@@ -238,13 +238,21 @@ namespace FourAirLineFinal.Controllers
 
         private void SendEmail(string recipient, string subject, string body)
         {
-            var fromAddress = new MailAddress("fourairline@gmail.com", "FourAirLine Bay Cùng Bạn");
-            var toAddress = new MailAddress(recipient);
-            const string fromPassword = "fourairline533";
+            // Kiểm tra xem tham số recipient có hợp lệ hay không
+            if (string.IsNullOrWhiteSpace(recipient))
+            {
+                throw new ArgumentException("Địa chỉ email người nhận không được để trống.", nameof(recipient));
+            }
 
+            // Địa chỉ email và tên người gửi
+            var fromAddress = new MailAddress("fouairline@gmail.com", "FourAirLine Bay Cùng Bạn");
+            var toAddress = new MailAddress(recipient);
+            const string fromPassword = "fouairline533";
+
+            // Cấu hình SMTP client
             var smtp = new SmtpClient
             {
-                Host = "smtp.gmail.com", // Sử dụng máy chủ SMTP của Google
+                Host = "smtp.gmail.com",
                 Port = 587,
                 EnableSsl = true,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
@@ -252,6 +260,7 @@ namespace FourAirLineFinal.Controllers
                 Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
             };
 
+            // Tạo và gửi email
             using (var message = new MailMessage(fromAddress, toAddress)
             {
                 Subject = subject,
@@ -261,6 +270,7 @@ namespace FourAirLineFinal.Controllers
                 smtp.Send(message);
             }
         }
+
 
         // Các hành động khác...
     }
