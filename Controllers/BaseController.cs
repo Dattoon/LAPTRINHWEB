@@ -9,7 +9,7 @@ namespace LAPTRINHWEB.Controllers
 {
     public class BaseController : Controller
     {
-        // GET: Base
+        // GET: Base dadadadad
         protected DataClasses1DataContext data = new DataClasses1DataContext("DATTOON\\DATER");
     }
 }
