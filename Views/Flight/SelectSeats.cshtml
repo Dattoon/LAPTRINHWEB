@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "SelectSeats";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model IEnumerable<LAPTRINHWEB.Models.Seat>
+
+<h2>Chọn ghế</h2>
+
+<form action="@Url.Action("BookSeats")" method="post">
+    @foreach (var item in Model)
+    {
+        <div>
+            <h3>Số ghế: @item.SeatNumber</h3>
+            <p>Loại ghế: @item.SeatClass</p>
+            <p>Giá: @item.Price</p>
+            <input type="checkbox" name="selectedSeats" value="@item.SeatID" /> Chọn ghế này
+        </div>
+    }
+    <input type="submit" value="Đặt ghế đã chọn" />
+</form>

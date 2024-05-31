@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "ReviewPayment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model LAPTRINHWEB.Models.BookingViewModel
+
+<h2>Xem lại thông tin thanh toán</h2>
+
+<p>Ngày đặt: @Model.Booking.BookingDate</p>
+
+<h3>Chi tiết vé:</h3>
+@foreach (var detail in Model.BookingDetails)
+{
+    <div>
+        <h4>Chuyến bay: @detail.OutboundFlightID</h4>
+        <p>Số ghế: @detail.Seat.SeatNumber</p>
+        <p>Loại ghế: @detail.Seat.SeatClass</p>
+        <p>Giá: @detail.Seat.Price</p>
+    </div>
+}
+
+<h3>Thông tin thanh toán:</h3>
+<p>Tên chủ thẻ: @ViewBag.CardName</p>
+<p>Số thẻ: @ViewBag.CardNumber</p>
+
+<form action="@Url.Action("ConfirmPayment")" method="post">
+    <input type="hidden" name="bookingId" value="@Model.Booking.BookingID" />
+    <input type="submit" value="Xác nhận thanh toán" />
+</form>

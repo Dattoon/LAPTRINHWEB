@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="FourAirline" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Table Name="dbo.Airlines" Member="Airlines">
+    <Type Name="Airline">
+      <Column Name="AirlineID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AirlineName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Logo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ContactInfo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="Airline_Flight" Member="Flights" ThisKey="AirlineID" OtherKey="AirlineID" Type="Flight" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Airports" Member="Airports">
+    <Type Name="Airport">
+      <Column Name="AirportID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AirportName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="City" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Country" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="Airport_Flight" Member="Flights" ThisKey="AirportID" OtherKey="ArrivalAirportID" Type="Flight" />
+      <Association Name="Airport_Flight1" Member="Flights1" ThisKey="AirportID" OtherKey="DepartureAirportID" Type="Flight" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Transactions" Member="Transactions">
+    <Type Name="Transaction">
+      <Column Name="TransactionID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BookingID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PaymentMethodID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TransactionDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="TransactionStatus" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="TransactionType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CreditCardInfo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="PaymentMethod_Transaction" Member="PaymentMethod" ThisKey="PaymentMethodID" OtherKey="PaymentMethodID" Type="PaymentMethod" IsForeignKey="true" />
+      <Association Name="Booking_Transaction" Member="Booking" ThisKey="BookingID" OtherKey="BookingID" Type="Booking" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tickets" Member="Tickets">
+    <Type Name="Ticket">
+      <Column Name="TicketID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FlightID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TicketType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Price" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Association Name="Ticket_Booking" Member="Bookings" ThisKey="TicketID" OtherKey="TicketID" Type="Booking" />
+      <Association Name="Flight_Ticket" Member="Flight" ThisKey="FlightID" OtherKey="FlightID" Type="Flight" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Seats" Member="Seats">
+    <Type Name="Seat">
+      <Column Name="SeatID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FlightID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SeatNumber" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="SeatClass" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IsAvailable" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsBooked" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Price" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Association Name="Seat_BookingDetail" Member="BookingDetails" ThisKey="SeatID" OtherKey="SeatID" Type="BookingDetail" />
+      <Association Name="Flight_Seat" Member="Flight" ThisKey="FlightID" OtherKey="FlightID" Type="Flight" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PaymentMethods" Member="PaymentMethods">
+    <Type Name="PaymentMethod">
+      <Column Name="PaymentMethodID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PaymentMethodName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="PaymentMethod_Transaction" Member="Transactions" ThisKey="PaymentMethodID" OtherKey="PaymentMethodID" Type="Transaction" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Flights" Member="Flights">
+    <Type Name="Flight">
+      <Column Name="FlightID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AirlineID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DepartureAirportID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ArrivalAirportID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DepartureTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ArrivalTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Duration" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AvailableSeats" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FlightStatus" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Flight_Ticket" Member="Tickets" ThisKey="FlightID" OtherKey="FlightID" Type="Ticket" />
+      <Association Name="Flight_Seat" Member="Seats" ThisKey="FlightID" OtherKey="FlightID" Type="Seat" />
+      <Association Name="Flight_BookingDetail" Member="BookingDetails" ThisKey="FlightID" OtherKey="OutboundFlightID" Type="BookingDetail" />
+      <Association Name="Flight_BookingDetail1" Member="BookingDetails1" ThisKey="FlightID" OtherKey="ReturnFlightID" Type="BookingDetail" />
+      <Association Name="Airline_Flight" Member="Airline" ThisKey="AirlineID" OtherKey="AirlineID" Type="Airline" IsForeignKey="true" />
+      <Association Name="Airport_Flight" Member="Airport" ThisKey="ArrivalAirportID" OtherKey="AirportID" Type="Airport" IsForeignKey="true" />
+      <Association Name="Airport_Flight1" Member="Airport1" ThisKey="DepartureAirportID" OtherKey="AirportID" Type="Airport" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Customers" Member="Customers">
+    <Type Name="Customer">
+      <Column Name="CustomerID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="PasswordHash" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="PhoneNumber" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="IsRegistered" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Customer_Booking" Member="Bookings" ThisKey="CustomerID" OtherKey="CustomerID" Type="Booking" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Bookings" Member="Bookings">
+    <Type Name="Booking">
+      <Column Name="BookingID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CustomerID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TicketID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BookingDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="IsPaid" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsRoundTrip" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Booking_Transaction" Member="Transactions" ThisKey="BookingID" OtherKey="BookingID" Type="Transaction" />
+      <Association Name="Booking_BookingDetail" Member="BookingDetails" ThisKey="BookingID" OtherKey="BookingID" Type="BookingDetail" />
+      <Association Name="Customer_Booking" Member="Customer" ThisKey="CustomerID" OtherKey="CustomerID" Type="Customer" IsForeignKey="true" />
+      <Association Name="Ticket_Booking" Member="Ticket" ThisKey="TicketID" OtherKey="TicketID" Type="Ticket" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BookingDetails" Member="BookingDetails">
+    <Type Name="BookingDetail">
+      <Column Name="BookingDetailID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BookingID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SeatID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="OutboundFlightID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ReturnFlightID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Booking_BookingDetail" Member="Booking" ThisKey="BookingID" OtherKey="BookingID" Type="Booking" IsForeignKey="true" />
+      <Association Name="Flight_BookingDetail" Member="Flight" ThisKey="OutboundFlightID" OtherKey="FlightID" Type="Flight" IsForeignKey="true" />
+      <Association Name="Flight_BookingDetail1" Member="Flight1" ThisKey="ReturnFlightID" OtherKey="FlightID" Type="Flight" IsForeignKey="true" />
+      <Association Name="Seat_BookingDetail" Member="Seat" ThisKey="SeatID" OtherKey="SeatID" Type="Seat" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

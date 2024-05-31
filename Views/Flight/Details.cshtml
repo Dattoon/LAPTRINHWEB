@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model LAPTRINHWEB.Models.Flight
+
+<h2>Chi tiết chuyến bay</h2>
+
+<div>
+    <h4>Hãng hàng không:</h4>
+    <div>@ViewBag.AirlineName</div>
+
+    <h4>Sân bay khởi hành:</h4>
+    <div>@ViewBag.DepartureAirportName</div>
+
+    <h4>Sân bay đến:</h4>
+    <div>@ViewBag.ArrivalAirportName</div>
+
+    <h4>Thời gian khởi hành:</h4>
+    <div>@Model.DepartureTime</div>
+
+    <h4>Thời gian đến:</h4>
+    <div>@Model.ArrivalTime</div>
+
+    <h4>Thời gian bay:</h4>
+    <div>@Model.Duration</div>
+
+    <h4>Số ghế trống:</h4>
+    <div>@Model.AvailableSeats</div>
+
+    <h4>Trạng thái chuyến bay:</h4>
+    <div>@Model.FlightStatus</div>
+
+    @Html.ActionLink("Chọn ghế", "SelectSeats", new { id = Model.FlightID }, new { @class = "btn btn-primary" })
+</div>

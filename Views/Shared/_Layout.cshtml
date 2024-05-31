@@ -1,0 +1,229 @@
+﻿<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Trang Chủ</title>
+    <link href="images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/CSSJSIMG/styles.css">
+    <link rel="stylesheet" href="~/Content/CSSJSIMG/css.css">
+
+</head>
+<style>
+    .box-destination {
+        position: relative;
+        background-size: cover;
+        background-position: center;
+        height: 300px;
+        /* Adjust as needed */
+        border-radius: 15px;
+        /* Adjust as needed */
+        overflow: hidden;
+        transition: .5s ease;
+        backface-visibility: hidden;
+    }
+
+        .box-destination .description,
+        .box-destination .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            /* Adjust as needed */
+            color: #fff;
+            transition: .5s ease;
+            backface-visibility: hidden;
+        }
+
+        .box-destination .overlay {
+            background: rgba(0, 0, 0, 0);
+            opacity: 0;
+            top: 0;
+        }
+
+        .box-destination:hover .overlay {
+            opacity: 1;
+        }
+
+        .box-destination .description .city {
+            font-size: 24px;
+            /* Adjust as needed */
+            font-weight: bold;
+        }
+
+        .box-destination .description .detail,
+        .box-destination .overlay .extra-info {
+            font-size: 16px;
+            /* Adjust as needed */
+        }
+
+        .box-destination .description .btn-book {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background: #ff0000;
+            /* Adjust as needed */
+            color: #fff;
+            text-decoration: none;
+        }
+</style>
+
+<body>
+    <header>
+        <div class="Header_wrapper__IXtx_ Header_home-header__haQj4">
+            <div class="container flex justify-between align-center Header_container__jM6_b">
+                <div class="flex align-center gap-40 h-full">
+                    <div class="Header_logo__tC3WE">
+                        <a>
+                            <img src="~/Content/CSSJSIMG/images/logo.png" decoding="async"
+                                 style="position:absolute;top:0;left:-20px;;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:210px;height:70px;min-width:100%;min-height:100%;"
+                                 loading="lazy">
+                        </a>
+                    </div>
+
+                    <div class="flex gap-24 h-full align-center cursor-pointer Header_nav-container__MeHQZ">
+                        <div class=" Header_menu__jRq_R h-full flex align-center ">
+                            <label for="" class="md">
+                                <a @Html.ActionLink("Trang Chủ", "Index", "Home")</a>
+                            </label>
+                        </div>
+                        <div class=" Header_menu__jRq_R h-full flex align-center ">
+                            <label for="" class="md">
+                                <a @Html.ActionLink("Giới Thiệu", "About", "Home") </a>
+                            </label>
+                        </div>
+                        <div class=" Header_menu__jRq_R h-full flex align-center ">
+                            <label for="" class="md">
+                                <a @Html.ActionLink("Ves ", "Index", "Flights") </a>
+                            </label>
+                        </div>
+                        <div class=" Header_menu__jRq_R h-full flex align-center ">
+                            <label for="" class="md">
+                                <a @Html.ActionLink("Đăng Xuất ", "Logout", "Account")</a>
+                            </label>
+                        </div>
+                        <div class=" Header_menu__jRq_R h-full flex align-center ">
+                            <label for="" class="md">
+                                <a @Html.ActionLink("Đăng Ky", "Dangky", "User")</a>
+                            </label>
+                        </div>
+                        <div class=" Header_menu__jRq_R h-full flex align-center ">
+                            <label for="" class="md">
+                                <a @Html.ActionLink("Đăng Nhap", "Dangnhap", "User")</a>
+                            </label>
+                        </div>
+                        <div class=" Header_menu__jRq_R h-full flex align-center ">
+                            <label for="" class="md">
+                                <a href="./donhang.html">Giỏ hàng </a>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="flex gap-16 align-center">
+                        <div class="Header_menu__jRq_R"></div>
+                        <div>
+                            <button type="button"
+                                    class="Button_button__QHarr  Button_button-sm__ljQtM Button_button-color__7QnYK  ">
+                                <div class="label sm"><a href="https://www.facebook.com/phan.duy.5680">Liên hệ: Bộ tứ siêu đẳng</a></div>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            @if (TempData["LogoutMessage"] != null)
+            {
+                <div class="alert alert-success">
+                    @TempData["LogoutMessage"]
+                </div>
+            }
+            @if (TempData["LogoutErrorMessage"] != null)
+            {
+                <div class="alert alert-danger">
+                    @TempData["LogoutErrorMessage"]
+                </div>
+            }
+
+    </header>
+
+
+    @RenderBody()
+    <footer>
+        <div class="flex justify-center Footer_footer1__GxwEZ">
+            <div class="Footer_footer__URfJd container">
+                <div class=" flex flex-col gap-20">
+                    <a href="/">
+                        <span style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;">
+                            <span style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;">
+                                <img alt="" aria-hidden="true" src="./images/logo.png"
+                                     style="display: block; max-width: 100%; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;">
+                            </span><img src="~/Content/CSSJSIMG/images/logo.png" decoding="async" data-nimg="intrinsic" srcset="./images/logo.png"
+                                        style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"><noscript></noscript>
+                        </span>
+                    </a><label class="md" style="color: var(--gray-300);">
+                        Hãng hàng không FourAirlines<br><br>123 Bến xe củ
+                        thành phố Cần Thơ<br><br>
+                    </label>
+                </div>
+                <div class="Footer_footer-list__VYqPy flex justify-between gap-32">
+                    <div class="flex flex-col gap-16">
+                        <span class="detail-sm">GIỚI THIỆU</span>
+                        <div class="flex flex-col gap-12">
+                            <a href=""
+                               class="subheading sm Footer_anchor__jQ0He" target="_blank" rel="noreferrer">
+                                Điều khoản
+                                và điều kiện
+                            </a><a href=""
+                                   class="subheading sm Footer_anchor__jQ0He" target="_blank" rel="noreferrer">
+                                Chính sách
+                                riêng tư
+                            </a><a href="" class="subheading sm Footer_anchor__jQ0He"
+                                   target="_blank" rel="noreferrer">
+                                Hướng dẫn sử
+                                dụng
+                            </a><a href="" class="subheading sm Footer_anchor__jQ0He"
+                                   target="_blank" rel="noreferrer">Hình thức thanh toán</a><a href=""
+                                                                                               class="subheading sm Footer_anchor__jQ0He" target="_blank" rel="noreferrer">
+                                Liên
+                                hệ
+                            </a><a href="" class="subheading sm Footer_anchor__jQ0He"
+                                   target="_blank" rel="noreferrer">Hotline: 0123456789</a><a href="" class="subheading sm Footer_anchor__jQ0He"
+                                                                                              target="_blank" rel="noreferrer">Email: FourAirlines@gamil.fall.com</a>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-16">
+                        <span class="detail-sm">ĐIỂM ĐẾN</span>
+                        <div class="flex flex-col gap-12">
+                            <a href="./sanpham.html" class="subheading sm Footer_anchor__jQ0He" target="_blank" rel="noreferrer">Đà Nẵng</a>
+                            <a href="./sanpham.html" class="subheading sm Footer_anchor__jQ0He" target="_blank" rel="noreferrer">Hồ Chí Minh</a>
+                            <a href="./sanpham.html" class="subheading sm Footer_anchor__jQ0He" target="_blank" rel="noreferrer">Đà Lạt</a>
+                            <a href="./sanpham.html" class="subheading sm Footer_anchor__jQ0He" target="_blank" rel="noreferrer">Hà Nội</a>
+                            <a href="./sanpham.html" class="subheading sm Footer_anchor__jQ0He" target="_blank" rel="noreferrer">Nha Trang</a>
+                            <a href="./sanpham.html" class="subheading sm Footer_anchor__jQ0He" target="_blank" rel="noreferrer">Cần Thơ</a>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-16">
+                        <span class="detail-sm">MÁY BAY</span>
+                        <div class="flex flex-col gap-12">
+                            <a href="" class="subheading sm Footer_anchor__jQ0He"
+                               target="_blank" rel="noreferrer">Tin tức</a><a href=""
+                                                                              class="subheading sm Footer_anchor__jQ0He" target="_blank" rel="noreferrer">
+                                Quy định
+                                chung và lưu ý
+                            </a><a href=""
+                                   class="subheading sm Footer_anchor__jQ0He" target="_blank" rel="noreferrer">
+                                Câu hỏi
+                                thường gặp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+
+</html>

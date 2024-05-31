@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "Tìm kiếm chuyến bay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Tìm kiếm chuyến bay</h2>
+
+<form action="@Url.Action("SearchFlights")" method="get">
+    <label for="departureCity">Thành phố khởi hành:</label>
+    @Html.DropDownList("departureCity", ViewBag.Cities as SelectList, "Chọn thành phố", new { @required = "required" })
+
+    <label for="arrivalCity">Thành phố đến:</label>
+    @Html.DropDownList("arrivalCity", ViewBag.Cities as SelectList, "Chọn thành phố", new { @required = "required" })
+
+
+    <label for="departureDate">Ngày khởi hành:</label>
+    <input type="date" id="departureDate" name="departureDate" required />
+
+    <label for="returnDate">Ngày về (không bắt buộc):</label>
+    <input type="date" id="returnDate" name="returnDate" />
+
+    <input type="submit" value="Tìm kiếm" />
+</form>
+<div>
+
+    @if (ViewBag.OutboundFlights != null)
+    {
+        <h2>Chuyến bay đi</h2>
+
+        foreach (var flight in ViewBag.OutboundFlights)
+        {
+            <div>
+                <h3>Chuyến bay: @flight.FlightID</h3>
+                <p>Thời gian khởi hành: @flight.DepartureTime</p>
+                <p>Thời gian đến: @flight.ArrivalTime</p>
+                <p>Thời gian bay: @flight.Duration</p>
+                <p>Số ghế trống: @flight.AvailableSeats</p>
+                <p>Trạng thái chuyến bay: @flight.FlightStatus</p>
+                @Html.ActionLink("Chi tiết", "Details", new { id = flight.FlightID })
+            </div>
+        }
+    }
+
+    @if (ViewBag.ReturnFlights != null)
+    {
+        <h2>Chuyến bay về</h2>
+
+        foreach (var flight in ViewBag.ReturnFlights)
+        {
+            <div>
+                <h3>Chuyến bay: @flight.FlightID</h3>
+                <p>Thời gian khởi hành: @flight.DepartureTime</p>
+                <p>Thời gian đến: @flight.ArrivalTime</p>
+                <p>Thời gian bay: @flight.Duration</p>
+                <p>Số ghế trống: @flight.AvailableSeats</p>
+                <p>Trạng thái chuyến bay: @flight.FlightStatus</p>
+                @Html.ActionLink("Chi tiết", "Details", new { id = flight.FlightID })
+            </div>
+        }
+    }
+
+</div>

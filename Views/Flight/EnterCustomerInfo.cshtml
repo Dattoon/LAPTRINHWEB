@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "EnterCustomerInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model LAPTRINHWEB.Models.Guest
+
+<h2>Thông tin khách hàng</h2>
+
+<form action="@Url.Action("BookFlights")" method="post">
+    <label for="UserName">Tên người dùng:</label>
+    <input type="text" id="UserName" name="UserName" required />
+
+    <label for="Email">Email:</label>
+    <input type="email" id="Email" name="Email" required />
+
+    <!-- Add other fields as necessary -->
+
+    <input type="submit" value="Tiếp tục" />
+</form>
