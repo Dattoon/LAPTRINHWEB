@@ -238,7 +238,7 @@ namespace FourAirLineFinal.Controllers
 
         private void SendEmail(string recipient, string subject, string body)
         {
-            var fromAddress = new MailAddress("your-email@fourairline.com", "FourAirLine Bay Cùng Bạn");
+            var fromAddress = new MailAddress("fourairline@gmail.com", "FourAirLine Bay Cùng Bạn");
             var toAddress = new MailAddress(recipient);
             const string fromPassword = "fourairline533";
 
