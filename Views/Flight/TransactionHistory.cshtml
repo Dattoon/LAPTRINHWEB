@@ -4,5 +4,24 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>TransactionHistory</h2>
+@model IEnumerable<LAPTRINHWEB.Models.Booking>
 
+<h2>Lịch sử giao dịch</h2>
+
+<table class="table">
+    <tr>
+        <th>Booking ID</th>
+        <th>Booking Date</th>
+       
+        <th>Status</th>
+    </tr>
+    @foreach (var booking in Model)
+    {
+        <tr>
+            <td>@booking.BookingID</td>
+            <td>@booking.BookingDate</td>
+           
+            <td>@booking.IsPaid ? "Paid" : "Not Paid"</td>
+        </tr>
+    }
+</table>
