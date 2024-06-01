@@ -74,7 +74,7 @@ namespace FourAirLineFinal.Controllers
                 ViewBag.ReturnFlights = returnFlights.ToList();
             }
 
-            return View();
+            return View();  
         }
 
         [HttpPost]
@@ -292,6 +292,23 @@ namespace FourAirLineFinal.Controllers
             })
             {
                 smtp.Send(message);
+            }
+        }
+
+
+
+        public ActionResult TransactionHistory()
+        {
+            var user = Session["Taikhoan"] as Customer;
+            if (user != null)
+            {
+                var bookings = data.Bookings.Where(b => b.CustomerID == user.CustomerID).ToList();
+                return View(bookings);
+            }
+            else
+            {
+                // Handle the case where the user is not logged in
+                return RedirectToAction("Dangnhap");
             }
         }
 
