@@ -7,44 +7,124 @@
 
 
 @model LAPTRINHWEB.Models.Customer
-<h2 style="text-align:center;">ĐĂNG KÝ THÀNH VIÊN</h2>
 
-<table align="center">
-    @using (Html.BeginForm())
-    {
-        <tr style="height:40px;">
-            <td> Tên đăng nhập:</td>
-            <td> @Html.TextBox("TenDN") </td>
-            @ViewData["Loi2"]
-        </tr>
-        <tr style="height:40px;">
-            <td> Mật khẩu:</td>
-            <td> @Html.Password("Matkhau") </td>
-            @ViewData["Loi3"]
-        </tr>
-        <tr style="height:40px;">
-            <td> Mật khẩu nhập lại:</td>
-            <td> @Html.Password("Matkhaunhaplai") </td>
-            @ViewData["Loi4"]
-        </tr>
-        <tr style="height: 40px;">
-            <td> Email:</td>
-            <td> @Html.TextBox("Email") </td>
-            @ViewData["Loi5"]
-        </tr>
+<section class="container-signup">
+    <div class="container">
+        <form action="" method="POST" class="form" id="form-1">
+            <h3>Đăng Ký</h3>
+            @using (Html.BeginForm())
+            {
 
-        <tr style="height: 40px;">
-            <td> Điện thoại:</td>
-            <td> @Html.TextBox("Dienthoai") </td>
-            @ViewData["Loi7"]
-        </tr>
+                <div class="container-form-input">
+                    @Html.TextBox("TenDN")
+                    <label for="loginname" class="form-label">Tên đăng nhập</label>
+                    @ViewData["Loi2"]
+                </div>
 
-        <tr style="height:40px;">
-            <th colspan="2">
-                @Html.ActionLink("Trở về", "Index")
-                &nbsp;&nbsp;&nbsp;
+                <div class="container-form-input">
+                    @Html.Password("Matkhau")
+                    <label for="password" class="form-label">Mật khẩu</label>
+                    @ViewData["Loi3"]
+                </div>
+
+                <div class="container-form-input">
+                    @Html.Password("Matkhaunhaplai")
+                    <label for="repassword" class="form-label">Nhập lại mật khẩu</label>
+                    @ViewData["Loi4"]
+                </div>
+
+                <div class="container-form-input">
+                    @Html.TextBox("Email")
+                    <label for="email" class="form-label">Email</label>
+                    @ViewData["Loi5"]
+                </div>
+
+                <div class="container-form-input">
+                    @Html.TextBox("Dienthoai")
+                    <label for="phone" class="form-label">Số điện thoại</label>
+                    @ViewData["Loi7"]
+                </div>
+
+                <div class="link-a">
+                    @Html.ActionLink("Bạn đã có tài khoản !", "Dangnhap", "Accounts")
+                </div>
+                    
                 <input type="submit" value="Đăng ký" />
-            </th>
-        </tr>
+
+
+
+            }
+        </form>
+    </div>
+</section>
+
+<style>
+    .container-signup {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #f7f7f7;
     }
-</table>
+
+    .form {
+        padding: 20px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 370px; /* Điều chỉnh chiều rộng tại đây */
+        margin: auto;
+    }
+
+    .container-form-input {
+        position: relative;
+        margin-bottom: 15px;
+    }
+
+        .container-form-input input[type='text'],
+        .container-form-input input[type='password'],
+        .container-form-input input[type='email'] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .container-form-input label {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .container-form-input input:focus + label,
+        .container-form-input input:not(:placeholder-shown) + label {
+            top: -10px;
+            font-size: 12px;
+            color: #5fa8d3;
+        }
+
+    input[type='submit'] {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #5fa8d3;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        input[type='submit']:hover {
+            background-color: #3e8ecf;
+        }
+
+    .link-a {
+        text-align: center;
+        margin-top: 10px;
+    }
+
+</style>
