@@ -16,10 +16,6 @@ namespace LAPTRINHWEB.Controllers
         {
             return View();
         }
-        public ActionResult AirportManager()
-        {
-            return View(data.Airports.ToList());
-        }
         public ActionResult ManagerAirport()
         {
             return View(data.Airports.ToList());
@@ -28,7 +24,7 @@ namespace LAPTRINHWEB.Controllers
         {
             return data.Airports.OrderByDescending(a => a.AirportID).Take(count).ToList();
         }
-        public ActionResult Sach(int? page)
+        public ActionResult Airport(int? page)
         {
             int pageSize = 10;
             int pageNum = (page ?? 1);
@@ -45,7 +41,7 @@ namespace LAPTRINHWEB.Controllers
         {
             data.Airports.InsertOnSubmit(airport);
             data.SubmitChanges();
-            return RedirectToAction("AirportManager");
+            return RedirectToAction("ManagerAirport");
         }
         public ActionResult EditAirport(int id)
         {
@@ -70,7 +66,7 @@ namespace LAPTRINHWEB.Controllers
                     if (ModelState.IsValid)
                     {
                         data.SubmitChanges();
-                        return RedirectToAction("AirportManager");
+                        return RedirectToAction("ManagerAirport");
                     }
                     else
                     {
@@ -133,7 +129,7 @@ namespace LAPTRINHWEB.Controllers
                 TempData["Error"] = "Có lỗi xảy ra khi  xóa sân bay: " + ex.Message;
             }
 
-            return RedirectToAction("AirportManager");
+            return RedirectToAction("ManagerAirport");
         }
 
     
