@@ -12,7 +12,7 @@ namespace FourAirLineFinal.Controllers
 {
     public class FlightController : BaseController
     {
-        protected DataClasses1DataContext data = new DataClasses1DataContext("DATTOON\\DATER");
+   
 
         // Hiển thị danh sách chuyến bay
         public ActionResult Index()
