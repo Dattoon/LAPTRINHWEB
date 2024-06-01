@@ -122,6 +122,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
+    <Compile Include="Controllers\AdminsController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\FlightController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -154,6 +155,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\CSSJSIMG\admin.css" />
     <Content Include="Content\CSSJSIMG\css.css" />
     <Content Include="Content\CSSJSIMG\images\a1.jpg" />
     <Content Include="Content\CSSJSIMG\images\a2.jpg" />
@@ -279,6 +281,8 @@
     <Content Include="Views\Flight\BookFlights.cshtml" />
     <Content Include="Views\Accounts\Dangky.cshtml" />
     <Content Include="Views\Accounts\Dangnhap.cshtml" />
+    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Views\Admins\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
