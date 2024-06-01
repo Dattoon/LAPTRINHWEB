@@ -292,6 +292,11 @@
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Admins\Index.cshtml" />
     <Content Include="Views\Admins\Login.cshtml" />
+    <Content Include="Views\Admins\AirportManager.cshtml" />
+    <Content Include="Views\Admins\AddNewAirport.cshtml" />
+    <Content Include="Views\Admins\DetailAirport.cshtml" />
+    <Content Include="Views\Admins\DeleteAirport.cshtml" />
+    <Content Include="Views\Admins\EditAirport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
