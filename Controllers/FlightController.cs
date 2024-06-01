@@ -251,22 +251,17 @@ namespace FourAirLineFinal.Controllers
                 body += $"Flight ID: {detail.OutboundFlightID}, Seat Number: {detail.Seat.SeatNumber}, Seat Class: {detail.Seat.SeatClass}, Price: {detail.Seat.Price}\n";
             }
 
-            // Send a confirmation email
-            string customerEmail = User.Identity.Name; // Replace this with the actual customer's email
-            string subject = "Booking Confirmation";
-            SendEmail(customerEmail, subject, body);
+            // Display a success message
+            TempData["SuccessMessage"] = "Đặt vé thành công! " + body;
 
-            // Redirect the user to a confirmation page
-            return RedirectToAction("Confirmation", new { id = bookingId });
+            // Redirect the user to the home page
+            return RedirectToAction("Index", "Home");
         }
 
-        private void SendEmail(string recipient, string subject, string body)
+
+        private void SendEmail(string subject, string body)
         {
-            // Kiểm tra xem tham số recipient có hợp lệ hay không
-            if (string.IsNullOrWhiteSpace(recipient))
-            {
-                throw new ArgumentException("Địa chỉ email người nhận không được để trống.", nameof(recipient));
-            }
+            string recipient = "ttmdvhd@gmail.com"; // Địa chỉ email cố định để kiểm tra
 
             // Địa chỉ email và tên người gửi
             var fromAddress = new MailAddress("fouairline@gmail.com", "FourAirLine Bay Cùng Bạn");
@@ -295,22 +290,41 @@ namespace FourAirLineFinal.Controllers
             }
         }
 
+        public ActionResult MyBookings()
+{
+    var user = User.Identity.IsAuthenticated ? data.Customers.SingleOrDefault(c => c.UserName == User.Identity.Name) : null;
 
+    if (user == null)
+    {
+        return RedirectToAction("Dangnhap", "Accounts");
+    }
 
-        public ActionResult TransactionHistory()
+    var bookings = data.Bookings.Where(b => b.CustomerID == user.CustomerID).ToList();
+    var bookingViewModels = new List<BookingViewModel>();
+
+    foreach (var booking in bookings)
+    {
+        var bookingDetails = data.BookingDetails.Where(bd => bd.BookingID == booking.BookingID).ToList();
+        var guest = new Guest
         {
-            var user = Session["Taikhoan"] as Customer;
-            if (user != null)
-            {
-                var bookings = data.Bookings.Where(b => b.CustomerID == user.CustomerID).ToList();
-                return View(bookings);
-            }
-            else
-            {
-                // Handle the case where the user is not logged in
-                return RedirectToAction("Dangnhap");
-            }
-        }
+            UserName = user.UserName,
+            Email = user.Email,
+            PhoneNumber = user.PhoneNumber
+        };
+        var viewModel = new BookingViewModel
+        {
+            Booking = booking,
+            BookingDetails = bookingDetails,
+            Guest = guest
+        };
+        bookingViewModels.Add(viewModel);
+    }
+
+    return View(bookingViewModels);
+}
+
+
+    
 
 
         // Các hành động khác...
