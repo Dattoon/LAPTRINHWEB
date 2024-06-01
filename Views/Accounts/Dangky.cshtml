@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "Dangky";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@model LAPTRINHWEB.Models.Customer
+<h2 style="text-align:center;">ĐĂNG KÝ THÀNH VIÊN</h2>
+
+<table align="center">
+    @using (Html.BeginForm())
+    {
+        <tr style="height:40px;">
+            <td> Tên đăng nhập:</td>
+            <td> @Html.TextBox("TenDN") </td>
+            @ViewData["Loi2"]
+        </tr>
+        <tr style="height:40px;">
+            <td> Mật khẩu:</td>
+            <td> @Html.Password("Matkhau") </td>
+            @ViewData["Loi3"]
+        </tr>
+        <tr style="height:40px;">
+            <td> Mật khẩu nhập lại:</td>
+            <td> @Html.Password("Matkhaunhaplai") </td>
+            @ViewData["Loi4"]
+        </tr>
+        <tr style="height: 40px;">
+            <td> Email:</td>
+            <td> @Html.TextBox("Email") </td>
+            @ViewData["Loi5"]
+        </tr>
+
+        <tr style="height: 40px;">
+            <td> Điện thoại:</td>
+            <td> @Html.TextBox("Dienthoai") </td>
+            @ViewData["Loi7"]
+        </tr>
+
+        <tr style="height:40px;">
+            <th colspan="2">
+                @Html.ActionLink("Trở về", "Index")
+                &nbsp;&nbsp;&nbsp;
+                <input type="submit" value="Đăng ký" />
+            </th>
+        </tr>
+    }
+</table>

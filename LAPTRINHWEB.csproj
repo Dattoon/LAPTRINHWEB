@@ -121,6 +121,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\FlightController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -276,6 +277,8 @@
     <Content Include="Views\Flight\SelectSeats.cshtml" />
     <Content Include="Views\Flight\ReviewPayment.cshtml" />
     <Content Include="Views\Flight\BookFlights.cshtml" />
+    <Content Include="Views\Accounts\Dangky.cshtml" />
+    <Content Include="Views\Accounts\Dangnhap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
