@@ -10,6 +10,6 @@ namespace LAPTRINHWEB.Controllers
     public class BaseController : Controller
     {
         // GET: Base con di me may cc
-        protected DataClasses1DataContext data = new DataClasses1DataContext("DATTOON\\DATER");
+        protected DataClasses1DataContext data = new DataClasses1DataContext("LAPTOP-F70LG2M7");
     }
 }
