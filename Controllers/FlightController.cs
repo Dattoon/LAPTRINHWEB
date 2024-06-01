@@ -25,6 +25,12 @@ namespace FourAirLineFinal.Controllers
         public ActionResult Details(int id)
         {
             var flight = data.Flights.SingleOrDefault(f => f.FlightID == id);
+            if (flight != null)
+            {
+                ViewBag.AirlineName = data.Airlines.Single(a => a.AirlineID == flight.AirlineID).AirlineName;
+                ViewBag.DepartureAirportName = data.Airports.Single(a => a.AirportID == flight.DepartureAirportID).AirportName;
+                ViewBag.ArrivalAirportName = data.Airports.Single(a => a.AirportID == flight.ArrivalAirportID).AirportName;
+            }
             return View(flight);
         }
 
@@ -95,8 +101,26 @@ namespace FourAirLineFinal.Controllers
 
         public ActionResult EnterCustomerInfo()
         {
-            return View();
+            var user = Session["Taikhoan"] as Customer;
+            if (user != null)
+            {
+                // Nếu người dùng đã đăng nhập, điền tự động thông tin của họ
+                var guest = new Guest
+                {
+                    UserName = user.UserName,
+                    Email = user.Email,
+                    PhoneNumber = user.PhoneNumber
+                    // Thêm các trường khác nếu cần
+                };
+                return View(guest);
+            }
+            else
+            {
+                // Nếu người dùng chưa đăng nhập, hiển thị form trống
+                return View();
+            }
         }
+
 
         [HttpPost]
         public ActionResult EnterCustomerInfo(Guest guest)

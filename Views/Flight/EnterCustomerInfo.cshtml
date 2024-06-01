@@ -9,10 +9,22 @@
 
 <form action="@Url.Action("BookFlights")" method="post">
     <label for="UserName">Tên người dùng:</label>
+    @Html.EditorFor(model => model.UserName)
+
+
     <input type="text" id="UserName" name="UserName" required />
 
     <label for="Email">Email:</label>
     <input type="email" id="Email" name="Email" required />
+
+    @Html.EditorFor(model => model.Email)
+
+
+
+    <label for="PhoneNumber">PhoneNumber:</label>
+    <input type="PhoneNumber" id="PhoneNumber" name="PhoneNumber" required />
+
+    @Html.EditorFor(model => model.PhoneNumber)
 
     <!-- Add other fields as necessary -->
 

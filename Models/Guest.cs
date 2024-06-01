@@ -9,6 +9,8 @@ namespace LAPTRINHWEB.Models
     {
         public string UserName { get; set; }
         public string Email { get; set; }
+
+        public string PhoneNumber { get; set; }
         // Thêm các trường khác nếu cần...
     }
 }
