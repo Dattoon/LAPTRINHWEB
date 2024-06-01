@@ -20,6 +20,10 @@ namespace LAPTRINHWEB.Controllers
         {
             return View(data.Airports.ToList());
         }
+        public ActionResult ManagerAirport()
+        {
+            return View(data.Airports.ToList());
+        }
         private List<Airport> CreateAirport(int count)
         {
             return data.Airports.OrderByDescending(a => a.AirportID).Take(count).ToList();
@@ -84,8 +88,6 @@ namespace LAPTRINHWEB.Controllers
             }
             return View(airport);
         }
-
-
         public ActionResult DetailAirport(int id)
         {
             Airport airport = data.Airports.SingleOrDefault(n => n.AirportID == id);
