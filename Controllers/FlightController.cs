@@ -8,6 +8,8 @@ using System.Net;
 using LAPTRINHWEB.Controllers;
 using LAPTRINHWEB.Models;
 
+using PagedList;
+
 namespace FourAirLineFinal.Controllers
 {
     public class FlightController : BaseController
@@ -54,7 +56,7 @@ namespace FourAirLineFinal.Controllers
         }
 
         // Tìm kiếm chuyến bay
-        public ActionResult SearchFlights(string departureCity, string arrivalCity, DateTime? departureDate, DateTime? returnDate)
+        public ActionResult SearchFlights(string departureCity, string arrivalCity, DateTime? departureDate, DateTime? returnDate, int? page)
         {
             var cities = data.Airports.Select(a => a.City).Distinct().ToList();
             ViewBag.Cities = new SelectList(cities);
@@ -75,14 +77,17 @@ namespace FourAirLineFinal.Controllers
 
                                           AvailableSeats = data.Seats.Count(s => s.FlightID == f.FlightID && s.IsAvailable)
                                       };
-                ViewBag.OutboundFlights = outboundFlights.ToList();
 
+                int pageSize = 10;
+                int pageNumber = (page ?? 1);
+                ViewBag.OutboundFlights = outboundFlights.ToPagedList(pageNumber, pageSize);
             }
 
             // Tương tự cho ViewBag.ReturnFlights
 
             return View();
         }
+
 
 
         [HttpPost]

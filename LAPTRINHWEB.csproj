@@ -163,9 +163,7 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\CSSJSIMG\admin.css" />
-    <Content Include="Content\CSSJSIMG\bundle.min.js" />
     <Content Include="Content\CSSJSIMG\css.css" />
-    <Content Include="Content\CSSJSIMG\fullsearch.css" />
     <Content Include="Content\CSSJSIMG\images\a1.jpg" />
     <Content Include="Content\CSSJSIMG\images\a2.jpg" />
     <Content Include="Content\CSSJSIMG\images\a3.jpg" />
@@ -237,8 +235,7 @@
     <Content Include="Content\CSSJSIMG\images\VeMayBay\HaNoi.jpg" />
     <Content Include="Content\CSSJSIMG\images\VeMayBay\HCM.jpg" />
     <Content Include="Content\CSSJSIMG\images\VeMayBay\PhuQuoc.jpg" />
-    <Content Include="Content\CSSJSIMG\SearchFlight.css" />
-    <Content Include="Content\CSSJSIMG\SearchFlight.js" />
+    <Content Include="Content\CSSJSIMG\LoginAdminstyle.css" />
     <Content Include="Content\CSSJSIMG\styles.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
@@ -296,7 +293,17 @@
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Admins\Index.cshtml" />
     <Content Include="Views\Admins\Login.cshtml" />
-    <Content Include="Views\Flight\MyBookings.cshtml" />
+    <Content Include="Views\Admins\AirportManager.cshtml" />
+    <Content Include="Views\Admins\AddNewAirport.cshtml" />
+    <Content Include="Views\Admins\DetailAirport.cshtml" />
+    <Content Include="Views\Admins\DeleteAirport.cshtml" />
+    <Content Include="Views\Admins\EditAirport.cshtml" />
+    <Content Include="Views\Admins\ManagerAirport.cshtml" />
+    <Content Include="Views\Admins\ManagerAirline.cshtml" />
+    <Content Include="Views\Admins\AddNewAirlines.cshtml" />
+    <Content Include="Views\Admins\EditAirlines.cshtml" />
+    <Content Include="Views\Admins\DetailAirline.cshtml" />
+    <Content Include="Views\Admins\DeleteAirline.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

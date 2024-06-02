@@ -1,0 +1,43 @@
+﻿@model LAPTRINHWEB.Models.Airline
+
+@{
+    ViewBag.Title = "DetailAirline";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>DetailAirline</h2>
+
+<div>
+    <h4>Airline</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AirlineName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AirlineName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Logo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Logo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactInfo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactInfo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.AirlineID }) |
+    @Html.ActionLink("Back to List", "ManagerAirline")
+</p>
