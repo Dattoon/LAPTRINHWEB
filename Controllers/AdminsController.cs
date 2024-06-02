@@ -255,8 +255,139 @@ namespace LAPTRINHWEB.Controllers
         }
 
         #endregion
-        #region LoginAdmin
-        [HttpGet]
+
+        #region ManagerFlight
+        public ActionResult ManagerFlight()
+        {
+            return View(data.Flights.ToList());
+        }
+        private List<Airport> CreateFlight(int count)
+        {
+            return data.Airports.OrderByDescending(a => a.AirportID).Take(count).ToList();
+        }
+        public ActionResult Flight(int? page)
+        {
+            int pageSize = 10;
+            int pageNum = (page ?? 1);
+
+            var sachmoi = CreateFlight(15);
+            return View(sachmoi.ToPagedList(pageNum, pageSize));
+        }
+        public ActionResult AddNewFlight()
+        {
+            ViewBag.AirlineID = new SelectList(data.Airlines, "AirlineID", "AirlineName");
+            ViewBag.DepartureAirportID = new SelectList(data.Airports, "AirportID", "AirportName");
+            ViewBag.ArrivalAirportID = new SelectList(data.Airports, "AirportID", "AirportName");
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AddNewFlight(Flight flight)
+        {
+            data.Flights.InsertOnSubmit(flight);
+            data.SubmitChanges();
+            return RedirectToAction("ManagerFlight");
+        }
+
+        public ActionResult EditFlight(int id)
+        {
+            Flight flight = data.Flights.SingleOrDefault(n => n.AirlineID == id);
+            if (flight == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            ViewBag.AirlineID = new SelectList(data.Airlines, "AirlineID", "AirlineName");
+            ViewBag.DepartureAirportID = new SelectList(data.Airports, "AirportID", "AirportName");
+            ViewBag.ArrivalAirportID = new SelectList(data.Airports, "AirportID", "AirportName");
+            return View(flight);
+        }
+
+        [HttpPost]
+        public ActionResult EditFlight(Flight flight)
+        {
+            ViewBag.AirlineID = new SelectList(data.Airlines, "AirlineID", "AirlineName");
+            ViewBag.DepartureAirportID = new SelectList(data.Airports, "AirportID", "AirportName");
+            ViewBag.ArrivalAirportID = new SelectList(data.Airports, "AirportID", "AirportName");
+            if (ModelState.IsValid)
+            {
+                Flight airlineToUpdate = data.Flights.SingleOrDefault(n => n.AirlineID == flight.AirlineID);
+                if (airlineToUpdate != null)
+                {
+                    TryUpdateModel(airlineToUpdate);
+                    if (ModelState.IsValid)
+                    {
+                        data.SubmitChanges();
+                        return RedirectToAction("ManagerFlight");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Cập nhật không thành công");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Không tìm thấy sân bay");
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("", "Dữ liệu không hợp lệ");
+            }
+            return View(flight);
+        }
+
+        public ActionResult DetailFlight(int id)
+        {
+            // Lấy ra đối tượng sách theo mã
+            Flight flight = data.Flights.SingleOrDefault(n => n.FlightID == id);
+            if (flight == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(flight);
+        }
+        public ActionResult DeleteFlight (int id)
+        {
+            // Lấy ra đối tượng sách cần xóa theo mã
+            Flight flight = data.Flights.SingleOrDefault(n => n.FlightID == id);
+            if (flight == null)
+            {
+                Response.StatusCode = 404;
+                return HttpNotFound("Sân bay không tồn tại.");
+            }
+            return View(flight);
+        }
+
+
+        [HttpPost, ActionName("DeleteFlight")]
+        public ActionResult ConfirmDeleteFlight(int id)
+        {
+            // Lấy ra đối tượng sách cần xóa theo mã
+            Flight flight = data.Flights.SingleOrDefault(n => n.FlightID == id);
+            if (flight == null)
+            {
+                Response.StatusCode = 404;
+                return HttpNotFound("Sân bay không tồn tại.");
+            }
+
+            try
+            {
+                data.Flights.DeleteOnSubmit(flight);
+                data.SubmitChanges();
+                TempData["Message"] = "Xóa sân bay thành công.";
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = "Có lỗi xảy ra khi  xóa sân bay: " + ex.Message;
+            }
+
+            return RedirectToAction("ManagerFlight");
+        }
+
+            #endregion
+            #region LoginAdmin
+            [HttpGet]
         public ActionResult Login()
         { return View(); }
         public ActionResult Login(FormCollection collection)

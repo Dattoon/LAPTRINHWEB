@@ -5,11 +5,18 @@
 
 @model LAPTRINHWEB.Models.BookingViewModel
 
+<<<<<<< HEAD
 <div>
     <h2>Thông tin đặt vé</h2>
 
     <p>Người đặt: @(User.Identity.IsAuthenticated ? User.Identity.Name : Model.Guest.UserName)</p>
     <p>Ngày đặt: @Model.Booking.BookingDate</p>
+=======
+<h2>Thông tin đặt vé</h2>
+<p>Người đặt: @(User.Identity.IsAuthenticated ? User.Identity.Name : (Model.Guest != null ? Model.Guest.UserName : ""))</p>
+
+<p>Ngày đặt: @Model.Booking.BookingDate</p>
+>>>>>>> cfd702326ca2cc9bc71b7dae0a1f973c321d373b
 
 
     <h3>Chi tiết vé:</h3>
