@@ -1,0 +1,43 @@
+﻿@model IEnumerable<LAPTRINHWEB.Models.Airline>
+
+@{
+    ViewBag.Title = "ManagerAirline";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<p>
+    @Html.ActionLink("Create New", "AddNewAirlines")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AirlineName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Logo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContactInfo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AirlineName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Logo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContactInfo)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditAirlines", new { id=item.AirlineID }) |
+            @Html.ActionLink("Details", "DetailAirline", new { id=item.AirlineID }) |
+            @Html.ActionLink("Delete", "DeleteAirline", new { id=item.AirlineID })
+        </td>
+    </tr>
+}
+
+</table>

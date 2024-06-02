@@ -298,6 +298,11 @@
     <Content Include="Views\Admins\DeleteAirport.cshtml" />
     <Content Include="Views\Admins\EditAirport.cshtml" />
     <Content Include="Views\Admins\ManagerAirport.cshtml" />
+    <Content Include="Views\Admins\ManagerAirline.cshtml" />
+    <Content Include="Views\Admins\AddNewAirlines.cshtml" />
+    <Content Include="Views\Admins\EditAirlines.cshtml" />
+    <Content Include="Views\Admins\DetailAirline.cshtml" />
+    <Content Include="Views\Admins\DeleteAirline.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
