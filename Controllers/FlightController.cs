@@ -133,18 +133,31 @@ namespace FourAirLineFinal.Controllers
         [HttpPost]
         public ActionResult EnterCustomerInfo(Guest guest)
         {
-            // Lưu thông tin khách hàng vào Session
-            Session["Guest"] = guest;
+            // Kiểm tra xem người dùng đã đăng nhập chưa
+            if (User.Identity.IsAuthenticated)
+            {
+                // Nếu người dùng đã đăng nhập, lấy thông tin người dùng
+                var user = data.Customers.SingleOrDefault(c => c.UserName == User.Identity.Name);
+                Session["User"] = user;
+            }
+            else
+            {
+                // Nếu người dùng chưa đăng nhập, lưu thông tin khách hàng
+                Session["Guest"] = guest;
+            }
 
             // Chuyển hướng đến trang tiếp theo
             return RedirectToAction("SelectSeats");
         }
 
+
         [HttpPost]
         public ActionResult BookFlights(Guest guest)
         {
-            // Get the current user and their selected seats
             var user = User.Identity.IsAuthenticated ? data.Customers.SingleOrDefault(c => c.UserName == User.Identity.Name) : null;
+
+            // Get the current user and their selected seats
+
 
             // Retrieve the selected seats from the session
             var selectedSeats = Session["SelectedSeats"] as int[];
@@ -156,10 +169,11 @@ namespace FourAirLineFinal.Controllers
                 CustomerID = user != null ? user.CustomerID : (int?)null, // Use null for guests
                 BookingDate = DateTime.Now,
                 IsPaid = false,
-                IsRoundTrip = seats.Count > 1
             };
             data.Bookings.InsertOnSubmit(booking);
             data.SubmitChanges();
+
+            Session["BookingID"] = booking.BookingID;
 
             // Create booking details for each selected seat
             var bookingDetails = new List<BookingDetail>();
@@ -188,6 +202,7 @@ namespace FourAirLineFinal.Controllers
 
             return View(viewModel);
         }
+
 
         public ActionResult ConfirmBooking(int bookingId)
         {
@@ -295,41 +310,42 @@ namespace FourAirLineFinal.Controllers
             })
             {
                 smtp.Send(message);
-            }
+            }   
         }
 
-        public ActionResult MyBookings()
-{
-    var user = User.Identity.IsAuthenticated ? data.Customers.SingleOrDefault(c => c.UserName == User.Identity.Name) : null;
+                public ActionResult MyBookings()
+                {
+    
+                    var user = Session["Taikhoan"] as Customer;
+                    if (user == null)
+                 {
+                return RedirectToAction("Dangnhap", "Accounts");
+                }
 
-    if (user == null)
-    {
-        return RedirectToAction("Dangnhap", "Accounts");
-    }
+            var bookings = data.Bookings.Where(b => b.CustomerID == user.CustomerID).ToList();
+            var bookingViewModels = new List<BookingViewModel>();
+            var bookingId = Session["BookingID"] as int?;
 
-    var bookings = data.Bookings.Where(b => b.CustomerID == user.CustomerID).ToList();
-    var bookingViewModels = new List<BookingViewModel>();
+            foreach (var booking in bookings)
+            {
+                var bookingDetails = data.BookingDetails.Where(bd => bd.BookingID == booking.BookingID).ToList();
+                var guest = new Guest
+                {
+                    UserName = user.UserName,
+                    Email = user.Email,
+                    PhoneNumber = user.PhoneNumber
+                };
+                var viewModel = new BookingViewModel
+                {
+                    Booking = booking,
+                    BookingDetails = bookingDetails,
+                    Guest = guest
+                };
+                bookingViewModels.Add(viewModel);
+            }
 
-    foreach (var booking in bookings)
-    {
-        var bookingDetails = data.BookingDetails.Where(bd => bd.BookingID == booking.BookingID).ToList();
-        var guest = new Guest
-        {
-            UserName = user.UserName,
-            Email = user.Email,
-            PhoneNumber = user.PhoneNumber
-        };
-        var viewModel = new BookingViewModel
-        {
-            Booking = booking,
-            BookingDetails = bookingDetails,
-            Guest = guest
-        };
-        bookingViewModels.Add(viewModel);
-    }
-
-    return View(bookingViewModels);
-}
+            return View(bookingViewModels);
+        }
 
 
     

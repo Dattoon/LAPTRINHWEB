@@ -1,126 +1,123 @@
-﻿using LAPTRINHWEB.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿    using LAPTRINHWEB.Models;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web;
+    using System.Web.Mvc;
 
-namespace LAPTRINHWEB.Controllers
-{
-    public class AccountsController : BaseController
+    namespace LAPTRINHWEB.Controllers
     {
-        // GET: User
-        [HttpGet]
-        public ActionResult Dangky()
+        public class AccountsController : BaseController
         {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Dangky(FormCollection collection, Customer kh)
-        {
-            // Gán các giá trị người dùng nhập liệu cho các biến 
-
-            var tendn = collection["TenDN"];
-            var matkhau = collection["MatKhau"];
-            var matkhaunhaplai = collection["Matkhaunhaplai"];
-            var email = collection["Email"];
-
-            var dienthoai = collection["DienThoai"];
-
-
-            // Kiểm tra hợp lệ của các trường dữ liệu
-
-
-            if (String.IsNullOrEmpty(tendn))
-                ViewData["Loi2"] = "Phải nhập tên đăng nhập";
-
-            else if (String.IsNullOrEmpty(matkhau))
-                ViewData["Loi3"] = "Phải nhập mật khẩu";
-
-            else if (String.IsNullOrEmpty(matkhaunhaplai))
-                ViewData["Loi4"] = "Phải nhập lại mật khẩu";
-            if (String.IsNullOrEmpty(email))
+            // GET: User
+            [HttpGet]
+            public ActionResult Dangky()
             {
-                ViewData["Loi5"] = "Email không được bỏ trống";
+                return View();
             }
 
-
-            if (String.IsNullOrEmpty(dienthoai))
+            [HttpPost]
+            public ActionResult Dangky(FormCollection collection, Customer kh)
             {
-                ViewData["Loi7"] = "Phải nhập điện thoại";
-            }
-            else
-            {
-                // Gán giá trị cho đối tượng được tạo mới (kh)
+                // Gán các giá trị người dùng nhập liệu cho các biến 
 
-                kh.UserName = tendn;
-                kh.PasswordHash = matkhau; // Consider encrypting this
-                kh.Email = email;
+                var tendn = collection["TenDN"];
+                var matkhau = collection["MatKhau"];
+                var matkhaunhaplai = collection["Matkhaunhaplai"];
+                var email = collection["Email"];
 
-                kh.PhoneNumber = dienthoai;
+                var dienthoai = collection["DienThoai"];
 
-                try
+
+                // Kiểm tra hợp lệ của các trường dữ liệu
+
+
+                if (String.IsNullOrEmpty(tendn))
+                    ViewData["Loi2"] = "Phải nhập tên đăng nhập";
+
+                else if (String.IsNullOrEmpty(matkhau))
+                    ViewData["Loi3"] = "Phải nhập mật khẩu";
+
+                else if (String.IsNullOrEmpty(matkhaunhaplai))
+                    ViewData["Loi4"] = "Phải nhập lại mật khẩu";
+                if (String.IsNullOrEmpty(email))
                 {
-                    data.Customers.InsertOnSubmit(kh);
-                    data.SubmitChanges();
-                    return RedirectToAction("Dangnhap");
+                    ViewData["Loi5"] = "Email không được bỏ trống";
                 }
-                catch (Exception ex)
+
+
+                if (String.IsNullOrEmpty(dienthoai))
                 {
-                    // Log the error
-                    ViewData["Loi7"] = "Có lỗi xảy ra khi tạo tài khoản. Vui lòng thử lại.";
-                }
-            }
-
-            return this.Dangky();
-        }
-
-
-
-        [HttpGet]
-        public ActionResult Dangnhap()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Dangnhap(FormCollection collection)
-        {
-            var tendn = collection["TenDN"];
-            var matkhau = collection["MatKhau"];
-            if (String.IsNullOrEmpty(tendn))
-            {
-                ViewData["Loi1"] = "Phải nhập tên đăng nhập";
-
-            }
-            else if (String.IsNullOrEmpty(matkhau))
-            {
-                ViewData["Loi2"] = "Phải nhập mật khẩu";
-            }
-            else
-            {
-                Customer kh = data.Customers.SingleOrDefault(n => n.UserName == tendn && n.PasswordHash == matkhau);
-                if (kh != null)
-                {
-                    ViewBag.Thongbao = "Chúc mừng đăng nhập thành công";
-                    Session["Taikhoan"] = kh;
-                    return RedirectToAction("Index", "Home");
-
+                    ViewData["Loi7"] = "Phải nhập điện thoại";
                 }
                 else
                 {
-                    ViewBag.Thongbao = "Tên đăng nhập hoặc mật khẩu không đúng";
-                }
-            }
-            return View();
-        }
+                    // Gán giá trị cho đối tượng được tạo mới (kh)
 
-        [HttpGet]
-        public ActionResult Dangxuat()
-        {
-            Session["Taikhoan"] = null;
-            return RedirectToAction("Index", "Home");
+                    kh.UserName = tendn;
+                    kh.PasswordHash = matkhau; // Consider encrypting this
+                    kh.Email = email;
+
+                    kh.PhoneNumber = dienthoai;
+
+                    try
+                    {
+                        data.Customers.InsertOnSubmit(kh);
+                        data.SubmitChanges();
+                        return RedirectToAction("Dangnhap");
+                    }
+                    catch (Exception ex)
+                    {
+                        // Log the error
+                        ViewData["Loi7"] = "Có lỗi xảy ra khi tạo tài khoản. Vui lòng thử lại.";
+                    }
+                }
+
+                return this.Dangky();
+            }
+
+
+
+            [HttpGet]
+            public ActionResult Dangnhap()
+            {
+                return View();
+            }
+            [HttpPost]
+            public ActionResult Dangnhap(FormCollection collection)
+            {
+                var tendn = collection["TenDN"];
+                var matkhau = collection["MatKhau"];
+                if (String.IsNullOrEmpty(tendn))
+                {
+                    ViewData["Loi1"] = "Phải nhập tên đăng nhập";
+                }
+                else if (String.IsNullOrEmpty(matkhau))
+                {
+                    ViewData["Loi2"] = "Phải nhập mật khẩu";
+                }
+                else
+                {
+                    Customer kh = data.Customers.SingleOrDefault(n => n.UserName == tendn && n.PasswordHash == matkhau);
+                    if (kh != null)
+                    {
+                        ViewBag.Thongbao = "Chúc mừng đăng nhập thành công";
+                        Session["Taikhoan"] = kh;
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        ViewBag.Thongbao = "Tên đăng nhập hoặc mật khẩu không đúng";
+                    }
+                }
+                return View();
+            }
+
+            [HttpGet]
+            public ActionResult Dangxuat()
+            {
+                Session["Taikhoan"] = null;
+                return RedirectToAction("Index", "Home");
+            }
         }
-    }
-}   
+    }   
