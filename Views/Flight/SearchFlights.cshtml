@@ -3,60 +3,458 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Tìm kiếm chuyến bay</h2>
-
 <form action="@Url.Action("SearchFlights")" method="get">
-    <label for="departureCity">Thành phố khởi hành:</label>
-    @Html.DropDownList("departureCity", ViewBag.Cities as SelectList, "Chọn thành phố", new { @required = "required" })
+    <div class="Card_card__rC1zg FlightSearchNavigation_wrapper__TCl60">
+        <div class="flex flex-col gap-24">
 
-    <label for="arrivalCity">Thành phố đến:</label>
-    @Html.DropDownList("arrivalCity", ViewBag.Cities as SelectList, "Chọn thành phố", new { @required = "required" })
+            <div class="flex gap-16 FlightSearchNavigation_input-group__0rMOZ">
+                <div class="flex-grow">
+                    <div class="FlightSearchNavigation_selectInput__V_rM5">
+                        <div class="">
+                            <label for="departureCity" class="Input_input-group__6PMfq label-departureCity">
+                                <svg xmlns="" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M19.1667 7.76666C19.2189 7.55255 19.1891 7.32665 19.0833 7.13333C18.8133 6.6647 18.4533 6.25401 18.0241 5.92483C17.5949 5.59565 17.105 5.35445 16.5824 5.21509C16.0597 5.07572 15.5147 5.04093 14.9786 5.1127C14.4425 5.18447 13.9259 5.3614 13.4583 5.63333L11.6667 6.66666L7.49999 4.70833C7.38154 4.64696 7.25007 4.61493 7.11666 4.61493C6.98325 4.61493 6.85179 4.64696 6.73333 4.70833L4.23333 6.15C4.10978 6.22126 4.00659 6.32305 3.93363 6.44561C3.86068 6.56818 3.8204 6.70741 3.81666 6.85C3.81263 6.99364 3.8458 7.13588 3.91297 7.26292C3.98014 7.38995 4.07901 7.49746 4.2 7.575L6.95 9.30833L5.49999 10.1417L1.51666 10.625C1.35653 10.6448 1.2056 10.7107 1.08218 10.8146C0.958764 10.9185 0.868172 11.0561 0.821404 11.2105C0.774636 11.3649 0.773703 11.5296 0.818719 11.6845C0.863735 11.8395 0.952763 11.978 1.07499 12.0833L4.02499 14.6333C4.41337 15.004 4.91075 15.2398 5.44353 15.3058C5.97632 15.3719 6.51621 15.2646 6.98333 15L18.75 8.275C18.8503 8.22294 18.9389 8.15103 19.0106 8.06365C19.0822 7.97626 19.1353 7.87522 19.1667 7.76666ZM6.22499 13.6C6.06492 13.6881 5.88033 13.7211 5.69964 13.694C5.51896 13.6669 5.35218 13.5812 5.225 13.45L3.64166 12.0917L5.91666 11.8167C6.02846 11.8023 6.13619 11.7655 6.23333 11.7083L9.03333 10.1C9.15807 10.028 9.26202 9.9249 9.33505 9.80076C9.40807 9.67662 9.44768 9.53567 9.45 9.39166C9.4517 9.24864 9.41657 9.10758 9.34798 8.98206C9.27938 8.85654 9.17963 8.7508 9.05833 8.675L6.30833 6.93333L7.225 6.40833L11.3917 8.34166C11.5101 8.40303 11.6416 8.43506 11.775 8.43506C11.9084 8.43506 12.0399 8.40303 12.1583 8.34166L14.2917 7.10833C14.7288 6.86333 15.2295 6.75538 15.7288 6.79847C16.2281 6.84156 16.7029 7.03371 17.0917 7.35L6.22499 13.6Z" fill="#98A2B3"></path>
+                                </svg>
+                                @Html.DropDownList("departureCity", ViewBag.Cities as SelectList, "Chọn thành phố", new { @id = "departureCity", @class = "p-md", @required = "required" })
+                                <svg xmlns="" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M6 9L12 15L18 9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                                <label for=":r8:" class="sm ">Điểm đi</label>
+                            </label>
+                        </div>
+                    </div>
+                </div>
 
-
-    <label for="departureDate">Ngày khởi hành:</label>
-    <input type="date" id="departureDate" name="departureDate" required />
-
-    <label for="returnDate">Ngày về (không bắt buộc):</label>
-    <input type="date" id="returnDate" name="returnDate" />
-
-    <input type="submit" value="Tìm kiếm" />
+                <div class="flex-grow">
+                    <div class="FlightSearchNavigation_selectInput__V_rM5">
+                        <div class=" ">
+                            <label for="departureCity" class="Input_input-group__6PMfq label-departureCity">
+                                <svg xmlns="" width="20" height="20" viewBox="0 0 20 20"
+                                     fill="none">
+                                    <path d="M17.6 13.525C17.3129 12.4729 16.6248 11.5754 15.6833 11.025L13.925 9.99997L13.525 5.44164C13.514 5.3085 13.4712 5.17995 13.4001 5.06682C13.3291 4.9537 13.2318 4.85932 13.1167 4.79164L10.6167 3.3583C10.49 3.28516 10.3463 3.24666 10.2 3.24666C10.0537 3.24666 9.91001 3.28516 9.78333 3.3583C9.65667 3.42747 9.55015 3.52835 9.47419 3.65106C9.39822 3.77376 9.35543 3.91409 9.35 4.0583L9.225 7.3083L7.76666 6.47497L5.38333 3.26664C5.28642 3.13805 5.15432 3.04029 5.00303 2.98519C4.85173 2.93009 4.68771 2.92 4.5308 2.95614C4.37389 2.99228 4.23081 3.07311 4.11886 3.18885C4.00691 3.30459 3.93089 3.45028 3.9 3.6083L3.175 7.44997C3.04874 7.97076 3.09316 8.51834 3.30171 9.01196C3.51027 9.50559 3.87191 9.91914 4.33333 10.1916L16.05 16.95C16.2383 17.0608 16.4626 17.0931 16.6746 17.0401C16.8866 16.9871 17.0693 16.853 17.1833 16.6666C17.4582 16.197 17.6366 15.6772 17.7082 15.1378C17.7797 14.5983 17.7429 14.05 17.6 13.525ZM16.0333 15L5.16666 8.74997C5.01083 8.65485 4.89056 8.51118 4.82431 8.34106C4.75807 8.17093 4.74953 7.98376 4.8 7.8083L5.18333 5.77497L6.56666 7.6083C6.63384 7.69952 6.7189 7.77608 6.81666 7.8333L9.60833 9.44997C9.73282 9.52197 9.87383 9.56052 10.0176 9.56189C10.1614 9.56325 10.3032 9.52737 10.429 9.45774C10.5548 9.38811 10.6605 9.2871 10.7357 9.16454C10.811 9.04198 10.8532 8.90203 10.8583 8.7583L10.9917 5.5083L11.9 6.0333L12.3 10.5916C12.3119 10.7256 12.356 10.8546 12.4285 10.9678C12.5011 11.081 12.5999 11.1749 12.7167 11.2416L14.85 12.5C15.1275 12.6601 15.3706 12.8736 15.5651 13.1282C15.7596 13.3828 15.9018 13.6734 15.9833 13.9833C16.0763 14.3141 16.0934 14.6616 16.0333 15Z"
+                                          fill="#98A2B3"></path>
+                                </svg> @Html.DropDownList("arrivalCity", ViewBag.Cities as SelectList, "Chọn thành phố", new { @id = "arrivalCity", @class = "p-md", @required = "required" })
+                                <svg xmlns="" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M6 9L12 15L18 9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg><label for=":r9:" class="sm ">Điểm đến</label>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-grow">
+                    <div class="DatePicker_mixi-date-picker__hHq_t">
+                        <div class="react-datepicker-wrapper">
+                            <div class="react-datepicker__input-container">
+                                <div class=" ">
+                                    <label for=":ra:" class="Input_input-group__6PMfq">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                             viewBox="0 0 24 24" fill="none">
+                                            <path d="M3 9H21M7 3V5M17 3V5M6 12H10V16H6V12ZM6.2 21H17.8C18.9201 21 19.4802 21 19.908 20.782C20.2843 20.5903 20.5903 20.2843 20.782 19.908C21 19.4802 21 18.9201 21 17.8V8.2C21 7.07989 21 6.51984 20.782 6.09202C20.5903 5.71569 20.2843 5.40973 19.908 5.21799C19.4802 5 18.9201 5 17.8 5H6.2C5.0799 5 4.51984 5 4.09202 5.21799C3.71569 5.40973 3.40973 5.71569 3.21799 6.09202C3 6.51984 3 7.07989 3 8.2V17.8C3 18.9201 3 19.4802 3.21799 19.908C3.40973 20.2843 3.71569 20.5903 4.09202 20.782C4.51984 21 5.07989 21 6.2 21Z"
+                                                  stroke="#101828" stroke-width="2" stroke-linecap="round"
+                                                  stroke-linejoin="round"></path>
+                                        </svg><input type="date" id="departureDate" name="departureDate" required /><label for=":ra:"
+                                                                                                                           class="sm ">Ngày đi</label>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-grow">
+                    <div class="DatePicker_mixi-date-picker__hHq_t">
+                        <div class="react-datepicker-wrapper">
+                            <div class="react-datepicker__input-container">
+                                <div class=" ">
+                                    <label for=":rj:" class="Input_input-group__6PMfq">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                             viewBox="0 0 24 24" fill="none">
+                                            <path d="M3 9H21M7 3V5M17 3V5M6 12H10V16H6V12ZM6.2 21H17.8C18.9201 21 19.4802 21 19.908 20.782C20.2843 20.5903 20.5903 20.2843 20.782 19.908C21 19.4802 21 18.9201 21 17.8V8.2C21 7.07989 21 6.51984 20.782 6.09202C20.5903 5.71569 20.2843 5.40973 19.908 5.21799C19.4802 5 18.9201 5 17.8 5H6.2C5.0799 5 4.51984 5 4.09202 5.21799C3.71569 5.40973 3.40973 5.71569 3.21799 6.09202C3 6.51984 3 7.07989 3 8.2V17.8C3 18.9201 3 19.4802 3.21799 19.908C3.40973 20.2843 3.71569 20.5903 4.09202 20.782C4.51984 21 5.07989 21 6.2 21Z"
+                                                  stroke="#101828" stroke-width="2" stroke-linecap="round"
+                                                  stroke-linejoin="round"></path>
+                                        </svg><input type="date" id="returnDate" name="returnDate" /><label for=":rj:"
+                                                                                                            class="sm ">Ngày về (không bắt buộc)</label>
+                                    </label>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><button type="submit" value="Tìm kiếm"
+                              class="Button_button__QHarr FlightSearchNavigation_submit-btn__CVUMl Button_button-normal__y4h10 Button_button-color__7QnYK  ">
+                    <div class="label md">Tìm kiếm</div>
+                </button>
+            </div>
+        </div>
+    </div>
 </form>
-<div>
+<style>
+    #departureCity, #arrivalCity {
+        border: none; /* Loại bỏ viền */
+        outline: none; /* Loại bỏ đường viền khi focus */
+        padding: 10px; /* Thêm padding để tăng kích thước click */
+        margin: -20px 0; /* Thêm margin để tách biệt các phần tử */
+        color: #333; /* Màu chữ */
+        font-size: 16px; /* Kích thước chữ */
+        border-radius: 5px; /* Bo góc */
+        -webkit-appearance: none; /* Loại bỏ style mặc định của browser cho select */
+        -moz-appearance: none; /* Loại bỏ style mặc định của Firefox */
+        cursor: pointer; /* Thay đổi con trỏ khi di chuyển qua dropdown */
+    }
 
+    /* Style cho icon mũi tên chỉ xuống */
+    .departureCity-arrow {
+        pointer-events: none; /* Ngăn sự kiện chuột để không ảnh hưởng đến việc chọn */
+        position: absolute; /* Đặt icon cố định so với parent */
+        right: 10px; /* Khoảng cách từ phải */
+        top: 50%; /* Đặt ở giữa theo chiều dọc */
+        transform: translateY(-50%); /* Cân chỉnh icon ở giữa theo chiều dọc */
+    }
+
+    /* Thêm style cho label nếu cần */
+    .label-departureCity {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 14px;
+    }
+    /* Phong cách cho thẻ select */
+    select {
+        width: 88%; /* Chiều rộng tối đa */
+        padding: 8px 16px; /* Đệm bên trong */
+        margin: 10px 0; /* Khoảng cách xung quanh */
+        display: inline-block; /* Hiển thị dạng khối */
+        border: 1px solid #ccc; /* Viền */
+        border-radius: 4px; /* Bo góc */
+        box-sizing: border-box; /* Tính kích thước hộp */
+        appearance: none; /* Gỡ bỏ phong cách mặc định */
+    }
+
+        /* Phong cách cho biểu tượng mũi tên */
+        select + svg {
+            position: absolute; /* Vị trí tuyệt đối */
+            right: 10px; /* Cách lề phải */
+            top: calc(50% - 12px); /* Cách lề trên */
+            pointer-events: none; /* Không tương tác chuột */
+        }
+
+        /* Thêm phong cách khi người dùng rê chuột qua */
+        select:hover {
+            border-color: #888; /* Đổi màu viền */
+        }
+
+        /* Thêm phong cách khi người dùng chọn */
+        select:focus {
+            border-color: #555; /* Đổi màu viền */
+            outline: none; /* Gỡ bỏ đường viền ngoài */
+        }
+</style>
+
+
+
+
+
+<div class="flight-container">
     @if (ViewBag.OutboundFlights != null)
     {
-        <h2>Chuyến bay đi</h2>
-
+        <h2 class="flight-header">Chuyến bay đi</h2>
         foreach (var flight in ViewBag.OutboundFlights)
         {
             <div>
                 <h3>Chuyến bay: @flight.FlightID</h3>
-                <p>Thời gian khởi hành: @flight.DepartureTime</p>
-                <p>Thời gian đến: @flight.ArrivalTime</p>
-                <p>Thời gian bay: @flight.Duration</p>
-                <p>Số ghế trống: @flight.AvailableSeats</p>
-                <p>Trạng thái chuyến bay: @flight.FlightStatus</p>
-                @Html.ActionLink("Chi tiết", "Details", new { id = flight.FlightID })
+                <div class="flight-details">
+                    <p><strong>Thời gian khởi hành:</strong> @flight.DepartureTime</p>
+                    <p><strong>Thời gian đến:</strong> @flight.ArrivalTime</p>
+                    <p><strong>Thời gian bay:</strong> @flight.Duration Phút</p>
+                    <p><strong>Trạng thái chuyến bay:</strong> @flight.FlightStatus</p>
+                </div>
+                @Html.ActionLink("Chi tiết", "Details", new { id = flight.FlightID }, new { @class = "action-link" })
             </div>
         }
     }
-
-    @if (ViewBag.ReturnFlights != null)
-    {
-        <h2>Chuyến bay về</h2>
-
-        foreach (var flight in ViewBag.ReturnFlights)
-        {
-            <div>
-                <h3>Chuyến bay: @flight.FlightID</h3>
-                <p>Thời gian khởi hành: @flight.DepartureTime</p>
-                <p>Thời gian đến: @flight.ArrivalTime</p>
-                <p>Thời gian bay: @flight.Duration</p>
-                <p>Số ghế trống: @flight.AvailableSeats</p>
-                <p>Trạng thái chuyến bay: @flight.FlightStatus</p>
-                @Html.ActionLink("Chi tiết", "Details", new { id = flight.FlightID })
-            </div>
-        }
-    }
-
+    <!-- Tương tự cho ViewBag.ReturnFlights -->
 </div>
+
+
+
+<div class="flex gap-32 FlightSearch_flight-container__tl_0X">
+    <div class="fresnel-container fresnel-lessThan-md "></div>
+    <div class="fresnel-container fresnel-greaterThan-mdless ">
+        <div class="FlightSidebar_side-bar__lbiAI flex flex-col">
+            <div class="FlightSidebar_side-bar__header__GQbTV">
+                <div class="subheading md flex-grow">Lọc kết quả</div><button type="button"
+                                                                              class="Button_button__QHarr FlightSidebar_apply-mb-btn__VyKQo Button_button-sm__ljQtM Button_button-link-color__rou_U  ">
+                    <div class="label sm">Áp dụng</div>
+                </button>
+            </div>
+            <div>
+                <div class="FlightSidebar_filter-item__jtakl">
+                    <label class="md">Hiển thị theo</label><label for=":r3:" class=" Checkbox_container__ccFUl">
+                        <input id=":r3:" type="checkbox"><span class="Checkbox_checkmark__81gnF Checkbox_sm__nLRCs">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none">
+                                <path d="M4 12.6111L8.92308 17.5L20 6.5" stroke="black" stroke-width="2"
+                                      stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </span>
+                        <div class="Checkbox_textGroup__Z0QZ_">
+                            <div class="sm Checkbox_title__rGvCj label">Vietravel Airlines</div>
+                            <p class="sm"></p>
+                        </div>
+                    </label><label for=":r4:" class=" Checkbox_container__ccFUl">
+                        <input id=":r4:"
+                               type="checkbox"><span class="Checkbox_checkmark__81gnF Checkbox_sm__nLRCs">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none">
+                                <path d="M4 12.6111L8.92308 17.5L20 6.5" stroke="black" stroke-width="2"
+                                      stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </span>
+                        <div class="Checkbox_textGroup__Z0QZ_">
+                            <div class="sm Checkbox_title__rGvCj label">Vietjet Air</div>
+                            <p class="sm"></p>
+                        </div>
+                    </label><label for=":r5:" class=" Checkbox_container__ccFUl">
+                        <input id=":r5:"
+                               type="checkbox"><span class="Checkbox_checkmark__81gnF Checkbox_sm__nLRCs">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none">
+                                <path d="M4 12.6111L8.92308 17.5L20 6.5" stroke="black" stroke-width="2"
+                                      stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </span>
+                        <div class="Checkbox_textGroup__Z0QZ_">
+                            <div class="sm Checkbox_title__rGvCj label">Bamboo Airways</div>
+                            <p class="sm"></p>
+                        </div>
+                    </label><label for=":r6:" class=" Checkbox_container__ccFUl">
+                        <input id=":r6:"
+                               type="checkbox"><span class="Checkbox_checkmark__81gnF Checkbox_sm__nLRCs">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none">
+                                <path d="M4 12.6111L8.92308 17.5L20 6.5" stroke="black" stroke-width="2"
+                                      stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </span>
+                        <div class="Checkbox_textGroup__Z0QZ_">
+                            <div class="sm Checkbox_title__rGvCj label">Vietnam Airlines</div>
+                            <p class="sm"></p>
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="FlightSearch_flight-content__E4THF flex-grow flex flex-col gap-16">
+        <div class="Card_card__rC1zg ">
+            <div class="">
+                <div class="FlightsCard_header__z_QqO flex gap-16 align-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 20 20" fill="none">
+                        <path d="M19.1667 7.76666C19.2189 7.55255 19.1891 7.32665 19.0833 7.13333C18.8133 6.6647 18.4533 6.25401 18.0241 5.92483C17.5949 5.59565 17.105 5.35445 16.5824 5.21509C16.0597 5.07572 15.5147 5.04093 14.9786 5.1127C14.4425 5.18447 13.9259 5.3614 13.4583 5.63333L11.6667 6.66666L7.49999 4.70833C7.38154 4.64696 7.25007 4.61493 7.11666 4.61493C6.98325 4.61493 6.85179 4.64696 6.73333 4.70833L4.23333 6.15C4.10978 6.22126 4.00659 6.32305 3.93363 6.44561C3.86068 6.56818 3.8204 6.70741 3.81666 6.85C3.81263 6.99364 3.8458 7.13588 3.91297 7.26292C3.98014 7.38995 4.07901 7.49746 4.2 7.575L6.95 9.30833L5.49999 10.1417L1.51666 10.625C1.35653 10.6448 1.2056 10.7107 1.08218 10.8146C0.958764 10.9185 0.868172 11.0561 0.821404 11.2105C0.774636 11.3649 0.773703 11.5296 0.818719 11.6845C0.863735 11.8395 0.952763 11.978 1.07499 12.0833L4.02499 14.6333C4.41337 15.004 4.91075 15.2398 5.44353 15.3058C5.97632 15.3719 6.51621 15.2646 6.98333 15L18.75 8.275C18.8503 8.22294 18.9389 8.15103 19.0106 8.06365C19.0822 7.97626 19.1353 7.87522 19.1667 7.76666ZM6.22499 13.6C6.06492 13.6881 5.88033 13.7211 5.69964 13.694C5.51896 13.6669 5.35218 13.5812 5.225 13.45L3.64166 12.0917L5.91666 11.8167C6.02846 11.8023 6.13619 11.7655 6.23333 11.7083L9.03333 10.1C9.15807 10.028 9.26202 9.9249 9.33505 9.80076C9.40807 9.67662 9.44768 9.53567 9.45 9.39166C9.4517 9.24864 9.41657 9.10758 9.34798 8.98206C9.27938 8.85654 9.17963 8.7508 9.05833 8.675L6.30833 6.93333L7.225 6.40833L11.3917 8.34166C11.5101 8.40303 11.6416 8.43506 11.775 8.43506C11.9084 8.43506 12.0399 8.40303 12.1583 8.34166L14.2917 7.10833C14.7288 6.86333 15.2295 6.75538 15.7288 6.79847C16.2281 6.84156 16.7029 7.03371 17.0917 7.35L6.22499 13.6Z"
+                              fill="var(--primary-base)"></path>
+                    </svg>
+                    <div class="FlightsCard_header__details__JJRqD flex flex-col gap-8">
+                        <div class="flex gap-8 align-center">
+                            <label class="sm">Sân bay Đà Nẵng (DAD)</label><svg width="20" height="20" viewBox="0 0 12 12" fill="none"
+                                                                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="var(--black)"
+                                      stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg><label class="sm">Sân bay Tân Sơn Nhất (SGN)</label>
+                        </div>
+                        <p class="sm">Chủ nhật, 02/06/2024</p>
+                    </div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                               fill="none">
+                        <path d="M6 12L18 12" stroke="var(--primary-base)" stroke-width="2" stroke-linecap="round"
+                              stroke-linejoin="round"></path>
+                    </svg>
+                </div>
+            </div>
+            <div class=" Collapse_collapse__g6PnD" style="height: 851.594px;">
+                <div>
+                    <div>
+                        <div class="flex flex-col gap-16 FlightList_flight-card-list__MdNDe">
+                            <div class="Card_card__rC1zg ">
+                                <div class="Collapse_open-header__wyuXQ">
+                                    <div class="FlightItemCard_header__fyioF flex gap-16 align-center  ">
+                                        <div class="FlightItemCard_item-group__mWKsn">
+                                            <div class="flex gap-16 align-center">
+                                                <div class="FlightItemCard_img-wrapper__Z8tXu">
+                                                    <div style="width: 100%; height: 100%; position: relative; overflow: hidden;">
+                                                        <img alt="mixivivu"
+                                                             src="https://minio.fares.vn/mixivivu-dev/icons/logo-airline/VU.png"
+                                                             width="100%" height="100%" loading="lazy"
+                                                             style="object-fit: cover;">
+                                                    </div>
+                                                </div>
+                                                <div class="flex flex-col gap-8 flex-grow text-left">
+                                                    <label class="sm">VU679</label>
+                                                    <p class="sm">Vietravel Airlines</p>
+                                                </div>
+                                            </div>
+                                            <div class="FlightItemCard_price-mobile__Cxgwg">
+                                                <label class="sm">1.488.440&nbsp;VND</label>
+                                                <p class="sm">VND</p>
+                                            </div>
+                                        </div>
+                                        <div class="FlightItemCard_item-group__mWKsn">
+                                            <div class="FlightItemCard_destination___qpoR">
+                                                <label class="sm">23:00</label>
+                                                <p class="sm">DAD</p>
+                                            </div>
+                                            <div class="FlightItemCard_destination___qpoR">
+                                                <label class="sm">00:30</label>
+                                                <p class="sm">SGN</p>
+                                            </div>
+                                        </div>
+                                        <div class="FlightItemCard_price__yFFyH">
+                                            <label class="sm">1.488.440&nbsp;VND</label>
+                                            <p class="sm">VND</p>
+                                        </div><button type="button"
+                                                      class="Button_button__QHarr FlightItemCard_select-btn__L2VsD Button_button-sm__ljQtM Button_button-outline__YRytX  ">
+                                            <div class="label sm">Chọn</div>
+                                        </button>
+                                        <div class="muiten">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                 viewBox="0 0 24 24" fill="none">
+                                                <path d="M6 9L12 15L18 9" stroke="var(--gray-600)" stroke-width="2"
+                                                      stroke-linecap="round" stroke-linejoin="round"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="Collapse_collapsed-content__UzsXV Collapse_collapse__g6PnD"
+                                     style="height: 0px;">
+                                    <div>
+                                        <div class="FlightItemCard_content__eJaAQ">
+                                            <div class="flex gap-19 flex-grow">
+                                                <div class="FlightItemCard_vertical-steps__Wzkcv">
+                                                    <div class="FlightItemCard_vertical-big-dot__68E_0"></div>
+                                                    <div class="FlightItemCard_vertical-small-dot__pPBY5"></div>
+                                                    <div class="FlightItemCard_vertical-small-dot__pPBY5"></div>
+                                                    <div class="FlightItemCard_vertical-small-dot__pPBY5"></div>
+                                                    <div class="FlightItemCard_vertical-small-dot__pPBY5"></div>
+                                                    <div class="FlightItemCard_vertical-small-dot__pPBY5"></div>
+                                                    <div class="FlightItemCard_vertical-big-dot__68E_0"></div>
+                                                </div>
+                                                <div class="flex flex-col gap-12 justify-between">
+                                                    <div class="flex gap-8 align-center">
+                                                        <label class="sm">03/06/2024 23:00</label>
+                                                        <div class="FlightItemCard_dot__Fb_rm"></div><label class="sm">DAD</label>
+                                                    </div>
+                                                    <p class="sm">Thời gian chuyến đi: 90 phút</p>
+                                                    <div class="flex gap-8 align-center">
+                                                        <label class="sm">04/06/2024 00:30</label>
+                                                        <div class="FlightItemCard_dot__Fb_rm"></div><label class="sm">SGN</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="flex flex-col gap-8">
+                                                <div style="width: 30px; height: 30px; position: relative; overflow: hidden;">
+                                                    <img alt="mixivivu"
+                                                         src="https://minio.fares.vn/mixivivu-dev/icons/logo-airline/VU.png"
+                                                         width="100%" height="100%" loading="lazy"
+                                                         style="object-fit: cover;">
+                                                </div>
+                                                <p class="sm">Hãng: Vietravel Airlines</p>
+                                                <p class="sm">Chuyến bay: VU679</p>
+                                                <p class="sm">Hạng chỗ: ECONOMY</p>
+                                                <p class="sm">Máy bay: 321</p>
+                                                <p class="sm">Hành lý xách tay: 7kg</p>
+                                                <p class="sm">Hành lý ký gửi: Vui lòng chọn ở bước tiếp theo</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between align-center Pagination_pagination__dV9rN">
+                            <div class="flex align-center gap-8 Pagination_left-pagination__IuI30">
+                                <p class="sm">Đang xem:</p>
+                                <div>
+                                    <label class="md Pagination_page-size__Rakop">
+                                        <input max="20" min="1"
+                                               type="number" value="5">
+                                    </label>
+                                </div>
+                                <p class="sm">của 136</p>
+                            </div>
+                            <ul class="Pagination_pagination-container__J4wRd ">
+                                <li class="Pagination_pagination-left-item__Ni_lJ Pagination_pagination-item__ZzJmt Pagination_disabled__UwpSX">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                         viewBox="0 0 20 20" fill="none">
+                                        <path d="M4.16602 10H15.8327M4.16602 10L9.16602 5M4.16602 10L9.16602 15"
+                                              stroke="var(--gray-700)" stroke-width="1.67" stroke-linecap="round"
+                                              stroke-linejoin="round"></path>
+                                    </svg><label class="sm">Trước</label>
+                                </li>
+                                <li class="Pagination_pagination-item__ZzJmt Pagination_selected__G5yaV">1</li>
+                                <li class="Pagination_pagination-item__ZzJmt ">2</li>
+                                <li class="Pagination_pagination-item__ZzJmt ">3</li>
+                                <li class="Pagination_pagination-item__ZzJmt Pagination_dots__kDBP6">…</li>
+                                <li class="Pagination_pagination-item__ZzJmt ">26</li>
+                                <li class="Pagination_pagination-item__ZzJmt ">27</li>
+                                <li class="Pagination_pagination-item__ZzJmt ">28</li>
+                                <li class="Pagination_pagination-right-item__xEHMH Pagination_pagination-item__ZzJmt ">
+                                    <label class="sm">Tiếp</label><svg width="20" height="20" viewBox="0 0 12 12"
+                                                                       fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="var(--gray-700)"
+                                              stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<style>
+    /* CSS cho chuyến bay đi và về */
+    .flight-container {
+        background-color: #77DADA;
+        border: 1px solid #d9d9d9;
+        border-radius: 8px;
+        margin: 10px;
+        padding: 15px;
+        transition: transform 0.3s ease;
+    }
+
+        .flight-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+    .flight-header {
+        color: #333;
+        font-size: 1.5em;
+        margin-bottom: 5px;
+    }
+
+    .flight-details {
+        color: #666;
+        line-height: 1.6;
+    }
+
+        .flight-details strong {
+            color: #333;
+        }
+
+    .action-link {
+        display: inline-block;
+        padding: 8px 15px;
+        margin-top: 10px;
+        background-color: #0056b3;
+        color: white;
+        border-radius: 4px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+        .action-link:hover {
+            background-color: #003d82;
+        }
+</style>

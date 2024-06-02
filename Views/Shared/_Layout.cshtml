@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/Content/CSSJSIMG/styles.css">
     <link rel="stylesheet" href="~/Content/CSSJSIMG/css.css">
-
+    <link href="~/Content/CSSJSIMG/fullsearch.css" rel="stylesheet" />
+    <link href="~/Content/CSSJSIMG/SearchFlight.css" rel="stylesheet" />
 </head>
 <style>
     .box-destination {
@@ -97,12 +98,14 @@
                         </div>
                         <div class=" Header_menu__jRq_R h-full flex align-center ">
                             <label for="" class="md">
-                                <a @Html.ActionLink("Vé ", "SearchFlights", "Flight") </a>
+                                <a @Html.ActionLink("Tìm kiếm chuyến bay", "SearchFlights", "Flight")
+ </a>
                             </label>
                         </div>
                         <div class=" Header_menu__jRq_R h-full flex align-center ">
                             <label for="" class="md">
-                                <a @Html.ActionLink("Đăng Xuất ", "Logout", "Account")</a>
+                                <a @Html.ActionLink("Thông Tin Đặt Vé", "MyBookings", "Flight")
+</a>
                             </label>
                         </div>
                         <div class=" Header_menu__jRq_R h-full flex align-center ">
@@ -133,20 +136,28 @@
                     </div>
                 </div>
             </div>
-            @if (TempData["LogoutMessage"] != null)
-            {
-                <div class="alert alert-success">
-                    @TempData["LogoutMessage"]
-                </div>
-            }
-            @if (TempData["LogoutErrorMessage"] != null)
-            {
-                <div class="alert alert-danger">
-                    @TempData["LogoutErrorMessage"]
-                </div>
-            }
+
 
     </header>
+    @if (TempData["LogoutMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["LogoutMessage"]
+        </div>
+    }
+    @if (TempData["LogoutErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["LogoutErrorMessage"]
+        </div>
+    }
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
 
 
     @RenderBody()
@@ -223,6 +234,7 @@
             </div>
         </div>
     </footer>
+    <script src="~/Content/CSSJSIMG/SearchFlight.js"></script>
 </body>
 
 
