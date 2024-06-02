@@ -21,6 +21,11 @@ namespace FourAirLineFinal.Controllers
             return View(flights);
         }
 
+
+
+
+
+
         // Hiển thị chi tiết chuyến bay
         public ActionResult Details(int id)
         {
@@ -57,25 +62,28 @@ namespace FourAirLineFinal.Controllers
             if (departureDate.HasValue)
             {
                 var outboundFlights = from f in data.Flights
-                                      where data.Airports.Single(a => a.AirportID == f.DepartureAirportID).City == departureCity
-                                      && data.Airports.Single(a => a.AirportID == f.ArrivalAirportID).City == arrivalCity
-                                      && f.DepartureTime.Date == departureDate.Value
-                                      select f;
+                                      join a in data.Airlines on f.AirlineID equals a.AirlineID
+                                      join d in data.Airports on f.DepartureAirportID equals d.AirportID
+                                      join r in data.Airports on f.ArrivalAirportID equals r.AirportID
+                                      where d.City == departureCity && r.City == arrivalCity && f.DepartureTime.Date == departureDate.Value
+                                      select new FlightDetailsViewModel
+                                      {
+                                          Flight = f,
+                                          AirlineName = a.AirlineName,
+                                          DepartureAirportName = d.AirportName,
+                                          ArrivalAirportName = r.AirportName,
+
+                                          AvailableSeats = data.Seats.Count(s => s.FlightID == f.FlightID && s.IsAvailable)
+                                      };
                 ViewBag.OutboundFlights = outboundFlights.ToList();
+
             }
 
-            if (returnDate.HasValue)
-            {
-                var returnFlights = from f in data.Flights
-                                    where data.Airports.Single(a => a.AirportID == f.DepartureAirportID).City == arrivalCity
-                                    && data.Airports.Single(a => a.AirportID == f.ArrivalAirportID).City == departureCity
-                                    && f.DepartureTime.Date == returnDate.Value
-                                    select f;
-                ViewBag.ReturnFlights = returnFlights.ToList();
-            }
+            // Tương tự cho ViewBag.ReturnFlights
 
-            return View();  
+            return View();
         }
+
 
         [HttpPost]
         public ActionResult BookSeats(int[] selectedSeats)
