@@ -150,35 +150,6 @@
 
 
 
-
-
-<!--<div class="flight-container">
-    @if (ViewBag.OutboundFlights != null)
-    {
-        <h2 class="flight-header">Chuyến bay đi</h2>
-        foreach (var flightDetails in ViewBag.OutboundFlights)
-        {
-            <div>
-                <h3>Chuyến bay: @flightDetails.Flight.FlightID</h3>
-                <div class="flight-details">
-                    <p><strong>Hãng hàng không:</strong> @flightDetails.AirlineName</p>
-                    <p><strong>Sân bay khởi hành:</strong> @flightDetails.DepartureAirportName</p>
-                    <p><strong>Sân bay đến:</strong> @flightDetails.ArrivalAirportName</p>
-                    <p><strong>Thời gian khởi hành:</strong> @flightDetails.Flight.DepartureTime</p>
-                    <p><strong>Thời gian đến:</strong> @flightDetails.Flight.ArrivalTime</p>
-                    <p><strong>Thời gian bay:</strong> @flightDetails.Flight.Duration Phút</p>
-
-                    <p><strong>Số ghế còn trống:</strong> @flightDetails.AvailableSeats</p>
-                </div>
-            </div>
-
-            <a href="@Url.Action("SelectSeats", new { id = flightDetails.Flight.FlightID })" class="btn btn-primary">Chọn ghế</a>
-
-        }
-    }-->
-    <!-- Tương tự cho ViewBag.ReturnFlights -->
-<!--</div>-->
-
 <div>
     @if (ViewBag.OutboundFlights != null)
     {
@@ -287,19 +258,17 @@
                                                         <div class="flex gap-16 align-center">
                                                             <div class="FlightItemCard_img-wrapper__Z8tXu">
                                                                 <div style="width: 100%; height: 100%; position: relative; overflow: hidden;">
-                                                                    <img alt="mixivivu"
-                                                                         src="https://minio.fares.vn/mixivivu-dev/icons/logo-airline/VU.png"
+                                                                    <img src="@flightDetails.AirlineLogo" alt="@flightDetails.AirlineName Logo"
                                                                          width="100%" height="100%" loading="lazy"
                                                                          style="object-fit: cover;">
                                                                 </div>
                                                             </div>
                                                             <div class="flex flex-col gap-8 flex-grow text-left">
-                                                                <label class="sm">VU679</label>
                                                                 <p class="sm">@flightDetails.AirlineName</p>
                                                             </div>
                                                         </div>
                                                         <div class="FlightItemCard_price-mobile__Cxgwg">
-                                                            <label class="sm">1.488.440&nbsp;VND</label>
+                                                            <label class="sm">@flightDetails.SeatPrice&nbsp;VND</label>
                                                             <p class="sm">VND</p>
                                                         </div>
                                                     </div>
@@ -314,7 +283,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="FlightItemCard_price__yFFyH">
-                                                        <label class="sm">1.488.440&nbsp;VND</label>
+                                                        <label class="sm">@flightDetails.SeatPrice&nbsp;VND</label>
                                                         <p class="sm">VND</p>
                                                     </div><button type="button"
                                                                   class="Button_button__QHarr FlightItemCard_select-btn__L2VsD Button_button-sm__ljQtM Button_button-outline__YRytX  ">
@@ -358,15 +327,13 @@
                                                         </div>
                                                         <div class="flex flex-col gap-8">
                                                             <div style="width: 30px; height: 30px; position: relative; overflow: hidden;">
-                                                                <img alt="mixivivu"
-                                                                     src="https://minio.fares.vn/mixivivu-dev/icons/logo-airline/VU.png"
+                                                                <img src="@flightDetails.AirlineLogo" alt="@flightDetails.AirlineName Logo"
                                                                      width="100%" height="100%" loading="lazy"
                                                                      style="object-fit: cover;">
                                                             </div>
                                                             <p class="sm">Hãng: @flightDetails.AirlineName</p>
-                                                            <p class="sm">Chuyến bay: VU679</p>
-                                                            <p class="sm">Hạng chỗ: </p>
-                                                            <p class="sm">Số ghế: @flightDetails.AvailableSeats</p>
+                                                            <p class="sm">Hạng ghế: @flightDetails.SeatClass </p>
+                                                            <p class="sm">Số ghế trống: @flightDetails.AvailableSeats</p>
                                                         </div>
                                                     </div>
                                                 </div>

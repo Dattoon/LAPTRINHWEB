@@ -5,38 +5,62 @@
 
 @model LAPTRINHWEB.Models.BookingViewModel
 
-<h2>Thông tin đặt vé</h2>
+<div>
+    <h2>Thông tin đặt vé</h2>
 
-<p>Người đặt: @(User.Identity.IsAuthenticated ? User.Identity.Name : Model.Guest.UserName)</p>
-<p>Ngày đặt: @Model.Booking.BookingDate</p>
+    <p>Người đặt: @(User.Identity.IsAuthenticated ? User.Identity.Name : Model.Guest.UserName)</p>
+    <p>Ngày đặt: @Model.Booking.BookingDate</p>
 
 
-<h3>Chi tiết vé:</h3>
-@foreach (var detail in Model.BookingDetails)
-{
-    <div>
-        <h4>Chuyến bay: @detail.OutboundFlightID</h4>
-        <p>Số ghế: @detail.Seat.SeatNumber</p>
-        <p>Loại ghế: @detail.Seat.SeatClass</p>
-        <p>Giá: @detail.Seat.Price</p>
-    </div>
-}
+    <h3>Chi tiết vé:</h3>
+    @foreach (var detail in Model.BookingDetails)
+    {
+        <div>
+            <h4>Chuyến bay: @detail.OutboundFlightID</h4>
+            <p>Số ghế: @detail.Seat.SeatNumber</p>
+            <p>Loại ghế: @detail.Seat.SeatClass</p>
+            <p>Giá: @detail.Seat.Price</p>
+        </div>
+    }
 
-<h3>Thông tin thanh toán:</h3>
-<form action="@Url.Action("Pay")" method="post">
-    <input type="hidden" name="bookingId" value="@Model.Booking.BookingID" />
+    <h3>Thông tin thanh toán:</h3>
+    <form action="@Url.Action("Pay")" method="post">
+        <input type="hidden" name="bookingId" value="@Model.Booking.BookingID" />
 
-    <label for="cardName">Tên chủ thẻ:</label>
-    <input type="text" id="cardName" name="cardName" required />
+        <label for="cardName">Tên chủ thẻ:</label>
+        <input type="text" id="cardName" name="cardName" required />
 
-    <label for="cardNumber">Số thẻ:</label>
-    <input type="text" id="cardNumber" name="cardNumber" required />
+        <label for="cardNumber">Số thẻ:</label>
+        <input type="text" id="cardNumber" name="cardNumber" required />
 
-    <label for="expiryDate">Ngày hết hạn:</label>
-    <input type="date" id="expiryDate" name="expiryDate" required />
+        <label for="expiryDate">Ngày hết hạn:</label>
+        <input type="date" id="expiryDate" name="expiryDate" required />
 
-    <label for="securityCode">Mã bảo mật:</label>
-    <input type="text" id="securityCode" name="securityCode" required />
+        <label for="securityCode">Mã bảo mật:</label>
+        <input type="text" id="securityCode" name="securityCode" required />
 
-    <input type="submit" value="Thanh toán" />
-</form>
+        <input type="submit" value="Thanh toán" />
+    </form>
+</div>
+<style>
+    /* Sử dụng grid layout để tổ chức nội dung */
+   .container {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+   gap: 20px;
+   padding: 20px;
+   }
+
+   /* Thêm hiệu ứng chuyển đổi mượt mà cho các nút và input */
+   button, input {
+   transition: all 0.3s ease;
+   }
+
+   button:hover, input:focus {
+   transform: scale(1.05);
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+   }
+
+   /* Tạo hiệu ứng gradient nền động */
+
+</style>
