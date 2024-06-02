@@ -9,10 +9,11 @@ namespace LAPTRINHWEB.Models
     {
         public Flight Flight { get; set; }
         public string AirlineName { get; set; }
+        public string AirlineLogo { get; set; } 
         public string DepartureAirportName { get; set; }
         public string ArrivalAirportName { get; set; }
-
+        public decimal SeatPrice { get; set; } 
+        public string SeatClass { get; set; } 
         public int AvailableSeats { get; set; }
     }
-
 }
