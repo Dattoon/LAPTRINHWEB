@@ -139,7 +139,15 @@ namespace FourAirLineFinal.Controllers
         public ActionResult EnterCustomerInfo(Guest guest)
         {
             // Kiểm tra xem người dùng đã đăng nhập chưa
-            if (!User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated)
+            {
+                // Nếu người dùng đã đăng nhập, lấy thông tin người dùng
+                var user = Session["Taikhoan"] as Customer;
+
+                // Lưu CustomerID vào Session
+                Session["CustomerID"] = user.CustomerID;
+            }
+            else
             {
                 // Nếu người dùng chưa đăng nhập, tạo một bản ghi Guest mới
                 var newGuest = new Guest
@@ -162,11 +170,13 @@ namespace FourAirLineFinal.Controllers
 
 
 
+
         [HttpPost]
         public ActionResult BookFlights()
         {
-            // Get the current user and their selected seats
-            var user = User.Identity.IsAuthenticated ? data.Customers.SingleOrDefault(c => c.UserName == User.Identity.Name) : null;
+            // Get the current user and their selected seats var user = Session["Taikhoan"] as Customer;
+            var user = Session["Taikhoan"] as Customer;
+            var guestId = Session["GuestID"] as int?;
 
             // Retrieve the selected seats from the session
             var selectedSeats = Session["SelectedSeats"] as int[];
@@ -176,7 +186,7 @@ namespace FourAirLineFinal.Controllers
             var booking = new Booking
             {
                 CustomerID = user != null ? user.CustomerID : (int?)null, // Use null for guests
-                GuestID = Session["GuestID"] as int?, // Get GuestID from session
+                GuestID = guestId, // Set GuestID for guests
                 BookingDate = DateTime.Now,
                 IsPaid = false,
             };
