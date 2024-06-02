@@ -51,18 +51,21 @@ namespace LAPTRINHWEB.Models
     partial void InsertFlight(Flight instance);
     partial void UpdateFlight(Flight instance);
     partial void DeleteFlight(Flight instance);
-    partial void InsertCustomer(Customer instance);
-    partial void UpdateCustomer(Customer instance);
-    partial void DeleteCustomer(Customer instance);
-    partial void InsertBooking(Booking instance);
-    partial void UpdateBooking(Booking instance);
-    partial void DeleteBooking(Booking instance);
     partial void InsertBookingDetail(BookingDetail instance);
     partial void UpdateBookingDetail(BookingDetail instance);
     partial void DeleteBookingDetail(BookingDetail instance);
     partial void InsertAdmin(Admin instance);
     partial void UpdateAdmin(Admin instance);
     partial void DeleteAdmin(Admin instance);
+    partial void InsertBooking(Booking instance);
+    partial void UpdateBooking(Booking instance);
+    partial void DeleteBooking(Booking instance);
+    partial void InsertCustomer(Customer instance);
+    partial void UpdateCustomer(Customer instance);
+    partial void DeleteCustomer(Customer instance);
+    partial void InsertGuest(Guest instance);
+    partial void UpdateGuest(Guest instance);
+    partial void DeleteGuest(Guest instance);
     #endregion
 		
 		public DataClasses1DataContext(string connection) : 
@@ -145,22 +148,6 @@ namespace LAPTRINHWEB.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<Customer> Customers
-		{
-			get
-			{
-				return this.GetTable<Customer>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Booking> Bookings
-		{
-			get
-			{
-				return this.GetTable<Booking>();
-			}
-		}
-		
 		public System.Data.Linq.Table<BookingDetail> BookingDetails
 		{
 			get
@@ -174,6 +161,30 @@ namespace LAPTRINHWEB.Models
 			get
 			{
 				return this.GetTable<Admin>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Booking> Bookings
+		{
+			get
+			{
+				return this.GetTable<Booking>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Customer> Customers
+		{
+			get
+			{
+				return this.GetTable<Customer>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Guest> Guests
+		{
+			get
+			{
+				return this.GetTable<Guest>();
 			}
 		}
 	}
@@ -1923,6 +1934,823 @@ namespace LAPTRINHWEB.Models
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.BookingDetails")]
+	public partial class BookingDetail : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _BookingDetailID;
+		
+		private System.Nullable<int> _BookingID;
+		
+		private System.Nullable<int> _SeatID;
+		
+		private System.Nullable<int> _OutboundFlightID;
+		
+		private System.Nullable<int> _ReturnFlightID;
+		
+		private EntityRef<Flight> _Flight;
+		
+		private EntityRef<Flight> _Flight1;
+		
+		private EntityRef<Seat> _Seat;
+		
+		private EntityRef<Booking> _Booking;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnBookingDetailIDChanging(int value);
+    partial void OnBookingDetailIDChanged();
+    partial void OnBookingIDChanging(System.Nullable<int> value);
+    partial void OnBookingIDChanged();
+    partial void OnSeatIDChanging(System.Nullable<int> value);
+    partial void OnSeatIDChanged();
+    partial void OnOutboundFlightIDChanging(System.Nullable<int> value);
+    partial void OnOutboundFlightIDChanged();
+    partial void OnReturnFlightIDChanging(System.Nullable<int> value);
+    partial void OnReturnFlightIDChanged();
+    #endregion
+		
+		public BookingDetail()
+		{
+			this._Flight = default(EntityRef<Flight>);
+			this._Flight1 = default(EntityRef<Flight>);
+			this._Seat = default(EntityRef<Seat>);
+			this._Booking = default(EntityRef<Booking>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookingDetailID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int BookingDetailID
+		{
+			get
+			{
+				return this._BookingDetailID;
+			}
+			set
+			{
+				if ((this._BookingDetailID != value))
+				{
+					this.OnBookingDetailIDChanging(value);
+					this.SendPropertyChanging();
+					this._BookingDetailID = value;
+					this.SendPropertyChanged("BookingDetailID");
+					this.OnBookingDetailIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookingID", DbType="Int")]
+		public System.Nullable<int> BookingID
+		{
+			get
+			{
+				return this._BookingID;
+			}
+			set
+			{
+				if ((this._BookingID != value))
+				{
+					if (this._Booking.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnBookingIDChanging(value);
+					this.SendPropertyChanging();
+					this._BookingID = value;
+					this.SendPropertyChanged("BookingID");
+					this.OnBookingIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SeatID", DbType="Int")]
+		public System.Nullable<int> SeatID
+		{
+			get
+			{
+				return this._SeatID;
+			}
+			set
+			{
+				if ((this._SeatID != value))
+				{
+					if (this._Seat.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSeatIDChanging(value);
+					this.SendPropertyChanging();
+					this._SeatID = value;
+					this.SendPropertyChanged("SeatID");
+					this.OnSeatIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OutboundFlightID", DbType="Int")]
+		public System.Nullable<int> OutboundFlightID
+		{
+			get
+			{
+				return this._OutboundFlightID;
+			}
+			set
+			{
+				if ((this._OutboundFlightID != value))
+				{
+					if (this._Flight.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnOutboundFlightIDChanging(value);
+					this.SendPropertyChanging();
+					this._OutboundFlightID = value;
+					this.SendPropertyChanged("OutboundFlightID");
+					this.OnOutboundFlightIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReturnFlightID", DbType="Int")]
+		public System.Nullable<int> ReturnFlightID
+		{
+			get
+			{
+				return this._ReturnFlightID;
+			}
+			set
+			{
+				if ((this._ReturnFlightID != value))
+				{
+					if (this._Flight1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnReturnFlightIDChanging(value);
+					this.SendPropertyChanging();
+					this._ReturnFlightID = value;
+					this.SendPropertyChanged("ReturnFlightID");
+					this.OnReturnFlightIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Flight_BookingDetail", Storage="_Flight", ThisKey="OutboundFlightID", OtherKey="FlightID", IsForeignKey=true)]
+		public Flight Flight
+		{
+			get
+			{
+				return this._Flight.Entity;
+			}
+			set
+			{
+				Flight previousValue = this._Flight.Entity;
+				if (((previousValue != value) 
+							|| (this._Flight.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Flight.Entity = null;
+						previousValue.BookingDetails.Remove(this);
+					}
+					this._Flight.Entity = value;
+					if ((value != null))
+					{
+						value.BookingDetails.Add(this);
+						this._OutboundFlightID = value.FlightID;
+					}
+					else
+					{
+						this._OutboundFlightID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Flight");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Flight_BookingDetail1", Storage="_Flight1", ThisKey="ReturnFlightID", OtherKey="FlightID", IsForeignKey=true)]
+		public Flight Flight1
+		{
+			get
+			{
+				return this._Flight1.Entity;
+			}
+			set
+			{
+				Flight previousValue = this._Flight1.Entity;
+				if (((previousValue != value) 
+							|| (this._Flight1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Flight1.Entity = null;
+						previousValue.BookingDetails1.Remove(this);
+					}
+					this._Flight1.Entity = value;
+					if ((value != null))
+					{
+						value.BookingDetails1.Add(this);
+						this._ReturnFlightID = value.FlightID;
+					}
+					else
+					{
+						this._ReturnFlightID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Flight1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Seat_BookingDetail", Storage="_Seat", ThisKey="SeatID", OtherKey="SeatID", IsForeignKey=true)]
+		public Seat Seat
+		{
+			get
+			{
+				return this._Seat.Entity;
+			}
+			set
+			{
+				Seat previousValue = this._Seat.Entity;
+				if (((previousValue != value) 
+							|| (this._Seat.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Seat.Entity = null;
+						previousValue.BookingDetails.Remove(this);
+					}
+					this._Seat.Entity = value;
+					if ((value != null))
+					{
+						value.BookingDetails.Add(this);
+						this._SeatID = value.SeatID;
+					}
+					else
+					{
+						this._SeatID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Seat");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Booking_BookingDetail", Storage="_Booking", ThisKey="BookingID", OtherKey="BookingID", IsForeignKey=true)]
+		public Booking Booking
+		{
+			get
+			{
+				return this._Booking.Entity;
+			}
+			set
+			{
+				Booking previousValue = this._Booking.Entity;
+				if (((previousValue != value) 
+							|| (this._Booking.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Booking.Entity = null;
+						previousValue.BookingDetails.Remove(this);
+					}
+					this._Booking.Entity = value;
+					if ((value != null))
+					{
+						value.BookingDetails.Add(this);
+						this._BookingID = value.BookingID;
+					}
+					else
+					{
+						this._BookingID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Booking");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Admin")]
+	public partial class Admin : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _UserAdmin;
+		
+		private string _PassAdmin;
+		
+		private string _HoTen;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnUserAdminChanging(string value);
+    partial void OnUserAdminChanged();
+    partial void OnPassAdminChanging(string value);
+    partial void OnPassAdminChanged();
+    partial void OnHoTenChanging(string value);
+    partial void OnHoTenChanged();
+    #endregion
+		
+		public Admin()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserAdmin", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string UserAdmin
+		{
+			get
+			{
+				return this._UserAdmin;
+			}
+			set
+			{
+				if ((this._UserAdmin != value))
+				{
+					this.OnUserAdminChanging(value);
+					this.SendPropertyChanging();
+					this._UserAdmin = value;
+					this.SendPropertyChanged("UserAdmin");
+					this.OnUserAdminChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PassAdmin", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string PassAdmin
+		{
+			get
+			{
+				return this._PassAdmin;
+			}
+			set
+			{
+				if ((this._PassAdmin != value))
+				{
+					this.OnPassAdminChanging(value);
+					this.SendPropertyChanging();
+					this._PassAdmin = value;
+					this.SendPropertyChanged("PassAdmin");
+					this.OnPassAdminChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoTen", DbType="NVarChar(50)")]
+		public string HoTen
+		{
+			get
+			{
+				return this._HoTen;
+			}
+			set
+			{
+				if ((this._HoTen != value))
+				{
+					this.OnHoTenChanging(value);
+					this.SendPropertyChanging();
+					this._HoTen = value;
+					this.SendPropertyChanged("HoTen");
+					this.OnHoTenChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Bookings")]
+	public partial class Booking : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _BookingID;
+		
+		private System.Nullable<int> _CustomerID;
+		
+		private System.Nullable<int> _TicketID;
+		
+		private System.DateTime _BookingDate;
+		
+		private bool _IsPaid;
+		
+		private bool _IsRoundTrip;
+		
+		private System.Nullable<int> _GuestID;
+		
+		private EntitySet<Transaction> _Transactions;
+		
+		private EntitySet<BookingDetail> _BookingDetails;
+		
+		private EntityRef<Ticket> _Ticket;
+		
+		private EntityRef<Customer> _Customer;
+		
+		private EntityRef<Guest> _Guest;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnBookingIDChanging(int value);
+    partial void OnBookingIDChanged();
+    partial void OnCustomerIDChanging(System.Nullable<int> value);
+    partial void OnCustomerIDChanged();
+    partial void OnTicketIDChanging(System.Nullable<int> value);
+    partial void OnTicketIDChanged();
+    partial void OnBookingDateChanging(System.DateTime value);
+    partial void OnBookingDateChanged();
+    partial void OnIsPaidChanging(bool value);
+    partial void OnIsPaidChanged();
+    partial void OnIsRoundTripChanging(bool value);
+    partial void OnIsRoundTripChanged();
+    partial void OnGuestIDChanging(System.Nullable<int> value);
+    partial void OnGuestIDChanged();
+    #endregion
+		
+		public Booking()
+		{
+			this._Transactions = new EntitySet<Transaction>(new Action<Transaction>(this.attach_Transactions), new Action<Transaction>(this.detach_Transactions));
+			this._BookingDetails = new EntitySet<BookingDetail>(new Action<BookingDetail>(this.attach_BookingDetails), new Action<BookingDetail>(this.detach_BookingDetails));
+			this._Ticket = default(EntityRef<Ticket>);
+			this._Customer = default(EntityRef<Customer>);
+			this._Guest = default(EntityRef<Guest>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookingID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int BookingID
+		{
+			get
+			{
+				return this._BookingID;
+			}
+			set
+			{
+				if ((this._BookingID != value))
+				{
+					this.OnBookingIDChanging(value);
+					this.SendPropertyChanging();
+					this._BookingID = value;
+					this.SendPropertyChanged("BookingID");
+					this.OnBookingIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int")]
+		public System.Nullable<int> CustomerID
+		{
+			get
+			{
+				return this._CustomerID;
+			}
+			set
+			{
+				if ((this._CustomerID != value))
+				{
+					if (this._Customer.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCustomerIDChanging(value);
+					this.SendPropertyChanging();
+					this._CustomerID = value;
+					this.SendPropertyChanged("CustomerID");
+					this.OnCustomerIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TicketID", DbType="Int")]
+		public System.Nullable<int> TicketID
+		{
+			get
+			{
+				return this._TicketID;
+			}
+			set
+			{
+				if ((this._TicketID != value))
+				{
+					if (this._Ticket.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnTicketIDChanging(value);
+					this.SendPropertyChanging();
+					this._TicketID = value;
+					this.SendPropertyChanged("TicketID");
+					this.OnTicketIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookingDate", DbType="DateTime NOT NULL")]
+		public System.DateTime BookingDate
+		{
+			get
+			{
+				return this._BookingDate;
+			}
+			set
+			{
+				if ((this._BookingDate != value))
+				{
+					this.OnBookingDateChanging(value);
+					this.SendPropertyChanging();
+					this._BookingDate = value;
+					this.SendPropertyChanged("BookingDate");
+					this.OnBookingDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsPaid", DbType="Bit NOT NULL")]
+		public bool IsPaid
+		{
+			get
+			{
+				return this._IsPaid;
+			}
+			set
+			{
+				if ((this._IsPaid != value))
+				{
+					this.OnIsPaidChanging(value);
+					this.SendPropertyChanging();
+					this._IsPaid = value;
+					this.SendPropertyChanged("IsPaid");
+					this.OnIsPaidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsRoundTrip", DbType="Bit NOT NULL")]
+		public bool IsRoundTrip
+		{
+			get
+			{
+				return this._IsRoundTrip;
+			}
+			set
+			{
+				if ((this._IsRoundTrip != value))
+				{
+					this.OnIsRoundTripChanging(value);
+					this.SendPropertyChanging();
+					this._IsRoundTrip = value;
+					this.SendPropertyChanged("IsRoundTrip");
+					this.OnIsRoundTripChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GuestID", DbType="Int")]
+		public System.Nullable<int> GuestID
+		{
+			get
+			{
+				return this._GuestID;
+			}
+			set
+			{
+				if ((this._GuestID != value))
+				{
+					if (this._Guest.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnGuestIDChanging(value);
+					this.SendPropertyChanging();
+					this._GuestID = value;
+					this.SendPropertyChanged("GuestID");
+					this.OnGuestIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Booking_Transaction", Storage="_Transactions", ThisKey="BookingID", OtherKey="BookingID")]
+		public EntitySet<Transaction> Transactions
+		{
+			get
+			{
+				return this._Transactions;
+			}
+			set
+			{
+				this._Transactions.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Booking_BookingDetail", Storage="_BookingDetails", ThisKey="BookingID", OtherKey="BookingID")]
+		public EntitySet<BookingDetail> BookingDetails
+		{
+			get
+			{
+				return this._BookingDetails;
+			}
+			set
+			{
+				this._BookingDetails.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Ticket_Booking", Storage="_Ticket", ThisKey="TicketID", OtherKey="TicketID", IsForeignKey=true)]
+		public Ticket Ticket
+		{
+			get
+			{
+				return this._Ticket.Entity;
+			}
+			set
+			{
+				Ticket previousValue = this._Ticket.Entity;
+				if (((previousValue != value) 
+							|| (this._Ticket.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Ticket.Entity = null;
+						previousValue.Bookings.Remove(this);
+					}
+					this._Ticket.Entity = value;
+					if ((value != null))
+					{
+						value.Bookings.Add(this);
+						this._TicketID = value.TicketID;
+					}
+					else
+					{
+						this._TicketID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Ticket");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_Booking", Storage="_Customer", ThisKey="CustomerID", OtherKey="CustomerID", IsForeignKey=true)]
+		public Customer Customer
+		{
+			get
+			{
+				return this._Customer.Entity;
+			}
+			set
+			{
+				Customer previousValue = this._Customer.Entity;
+				if (((previousValue != value) 
+							|| (this._Customer.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Customer.Entity = null;
+						previousValue.Bookings.Remove(this);
+					}
+					this._Customer.Entity = value;
+					if ((value != null))
+					{
+						value.Bookings.Add(this);
+						this._CustomerID = value.CustomerID;
+					}
+					else
+					{
+						this._CustomerID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Customer");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Guest_Booking", Storage="_Guest", ThisKey="GuestID", OtherKey="GuestID", IsForeignKey=true)]
+		public Guest Guest
+		{
+			get
+			{
+				return this._Guest.Entity;
+			}
+			set
+			{
+				Guest previousValue = this._Guest.Entity;
+				if (((previousValue != value) 
+							|| (this._Guest.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Guest.Entity = null;
+						previousValue.Bookings.Remove(this);
+					}
+					this._Guest.Entity = value;
+					if ((value != null))
+					{
+						value.Bookings.Add(this);
+						this._GuestID = value.GuestID;
+					}
+					else
+					{
+						this._GuestID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Guest");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Transactions(Transaction entity)
+		{
+			this.SendPropertyChanging();
+			entity.Booking = this;
+		}
+		
+		private void detach_Transactions(Transaction entity)
+		{
+			this.SendPropertyChanging();
+			entity.Booking = null;
+		}
+		
+		private void attach_BookingDetails(BookingDetail entity)
+		{
+			this.SendPropertyChanging();
+			entity.Booking = this;
+		}
+		
+		private void detach_BookingDetails(BookingDetail entity)
+		{
+			this.SendPropertyChanging();
+			entity.Booking = null;
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Customers")]
 	public partial class Customer : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2133,278 +2961,132 @@ namespace LAPTRINHWEB.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Bookings")]
-	public partial class Booking : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Guests")]
+	public partial class Guest : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _BookingID;
+		private int _GuestID;
 		
-		private System.Nullable<int> _CustomerID;
+		private string _Email;
 		
-		private System.Nullable<int> _TicketID;
+		private string _PhoneNumber;
 		
-		private System.DateTime _BookingDate;
+		private string _UserName;
 		
-		private bool _IsPaid;
-		
-		private bool _IsRoundTrip;
-		
-		private EntitySet<Transaction> _Transactions;
-		
-		private EntitySet<BookingDetail> _BookingDetails;
-		
-		private EntityRef<Customer> _Customer;
-		
-		private EntityRef<Ticket> _Ticket;
+		private EntitySet<Booking> _Bookings;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnBookingIDChanging(int value);
-    partial void OnBookingIDChanged();
-    partial void OnCustomerIDChanging(System.Nullable<int> value);
-    partial void OnCustomerIDChanged();
-    partial void OnTicketIDChanging(System.Nullable<int> value);
-    partial void OnTicketIDChanged();
-    partial void OnBookingDateChanging(System.DateTime value);
-    partial void OnBookingDateChanged();
-    partial void OnIsPaidChanging(bool value);
-    partial void OnIsPaidChanged();
-    partial void OnIsRoundTripChanging(bool value);
-    partial void OnIsRoundTripChanged();
+    partial void OnGuestIDChanging(int value);
+    partial void OnGuestIDChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnPhoneNumberChanging(string value);
+    partial void OnPhoneNumberChanged();
+    partial void OnUserNameChanging(string value);
+    partial void OnUserNameChanged();
     #endregion
 		
-		public Booking()
+		public Guest()
 		{
-			this._Transactions = new EntitySet<Transaction>(new Action<Transaction>(this.attach_Transactions), new Action<Transaction>(this.detach_Transactions));
-			this._BookingDetails = new EntitySet<BookingDetail>(new Action<BookingDetail>(this.attach_BookingDetails), new Action<BookingDetail>(this.detach_BookingDetails));
-			this._Customer = default(EntityRef<Customer>);
-			this._Ticket = default(EntityRef<Ticket>);
+			this._Bookings = new EntitySet<Booking>(new Action<Booking>(this.attach_Bookings), new Action<Booking>(this.detach_Bookings));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookingID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int BookingID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GuestID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int GuestID
 		{
 			get
 			{
-				return this._BookingID;
+				return this._GuestID;
 			}
 			set
 			{
-				if ((this._BookingID != value))
+				if ((this._GuestID != value))
 				{
-					this.OnBookingIDChanging(value);
+					this.OnGuestIDChanging(value);
 					this.SendPropertyChanging();
-					this._BookingID = value;
-					this.SendPropertyChanged("BookingID");
-					this.OnBookingIDChanged();
+					this._GuestID = value;
+					this.SendPropertyChanged("GuestID");
+					this.OnGuestIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int")]
-		public System.Nullable<int> CustomerID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(1) NOT NULL", CanBeNull=false)]
+		public string Email
 		{
 			get
 			{
-				return this._CustomerID;
+				return this._Email;
 			}
 			set
 			{
-				if ((this._CustomerID != value))
+				if ((this._Email != value))
 				{
-					if (this._Customer.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnCustomerIDChanging(value);
+					this.OnEmailChanging(value);
 					this.SendPropertyChanging();
-					this._CustomerID = value;
-					this.SendPropertyChanged("CustomerID");
-					this.OnCustomerIDChanged();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TicketID", DbType="Int")]
-		public System.Nullable<int> TicketID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="NVarChar(1)")]
+		public string PhoneNumber
 		{
 			get
 			{
-				return this._TicketID;
+				return this._PhoneNumber;
 			}
 			set
 			{
-				if ((this._TicketID != value))
+				if ((this._PhoneNumber != value))
 				{
-					if (this._Ticket.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnTicketIDChanging(value);
+					this.OnPhoneNumberChanging(value);
 					this.SendPropertyChanging();
-					this._TicketID = value;
-					this.SendPropertyChanged("TicketID");
-					this.OnTicketIDChanged();
+					this._PhoneNumber = value;
+					this.SendPropertyChanged("PhoneNumber");
+					this.OnPhoneNumberChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookingDate", DbType="DateTime NOT NULL")]
-		public System.DateTime BookingDate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="NVarChar(50)")]
+		public string UserName
 		{
 			get
 			{
-				return this._BookingDate;
+				return this._UserName;
 			}
 			set
 			{
-				if ((this._BookingDate != value))
+				if ((this._UserName != value))
 				{
-					this.OnBookingDateChanging(value);
+					this.OnUserNameChanging(value);
 					this.SendPropertyChanging();
-					this._BookingDate = value;
-					this.SendPropertyChanged("BookingDate");
-					this.OnBookingDateChanged();
+					this._UserName = value;
+					this.SendPropertyChanged("UserName");
+					this.OnUserNameChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsPaid", DbType="Bit NOT NULL")]
-		public bool IsPaid
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Guest_Booking", Storage="_Bookings", ThisKey="GuestID", OtherKey="GuestID")]
+		public EntitySet<Booking> Bookings
 		{
 			get
 			{
-				return this._IsPaid;
+				return this._Bookings;
 			}
 			set
 			{
-				if ((this._IsPaid != value))
-				{
-					this.OnIsPaidChanging(value);
-					this.SendPropertyChanging();
-					this._IsPaid = value;
-					this.SendPropertyChanged("IsPaid");
-					this.OnIsPaidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsRoundTrip", DbType="Bit NOT NULL")]
-		public bool IsRoundTrip
-		{
-			get
-			{
-				return this._IsRoundTrip;
-			}
-			set
-			{
-				if ((this._IsRoundTrip != value))
-				{
-					this.OnIsRoundTripChanging(value);
-					this.SendPropertyChanging();
-					this._IsRoundTrip = value;
-					this.SendPropertyChanged("IsRoundTrip");
-					this.OnIsRoundTripChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Booking_Transaction", Storage="_Transactions", ThisKey="BookingID", OtherKey="BookingID")]
-		public EntitySet<Transaction> Transactions
-		{
-			get
-			{
-				return this._Transactions;
-			}
-			set
-			{
-				this._Transactions.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Booking_BookingDetail", Storage="_BookingDetails", ThisKey="BookingID", OtherKey="BookingID")]
-		public EntitySet<BookingDetail> BookingDetails
-		{
-			get
-			{
-				return this._BookingDetails;
-			}
-			set
-			{
-				this._BookingDetails.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_Booking", Storage="_Customer", ThisKey="CustomerID", OtherKey="CustomerID", IsForeignKey=true)]
-		public Customer Customer
-		{
-			get
-			{
-				return this._Customer.Entity;
-			}
-			set
-			{
-				Customer previousValue = this._Customer.Entity;
-				if (((previousValue != value) 
-							|| (this._Customer.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Customer.Entity = null;
-						previousValue.Bookings.Remove(this);
-					}
-					this._Customer.Entity = value;
-					if ((value != null))
-					{
-						value.Bookings.Add(this);
-						this._CustomerID = value.CustomerID;
-					}
-					else
-					{
-						this._CustomerID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Customer");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Ticket_Booking", Storage="_Ticket", ThisKey="TicketID", OtherKey="TicketID", IsForeignKey=true)]
-		public Ticket Ticket
-		{
-			get
-			{
-				return this._Ticket.Entity;
-			}
-			set
-			{
-				Ticket previousValue = this._Ticket.Entity;
-				if (((previousValue != value) 
-							|| (this._Ticket.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Ticket.Entity = null;
-						previousValue.Bookings.Remove(this);
-					}
-					this._Ticket.Entity = value;
-					if ((value != null))
-					{
-						value.Bookings.Add(this);
-						this._TicketID = value.TicketID;
-					}
-					else
-					{
-						this._TicketID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Ticket");
-				}
+				this._Bookings.Assign(value);
 			}
 		}
 		
@@ -2428,460 +3110,16 @@ namespace LAPTRINHWEB.Models
 			}
 		}
 		
-		private void attach_Transactions(Transaction entity)
+		private void attach_Bookings(Booking entity)
 		{
 			this.SendPropertyChanging();
-			entity.Booking = this;
+			entity.Guest = this;
 		}
 		
-		private void detach_Transactions(Transaction entity)
+		private void detach_Bookings(Booking entity)
 		{
 			this.SendPropertyChanging();
-			entity.Booking = null;
-		}
-		
-		private void attach_BookingDetails(BookingDetail entity)
-		{
-			this.SendPropertyChanging();
-			entity.Booking = this;
-		}
-		
-		private void detach_BookingDetails(BookingDetail entity)
-		{
-			this.SendPropertyChanging();
-			entity.Booking = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.BookingDetails")]
-	public partial class BookingDetail : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _BookingDetailID;
-		
-		private System.Nullable<int> _BookingID;
-		
-		private System.Nullable<int> _SeatID;
-		
-		private System.Nullable<int> _OutboundFlightID;
-		
-		private System.Nullable<int> _ReturnFlightID;
-		
-		private EntityRef<Booking> _Booking;
-		
-		private EntityRef<Flight> _Flight;
-		
-		private EntityRef<Flight> _Flight1;
-		
-		private EntityRef<Seat> _Seat;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnBookingDetailIDChanging(int value);
-    partial void OnBookingDetailIDChanged();
-    partial void OnBookingIDChanging(System.Nullable<int> value);
-    partial void OnBookingIDChanged();
-    partial void OnSeatIDChanging(System.Nullable<int> value);
-    partial void OnSeatIDChanged();
-    partial void OnOutboundFlightIDChanging(System.Nullable<int> value);
-    partial void OnOutboundFlightIDChanged();
-    partial void OnReturnFlightIDChanging(System.Nullable<int> value);
-    partial void OnReturnFlightIDChanged();
-    #endregion
-		
-		public BookingDetail()
-		{
-			this._Booking = default(EntityRef<Booking>);
-			this._Flight = default(EntityRef<Flight>);
-			this._Flight1 = default(EntityRef<Flight>);
-			this._Seat = default(EntityRef<Seat>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookingDetailID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int BookingDetailID
-		{
-			get
-			{
-				return this._BookingDetailID;
-			}
-			set
-			{
-				if ((this._BookingDetailID != value))
-				{
-					this.OnBookingDetailIDChanging(value);
-					this.SendPropertyChanging();
-					this._BookingDetailID = value;
-					this.SendPropertyChanged("BookingDetailID");
-					this.OnBookingDetailIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookingID", DbType="Int")]
-		public System.Nullable<int> BookingID
-		{
-			get
-			{
-				return this._BookingID;
-			}
-			set
-			{
-				if ((this._BookingID != value))
-				{
-					if (this._Booking.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnBookingIDChanging(value);
-					this.SendPropertyChanging();
-					this._BookingID = value;
-					this.SendPropertyChanged("BookingID");
-					this.OnBookingIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SeatID", DbType="Int")]
-		public System.Nullable<int> SeatID
-		{
-			get
-			{
-				return this._SeatID;
-			}
-			set
-			{
-				if ((this._SeatID != value))
-				{
-					if (this._Seat.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnSeatIDChanging(value);
-					this.SendPropertyChanging();
-					this._SeatID = value;
-					this.SendPropertyChanged("SeatID");
-					this.OnSeatIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OutboundFlightID", DbType="Int")]
-		public System.Nullable<int> OutboundFlightID
-		{
-			get
-			{
-				return this._OutboundFlightID;
-			}
-			set
-			{
-				if ((this._OutboundFlightID != value))
-				{
-					if (this._Flight.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnOutboundFlightIDChanging(value);
-					this.SendPropertyChanging();
-					this._OutboundFlightID = value;
-					this.SendPropertyChanged("OutboundFlightID");
-					this.OnOutboundFlightIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReturnFlightID", DbType="Int")]
-		public System.Nullable<int> ReturnFlightID
-		{
-			get
-			{
-				return this._ReturnFlightID;
-			}
-			set
-			{
-				if ((this._ReturnFlightID != value))
-				{
-					if (this._Flight1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnReturnFlightIDChanging(value);
-					this.SendPropertyChanging();
-					this._ReturnFlightID = value;
-					this.SendPropertyChanged("ReturnFlightID");
-					this.OnReturnFlightIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Booking_BookingDetail", Storage="_Booking", ThisKey="BookingID", OtherKey="BookingID", IsForeignKey=true)]
-		public Booking Booking
-		{
-			get
-			{
-				return this._Booking.Entity;
-			}
-			set
-			{
-				Booking previousValue = this._Booking.Entity;
-				if (((previousValue != value) 
-							|| (this._Booking.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Booking.Entity = null;
-						previousValue.BookingDetails.Remove(this);
-					}
-					this._Booking.Entity = value;
-					if ((value != null))
-					{
-						value.BookingDetails.Add(this);
-						this._BookingID = value.BookingID;
-					}
-					else
-					{
-						this._BookingID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Booking");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Flight_BookingDetail", Storage="_Flight", ThisKey="OutboundFlightID", OtherKey="FlightID", IsForeignKey=true)]
-		public Flight Flight
-		{
-			get
-			{
-				return this._Flight.Entity;
-			}
-			set
-			{
-				Flight previousValue = this._Flight.Entity;
-				if (((previousValue != value) 
-							|| (this._Flight.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Flight.Entity = null;
-						previousValue.BookingDetails.Remove(this);
-					}
-					this._Flight.Entity = value;
-					if ((value != null))
-					{
-						value.BookingDetails.Add(this);
-						this._OutboundFlightID = value.FlightID;
-					}
-					else
-					{
-						this._OutboundFlightID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Flight");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Flight_BookingDetail1", Storage="_Flight1", ThisKey="ReturnFlightID", OtherKey="FlightID", IsForeignKey=true)]
-		public Flight Flight1
-		{
-			get
-			{
-				return this._Flight1.Entity;
-			}
-			set
-			{
-				Flight previousValue = this._Flight1.Entity;
-				if (((previousValue != value) 
-							|| (this._Flight1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Flight1.Entity = null;
-						previousValue.BookingDetails1.Remove(this);
-					}
-					this._Flight1.Entity = value;
-					if ((value != null))
-					{
-						value.BookingDetails1.Add(this);
-						this._ReturnFlightID = value.FlightID;
-					}
-					else
-					{
-						this._ReturnFlightID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Flight1");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Seat_BookingDetail", Storage="_Seat", ThisKey="SeatID", OtherKey="SeatID", IsForeignKey=true)]
-		public Seat Seat
-		{
-			get
-			{
-				return this._Seat.Entity;
-			}
-			set
-			{
-				Seat previousValue = this._Seat.Entity;
-				if (((previousValue != value) 
-							|| (this._Seat.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Seat.Entity = null;
-						previousValue.BookingDetails.Remove(this);
-					}
-					this._Seat.Entity = value;
-					if ((value != null))
-					{
-						value.BookingDetails.Add(this);
-						this._SeatID = value.SeatID;
-					}
-					else
-					{
-						this._SeatID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Seat");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Admin")]
-	public partial class Admin : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _UserAdmin;
-		
-		private string _PassAdmin;
-		
-		private string _HoTen;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnUserAdminChanging(string value);
-    partial void OnUserAdminChanged();
-    partial void OnPassAdminChanging(string value);
-    partial void OnPassAdminChanged();
-    partial void OnHoTenChanging(string value);
-    partial void OnHoTenChanged();
-    #endregion
-		
-		public Admin()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserAdmin", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string UserAdmin
-		{
-			get
-			{
-				return this._UserAdmin;
-			}
-			set
-			{
-				if ((this._UserAdmin != value))
-				{
-					this.OnUserAdminChanging(value);
-					this.SendPropertyChanging();
-					this._UserAdmin = value;
-					this.SendPropertyChanged("UserAdmin");
-					this.OnUserAdminChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PassAdmin", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string PassAdmin
-		{
-			get
-			{
-				return this._PassAdmin;
-			}
-			set
-			{
-				if ((this._PassAdmin != value))
-				{
-					this.OnPassAdminChanging(value);
-					this.SendPropertyChanging();
-					this._PassAdmin = value;
-					this.SendPropertyChanged("PassAdmin");
-					this.OnPassAdminChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoTen", DbType="NVarChar(50)")]
-		public string HoTen
-		{
-			get
-			{
-				return this._HoTen;
-			}
-			set
-			{
-				if ((this._HoTen != value))
-				{
-					this.OnHoTenChanging(value);
-					this.SendPropertyChanging();
-					this._HoTen = value;
-					this.SendPropertyChanged("HoTen");
-					this.OnHoTenChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
+			entity.Guest = null;
 		}
 	}
 }

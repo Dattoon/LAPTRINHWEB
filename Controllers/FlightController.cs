@@ -135,21 +135,25 @@ namespace FourAirLineFinal.Controllers
             }
         }
 
-
         [HttpPost]
         public ActionResult EnterCustomerInfo(Guest guest)
         {
             // Kiểm tra xem người dùng đã đăng nhập chưa
-            if (User.Identity.IsAuthenticated)
+            if (!User.Identity.IsAuthenticated)
             {
-                // Nếu người dùng đã đăng nhập, lấy thông tin người dùng
-                var user = data.Customers.SingleOrDefault(c => c.UserName == User.Identity.Name);
-                Session["User"] = user;
-            }
-            else
-            {
-                // Nếu người dùng chưa đăng nhập, lưu thông tin khách hàng
-                Session["Guest"] = guest;
+                // Nếu người dùng chưa đăng nhập, tạo một bản ghi Guest mới
+                var newGuest = new Guest
+                {
+                    UserName = guest.UserName,
+                    Email = guest.Email,
+                    PhoneNumber = guest.PhoneNumber
+                    // Thêm các trường khác nếu cần
+                };
+                data.Guests.InsertOnSubmit(newGuest);
+                data.SubmitChanges();
+
+                // Lưu GuestID vào Session
+                Session["GuestID"] = newGuest.GuestID;
             }
 
             // Chuyển hướng đến trang tiếp theo
@@ -157,13 +161,12 @@ namespace FourAirLineFinal.Controllers
         }
 
 
+
         [HttpPost]
-        public ActionResult BookFlights(Guest guest)
+        public ActionResult BookFlights()
         {
-            var user = User.Identity.IsAuthenticated ? data.Customers.SingleOrDefault(c => c.UserName == User.Identity.Name) : null;
-
             // Get the current user and their selected seats
-
+            var user = User.Identity.IsAuthenticated ? data.Customers.SingleOrDefault(c => c.UserName == User.Identity.Name) : null;
 
             // Retrieve the selected seats from the session
             var selectedSeats = Session["SelectedSeats"] as int[];
@@ -173,14 +176,12 @@ namespace FourAirLineFinal.Controllers
             var booking = new Booking
             {
                 CustomerID = user != null ? user.CustomerID : (int?)null, // Use null for guests
+                GuestID = Session["GuestID"] as int?, // Get GuestID from session
                 BookingDate = DateTime.Now,
                 IsPaid = false,
             };
             data.Bookings.InsertOnSubmit(booking);
             data.SubmitChanges();
-
-            Session["BookingID"] = booking.BookingID;
-
             // Create booking details for each selected seat
             var bookingDetails = new List<BookingDetail>();
             foreach (var seat in seats)
@@ -203,11 +204,12 @@ namespace FourAirLineFinal.Controllers
             {
                 Booking = booking,
                 BookingDetails = bookingDetails,
-                Guest = guest // Add the guest to the ViewModel
+                Guest = Session["Guest"] as Guest // Add the guest to the ViewModel
             };
 
             return View(viewModel);
         }
+
 
 
         public ActionResult ConfirmBooking(int bookingId)
