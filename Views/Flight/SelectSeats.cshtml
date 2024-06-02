@@ -6,89 +6,90 @@
 @model IEnumerable<LAPTRINHWEB.Models.Seat>
 
 
-<div>
-    <h2>Chọn ghế</h2>
-    <div class="container">
-        <h2>Chọn ghế</h2>
+<div class="tongSelectSeats">
+
+
+    <div class="ghecontainer">
         <form action="@Url.Action("BookSeats")" method="post">
-            @foreach (var item in Model)
+            <input type="submit" class="submit-btn" value="Đặt ghế đã chọn" />
+            @for (int i = 0; i < Model.Count(); i++)
             {
+                var seat = Model.ElementAt(i);
                 <div class="seat">
-                    <input type="checkbox" id="seat@item.SeatID" name="selectedSeats" value="@item.SeatID" />
-                    <label for="seat@item.SeatID">
-                        <h3>Số ghế: @item.SeatNumber</h3>
-                        <p>Loại ghế: @item.SeatClass</p>
-                        <p>Giá: @item.Price</p>
-                        Chọn ghế này
+                    <input type="checkbox" id="seat@(seat.SeatID)@(i)" name="selectedSeats" value="@seat.SeatID" />
+                    <label for="seat@(seat.SeatID)@(i)">
+                        <h3> @seat.SeatNumber</h3>
+                        <p>Loại ghế: @seat.SeatClass</p>
+                        <p>Giá: @seat.Price</p>
                     </label>
                 </div>
+                if ((i + 1) % 6 == 0)
+                {
+                    @:<div style="flex-basis: 100%; height: 0;"></div> <!-- Tạo khoảng cách giữa các hàng -->
+                }
             }
-            <input type="submit" value="Đặt ghế đã chọn" />
         </form>
     </div>
 </div>
 
+
 <style>
-    body {
-        font-family: Arial, sans-serif;
+    .submit-btn {
+        display: block; /* Đặt nút thành block để có thể áp dụng margin tự động */
+        width: 200px; /* Đặt chiều rộng cố định cho nút */
+        margin: 20px auto; /* Áp dụng margin trên và dưới là 20px, và margin tự động ở hai bên để căn giữa */
+        padding: 10px 0; /* Đặt padding cho nút */
+        background-color: #77DADA; /* Màu nền cho nút */
+        color: white; /* Màu chữ cho nút */
+        border: none; /* Bỏ viền nút */
+        border-radius: 5px; /* Bo tròn góc của nút */
+        cursor: pointer; /* Hiển thị con trỏ chuột dạng pointer khi di chuyển qua nút */
     }
 
-    .container {
-        width: 80%;
-        margin: 0 auto;
-        text-align: center;
-    }
+        .submit-btn:hover {
+            background-color: #66c0b9; /* Màu nền khi hover */
+        }
 
-    .seat-selection {
+    .ghecontainer {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
-        margin-top: 20px;
+        max-width: 900px;
+        margin: auto;
+        text-align: center;
     }
 
     .seat {
-        flex: 0 0 18%;
-        margin-bottom: 10px;
+        flex: 0 0 18%; /* Hiển thị 5 ghế trên mỗi hàng */
+        margin: 0 1%;
+        margin-bottom: 15px;
+        text-align: center;
         padding: 10px;
-        background-color: #f0f0f0;
         border: 1px solid #ddd;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: transform 0.3s ease;
+        border-radius: 10px;
+        background-color: #f4f4f4;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: table-cell;
     }
 
         .seat:hover {
-            transform: translateY(-3px);
-            background-color: #e3f2fd;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
         .seat input[type="checkbox"] {
             display: none;
         }
 
-            .seat input[type="checkbox"]:checked + label {
-                background-color: #90caf9;
-                color: white;
+            .seat input[type="checkbox"] + label {
+                cursor: pointer;
+                display: block;
             }
 
-        .seat label {
-            display: block;
-            padding: 10px;
-            border: 1px solid transparent;
-            border-radius: 5px;
-        }
+            .seat input[type="checkbox"]:checked + label {
+                background-color: #77DADA;
+                border: 1px solid #ddd;
+                border-radius: 10px;
+            }
 
-    .submit-btn {
-        background-color: #4CAF50;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-    }
-
-        .submit-btn:hover {
-            background-color: #45a049;
-        }
-</style> 
+</style>

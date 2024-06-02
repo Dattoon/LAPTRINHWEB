@@ -1,0 +1,89 @@
+﻿@model LAPTRINHWEB.Models.Flight
+
+@{
+    ViewBag.Title = "DeleteFlight";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>DeleteFlight</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Flight</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AirlineID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AirlineID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DepartureAirportID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DepartureAirportID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArrivalAirportID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArrivalAirportID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DepartureTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DepartureTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArrivalTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArrivalTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Duration)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Duration)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AvailableSeats)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AvailableSeats)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FlightStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FlightStatus)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "ManagerFlight")
+        </div>
+    }
+</div>
