@@ -165,7 +165,7 @@ namespace LAPTRINHWEB.Controllers
             data.SubmitChanges();
             return RedirectToAction("ManagerAirline");
         }
-        public ActionResult EditAirlines(int id)
+        public ActionResult EditAirline(int id)
         {
             Airline airline = data.Airlines.SingleOrDefault(n => n.AirlineID == id);
             if (airline == null)
@@ -385,9 +385,133 @@ namespace LAPTRINHWEB.Controllers
             return RedirectToAction("ManagerFlight");
         }
 
-            #endregion
-            #region LoginAdmin
-            [HttpGet]
+        #endregion
+
+        #region ManagerCustomer
+        public ActionResult ManagerCustomer()
+        {
+            return View(data.Customers.ToList());
+        }
+        private List<Customer> CreateCustomer(int count)
+        {
+            return data.Customers.OrderByDescending(a => a.CustomerID).Take(count).ToList();
+        }
+        public ActionResult Customer(int? page)
+        {
+            int pageSize = 10;
+            int pageNum = (page ?? 1);
+
+            var sachmoi = CreateCustomer(15);
+            return View(sachmoi.ToPagedList(pageNum, pageSize));
+        }
+        public ActionResult AddNewCustomer()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AddNewCustomer(Customer customer)
+        {
+            data.Customers.InsertOnSubmit(customer);
+            data.SubmitChanges();
+            return RedirectToAction("ManagerCustomer");
+        }
+        public ActionResult EditCustomer(int id)
+        {
+            Customer customer = data.Customers.SingleOrDefault(n => n.CustomerID == id);
+            if (customer == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(customer);
+        }
+
+        [HttpPost]
+        public ActionResult EditCustomer(Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                Customer airportToUpdate = data.Customers.SingleOrDefault(n => n.CustomerID == customer.CustomerID);
+                if (airportToUpdate != null)
+                {
+                    TryUpdateModel(airportToUpdate);
+                    if (ModelState.IsValid)
+                    {
+                        data.SubmitChanges();
+                        return RedirectToAction("ManagerCustomer");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Cập nhật không thành công");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Không tìm thấy sân bay");
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("", "Dữ liệu không hợp lệ");
+            }
+            return View(customer);
+        }
+        public ActionResult DetailCustomer(int id)
+        {
+            Customer customer = data.Customers.SingleOrDefault(n => n.CustomerID == id);
+            if (customer == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(customer);
+        }
+        public ActionResult DeleteCustomer(int id)
+        {
+            // Lấy ra đối tượng sách cần xóa theo mã
+            Customer customer = data.Customers.SingleOrDefault(n => n.CustomerID == id);
+            if (customer == null)
+            {
+                Response.StatusCode = 404;
+                return HttpNotFound("Người dùng không tồn tại.");
+            }
+            return View(customer);
+        }
+
+
+        [HttpPost, ActionName("DeleteCustomer")]
+        public ActionResult ConfirmDeleteCustomer(int id)
+        {
+            // Lấy ra đối tượng sách cần xóa theo mã
+            Customer customer = data.Customers.SingleOrDefault(n => n.CustomerID == id);
+            if (customer == null)
+            {
+                Response.StatusCode = 404;
+                return HttpNotFound("Người dùng không tồn tại.");
+            }
+
+            try
+            {
+                data.Customers.DeleteOnSubmit(customer);
+                data.SubmitChanges();
+                TempData["Message"] = "Xóa người dùng thành công.";
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = "Có lỗi xảy ra khi  xóa người dùng: " + ex.Message;
+            }
+
+            return RedirectToAction("ManagerCustomer");
+        }
+
+
+
+
+
+        #endregion
+
+        #region LoginAdmin
+        [HttpGet]
         public ActionResult Login()
         { return View(); }
         public ActionResult Login(FormCollection collection)
@@ -416,6 +540,7 @@ namespace LAPTRINHWEB.Controllers
             return View();
         }
         #endregion
+
 
 
     }
