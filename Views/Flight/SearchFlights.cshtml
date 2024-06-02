@@ -150,45 +150,6 @@
 
 
 
-
-
-<div class="flight-container">
-    @if (ViewBag.OutboundFlights != null)
-    {
-        <h2 class="flight-header">Chuyến bay đi</h2>
-        foreach (var flightDetails in ViewBag.OutboundFlights)
-        {
-            <div>
-                <h3>Chuyến bay: @flightDetails.Flight.FlightID</h3>
-                <div class="flight-details">
-                    <p><strong>Hãng hàng không:</strong> @flightDetails.AirlineName</p>
-                    <p><strong>Sân bay khởi hành:</strong> @flightDetails.DepartureAirportName</p>
-                    <p><strong>Sân bay đến:</strong> @flightDetails.ArrivalAirportName</p>
-                    <p><strong>Thời gian khởi hành:</strong> @flightDetails.Flight.DepartureTime</p>
-                    <p><strong>Thời gian đến:</strong> @flightDetails.Flight.ArrivalTime</p>
-                    <p><strong>Thời gian bay:</strong> @flightDetails.Flight.Duration Phút</p>
-
-                    <p><strong>Số ghế còn trống:</strong> @flightDetails.AvailableSeats</p>
-                </div>
-            </div>
-
-            <a href="@Url.Action("SelectSeats", new { id = flightDetails.Flight.FlightID })" class="btn btn-primary">Chọn ghế</a>
-
-        }
-
-
-          <img src="@flightDetails.AirlineLogo" alt="@flightDetails.AirlineName Logo" /> <!-- Hiển thị logo hãng hàng không 
-
-<p class="sm">Giá: @flightDetails.SeatPrice</p>  Hiển thị giá ghế 
-<p class="sm">Hạng ghế: @flightDetails.SeatClass</p>  Hiển thị hạng ghế 
-
-
-}-->
-
-
-<!-- Tương tự cho ViewBag.ReturnFlights -->
-<!--</div>-->
-
 <div>
     @if (ViewBag.OutboundFlights != null)
     {

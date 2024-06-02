@@ -6,8 +6,8 @@
 @model LAPTRINHWEB.Models.BookingViewModel
 
 <h2>Thông tin đặt vé</h2>
+<p>Người đặt: @(User.Identity.IsAuthenticated ? User.Identity.Name : (Model.Guest != null ? Model.Guest.UserName : ""))</p>
 
-<p>Người đặt: @(User.Identity.IsAuthenticated ? User.Identity.Name : Model.Guest.UserName)</p>
 <p>Ngày đặt: @Model.Booking.BookingDate</p>
 
 
