@@ -173,6 +173,10 @@
     <Content Include="Content\CSSJSIMG\images\dangnhap\userlogin.png" />
     <Content Include="Content\CSSJSIMG\images\favicon.ico" />
     <Content Include="Content\CSSJSIMG\images\gioithieu\bg-header-about.jpg" />
+    <Content Include="Content\CSSJSIMG\images\Hanghangkhong\bamboo.jpg" />
+    <Content Include="Content\CSSJSIMG\images\Hanghangkhong\jetstar.jpg" />
+    <Content Include="Content\CSSJSIMG\images\Hanghangkhong\vietjetair.jpg" />
+    <Content Include="Content\CSSJSIMG\images\Hanghangkhong\vietnamairline.jpg" />
     <Content Include="Content\CSSJSIMG\images\header-img1.png" />
     <Content Include="Content\CSSJSIMG\images\header-img2.png" />
     <Content Include="Content\CSSJSIMG\images\header-img3.png" />
