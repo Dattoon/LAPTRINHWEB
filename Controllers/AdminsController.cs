@@ -154,14 +154,14 @@ namespace LAPTRINHWEB.Controllers
             var sachmoi = CreateAirport(15);
             return View(sachmoi.ToPagedList(pageNum, pageSize));
         }
-        public ActionResult AddNewAirlines()
+        public ActionResult AddNewAirline()
         {
             return View();
         }
         [HttpPost]
-        public ActionResult AddNewAirlines(Airport airline)
+        public ActionResult AddNewAirline(Airline airline)
         {
-            data.Airports.InsertOnSubmit(airline);
+            data.Airlines.InsertOnSubmit(airline);
             data.SubmitChanges();
             return RedirectToAction("ManagerAirline");
         }

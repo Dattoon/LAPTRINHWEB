@@ -55,7 +55,6 @@ namespace FourAirLineFinal.Controllers
             return View(flights);
         }
 
-        // Tìm kiếm chuyến bay
         public ActionResult SearchFlights(string departureCity, string arrivalCity, DateTime? departureDate, DateTime? returnDate, int? page)
         {
             var cities = data.Airports.Select(a => a.City).Distinct().ToList();
@@ -72,10 +71,12 @@ namespace FourAirLineFinal.Controllers
                                       {
                                           Flight = f,
                                           AirlineName = a.AirlineName,
+                                          AirlineLogo = a.Logo, // Thêm logo hãng hàng không
                                           DepartureAirportName = d.AirportName,
                                           ArrivalAirportName = r.AirportName,
-
-                                          AvailableSeats = data.Seats.Count(s => s.FlightID == f.FlightID && s.IsAvailable)
+                                          AvailableSeats = data.Seats.Count(s => s.FlightID == f.FlightID && s.IsAvailable),
+                                          SeatPrice = data.Seats.Where(s => s.FlightID == f.FlightID && s.IsAvailable).Select(s => s.Price).FirstOrDefault(), // Thêm giá ghế
+                                          SeatClass = data.Seats.Where(s => s.FlightID == f.FlightID && s.IsAvailable).Select(s => s.SeatClass).FirstOrDefault() // Thêm hạng ghế
                                       };
 
                 int pageSize = 10;
