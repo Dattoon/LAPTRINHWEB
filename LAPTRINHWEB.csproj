@@ -239,6 +239,7 @@
     <Content Include="Content\CSSJSIMG\images\VeMayBay\HCM.jpg" />
     <Content Include="Content\CSSJSIMG\images\VeMayBay\PhuQuoc.jpg" />
     <Content Include="Content\CSSJSIMG\LoginAdminstyle.css" />
+    <Content Include="Content\CSSJSIMG\SearchFlight.js" />
     <Content Include="Content\CSSJSIMG\styles.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
