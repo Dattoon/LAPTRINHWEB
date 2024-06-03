@@ -5,19 +5,118 @@
 
 @model LAPTRINHWEB.Models.Guest
 
-<h2>Thông tin khách hàng</h2>
 
-<form action="@Url.Action("BookFlights")" method="post">
-    <label for="UserName">Tên người dùng:</label>
-    @Html.EditorFor(model => model.UserName)
 
-    <label for="Email">Email:</label>
-    @Html.EditorFor(model => model.Email)
+<div>
+    <h4 style="color:red; text-align:center">@ViewBag.Thongbao</h4>
+    <section class="container-login">
+        <div class="container-form">
+            <form action="@Url.Action("BookFlights")" method="post">
+                <h3 class="h">Nhập thông tin</h3>
+                @using (Html.BeginForm())
+                {
+                    <div class="container-form-input">
+                        @Html.EditorFor(model => model.UserName)
+                        <label for="UserName" class="form-label">Tên người dùng:</label>
+                    </div>
 
-    <label for="PhoneNumber">Số điện thoại:</label>
-    @Html.EditorFor(model => model.PhoneNumber)
+                    <div class="container-form-input">
+                        @Html.EditorFor(model => model.Email)
+                        <label for="Email" class="form-label">Email:</label>
+                    </div>
 
-    <!-- Add other fields as necessary -->
+                    <div class="container-form-input">
+                        @Html.EditorFor(model => model.PhoneNumber)
+                        <label for="PhoneNumber" class="form-label">Số điện thoại:</label>
+                    </div>
+                    <input type="submit" value="Tiếp tục" />
+                }
+            </form>
+        </div>
+    </section>
+</div>
 
-    <input type="submit" value="Tiếp tục" />
-</form>
+<style>
+    .h
+    {
+        padding:5px
+    }
+    .container-login {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #f7f7f7;
+    }
+
+    .container-form {
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 370px;
+        margin: auto;
+        background: white;
+    }
+
+
+    .container-form-input {
+        position: relative;
+        margin-bottom: 15px;
+    }
+
+        .container-form-input input[type='text'],
+        .container-form-input input[type='password'] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .container-form-input label {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: white;
+            padding: 0 5px;
+            transition: all 0.3s ease;
+        }
+
+        .container-form-input input:focus + label,
+        .container-form-input input:not(:placeholder-shown) + label {
+            top: -10px;
+            font-size: 12px;
+            color: #5fa8d3;
+        }
+
+    .form-sumit {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #5fa8d3;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .form-sumit:hover {
+            background-color: #3e8ecf;
+        }
+
+
+    input[type='submit'] {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #5fa8d3;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        input[type='submit']:hover {
+            background-color: #3e8ecf;
+        }
+</style>

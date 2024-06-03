@@ -5,26 +5,149 @@
 
 @model LAPTRINHWEB.Models.BookingViewModel
 
-<h2>Xem lại thông tin thanh toán</h2>
+<div class="container-review">
+    <div class="info-section">
+        <p>Ngày đặt: @Model.Booking.BookingDate</p>
 
-<p>Ngày đặt: @Model.Booking.BookingDate</p>
-
-<h3>Chi tiết vé:</h3>
-@foreach (var detail in Model.BookingDetails)
-{
-    <div>
-        <h4>Chuyến bay: @detail.OutboundFlightID</h4>
-        <p>Số ghế: @detail.Seat.SeatNumber</p>
-        <p>Loại ghế: @detail.Seat.SeatClass</p>
-        <p>Giá: @detail.Seat.Price</p>
+        <h3>Chi tiết vé:</h3>
+        @foreach (var detail in Model.BookingDetails)
+        {
+            <div class="ticket-detail">
+                <h4>Chuyến bay: @detail.OutboundFlightID</h4>
+                <p>Số ghế: @detail.Seat.SeatNumber</p>
+                <p>Loại ghế: @detail.Seat.SeatClass</p>
+                <p>Giá: @detail.Seat.Price</p>
+            </div>
+        }
     </div>
-}
 
-<h3>Thông tin thanh toán:</h3>
-<p>Tên chủ thẻ: @ViewBag.CardName</p>
-<p>Số thẻ: @ViewBag.CardNumber</p>
+    <div class="payment-section">
+        <div class="payment-info">
+            <h3>Thông tin thanh toán:</h3>
+            <p>Tên chủ thẻ: <span>@ViewBag.CardName</span></p>
+            <p>Số thẻ: <span>@ViewBag.CardNumber</span></p>
+        </div>
 
-<form action="@Url.Action("ConfirmPayment")" method="post">
-    <input type="hidden" name="bookingId" value="@Model.Booking.BookingID" />
-    <input type="submit" value="Xác nhận thanh toán" />
-</form>
+
+        <div class="XacNhan" style="height: 200px;">
+            <!-- Thêm chiều cao cụ thể nếu cần -->
+            <form class="active-pay" action="@Url.Action("ConfirmPayment")" method="post">
+                <input type="hidden" name="bookingId" value="@Model.Booking.BookingID" />
+                <input type="submit" value="Xác nhận thanh toán" />
+            </form>
+        </div>
+
+    </div>
+</div>
+<style>
+    /* Cài đặt chung */
+    .container-review {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        padding: 20px;
+    }
+    .active-pay {
+        border: none;
+    }
+    .XacNhan {
+        display: flex;
+        justify-content: center; /* Căn ngang */
+        align-items: center; /* Căn dọc nếu cần */
+        height: 100%; /* Hoặc chiều cao cụ thể nếu bạn muốn */
+
+    }
+
+    /* Hiệu ứng chuyển đổi mượt mà cho các nút và input */
+    button, input {
+        transition: all 0.3s ease;
+        cursor:pointer;
+    }
+
+        button:hover, input:focus {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        button, input:hover {
+            background-color: #77DADA;
+        }
+        /* Phân chia phần hiển thị thông tin và phần nhập thông tin */
+        .info-section, .payment-section {
+            background: #f7f7f7; /* Màu nền cho cả hai phần */
+            border-radius: 8px; /* Bo góc cho khối thông tin */
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Bóng đổ nhẹ */
+        }
+
+    /* Phần hiển thị thông tin */
+    .info-section {
+        border-left: 5px solid #77DADA; /* Thanh màu bên trái để phân biệt */
+    }
+
+    .info-section {
+        background: #fff; /* Màu nền cho khối thông tin */
+        border-radius: 8px; /* Bo góc */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bóng đổ nhẹ */
+        padding: 20px;
+        margin-bottom: 20px; /* Khoảng cách giữa các khối vé */
+    }
+
+        .info-section h2, .info-section h3 {
+            color: #333; /* Màu chữ */
+            margin-bottom: 10px;
+        }
+
+        .info-section p {
+            color: #666; /* Màu chữ */
+            margin-bottom: 5px;
+        }
+
+    .ticket-detail {
+        background: #f9f9f9; /* Màu nền cho từng vé */
+        border: 1px solid #eaeaea; /* Viền */
+        border-radius: 4px; /* Bo góc */
+        padding: 10px;
+        margin-bottom: 10px; /* Khoảng cách giữa các vé */
+    }
+
+        .ticket-detail h4 {
+            color: #4CAF50; /* Màu chữ */
+            margin-bottom: 5px;
+        }
+
+        .ticket-detail p {
+            font-size: 14px; /* Kích thước chữ */
+        }
+
+    /* Phần nhập thông tin thanh toán */
+    .payment-section {
+        background: linear-gradient(to right, #6DD5FA, #FF758C); /* Gradient nền động */
+    }
+    .payment-info {
+        background-color: #f2f2f2;
+        border: 1px solid #e0e0e0;
+        border-radius: 4px;
+        padding: 20px;
+        margin: auto;
+    }
+
+        .payment-info h3 {
+            color: #333;
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .payment-info p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+            word-break: break-all;
+        }
+
+            .payment-info p span {
+                font-weight: bold;
+            }
+
+
+</style>

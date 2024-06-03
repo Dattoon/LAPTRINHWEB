@@ -523,10 +523,11 @@ header {
     flex-wrap: wrap-reverse;
 
 }
-form{
-    border: 1px solid gray;
-    border-radius: 5px;
-    padding: 15px;
+form {
+	border: 1px solid gray;
+	border-radius: 5px;
+	padding: 15px;
+	background: white;
 }
 h3{
     text-align: center;

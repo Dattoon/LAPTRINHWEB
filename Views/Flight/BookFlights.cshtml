@@ -5,68 +5,152 @@
 
 @model LAPTRINHWEB.Models.BookingViewModel
 
+<div class="container-Book">
+    <!-- Phần hiển thị thông tin đặt vé -->
+    <div class="display-info">
+        <h2>Thông tin đặt vé</h2>
+        <p>Ngày đặt: @Model.Booking.BookingDate</p>
+        <p>Người đặt:  @(User.Identity.IsAuthenticated ? User.Identity.Name : (Model.Guest != null ? Model.Guest.UserName : "")) </p>
+        <h3>Chi tiết vé:</h3>
+        @foreach (var detail in Model.BookingDetails)
+        {
+            <div class="ticket-detail">
+                <h4>Chuyến bay: @detail.OutboundFlightID</h4>
+                <p>Số ghế: @detail.Seat.SeatNumber</p>
+                <p>Loại ghế: @detail.Seat.SeatClass</p>
+                <p>Giá: @detail.Seat.Price</p>
+            </div>
+        }
+    </div>
 
-<div>
-    <h2>Thông tin đặt vé</h2>
 
-    <p>Ngày đặt: @Model.Booking.BookingDate</p>
+    <!-- Phần nhập thông tin thanh toán -->
+    <div class="payment-info">
+        <h3>Thông tin thanh toán:</h3>
+        <form action="@Url.Action("Pay")" method="post">
+            <input type="hidden" name="bookingId" value="@Model.Booking.BookingID" />
 
-<h2>Thông tin đặt vé</h2>
-<p>Người đặt: @(User.Identity.IsAuthenticated ? User.Identity.Name : (Model.Guest != null ? Model.Guest.UserName : ""))</p>
+            <div>
+                <label for="cardName">Tên chủ thẻ:</label>
+                <input type="text" id="cardName" name="cardName" required />
+            </div>
 
-<p>Ngày đặt: @Model.Booking.BookingDate</p>
+            <div>
+                <label for="cardNumber">Số thẻ:</label>
+                <input type="text" id="cardNumber" name="cardNumber" required />
+            </div>
 
+            <div>
+                <label for="expiryDate">Ngày hết hạn:</label>
+                <input type="date" id="expiryDate" name="expiryDate" required />
+            </div>
 
+            <div>
+                <label for="securityCode">Mã bảo mật:</label>
+                <input type="text" id="securityCode" name="securityCode" required />
+            </div>
 
-    <h3>Chi tiết vé:</h3>
-    @foreach (var detail in Model.BookingDetails)
-    {
-        <div>
-            <h4>Chuyến bay: @detail.OutboundFlightID</h4>
-            <p>Số ghế: @detail.Seat.SeatNumber</p>
-            <p>Loại ghế: @detail.Seat.SeatClass</p>
-            <p>Giá: @detail.Seat.Price</p>
-        </div>
+            <input type="submit" value="Thanh toán" />
+        </form>
+    </div>
+</div>
+
+<style>
+    /* Phần tổng quát */
+    .container-Book {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        padding: 20px;
     }
 
-    <h3>Thông tin thanh toán:</h3>
-    <form action="@Url.Action("Pay")" method="post">
-        <input type="hidden" name="bookingId" value="@Model.Booking.BookingID" />
+    /* Hiệu ứng chuyển đổi mượt mà cho các nút và input */
+    button, input {
+        transition: all 0.3s ease;
+    }
 
-        <label for="cardName">Tên chủ thẻ:</label>
-        <input type="text" id="cardName" name="cardName" required />
+        button:hover, input:focus {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
 
-        <label for="cardNumber">Số thẻ:</label>
-        <input type="text" id="cardNumber" name="cardNumber" required />
+    /* Phân chia phần hiển thị thông tin và phần nhập thông tin */
+    .display-info, .payment-info {
+        background: #f7f7f7; /* Màu nền cho cả hai phần */
+        border-radius: 8px; /* Bo góc cho khối thông tin */
+        padding: 15px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Bóng đổ nhẹ */
+    }
 
-        <label for="expiryDate">Ngày hết hạn:</label>
-        <input type="date" id="expiryDate" name="expiryDate" required />
+    /* Phần hiển thị thông tin */
+    .display-info {
+        border-left: 5px solid #77DADA; /* Thanh màu bên trái để phân biệt */
+    }
+    .display-info {
+        background: #fff; /* Màu nền cho khối thông tin */
+        border-radius: 8px; /* Bo góc */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bóng đổ nhẹ */
+        padding: 20px;
+        margin-bottom: 20px; /* Khoảng cách giữa các khối vé */
+    }
 
-        <label for="securityCode">Mã bảo mật:</label>
-        <input type="text" id="securityCode" name="securityCode" required />
+        .display-info h2, .display-info h3 {
+            color: #333; /* Màu chữ */
+            margin-bottom: 10px;
+        }
 
-        <input type="submit" value="Thanh toán" />
-    </form>
-</div>
-<style>
-    /* Sử dụng grid layout để tổ chức nội dung */
-   .container {
-   display: grid;
-   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-   gap: 20px;
-   padding: 20px;
-   }
+        .display-info p {
+            color: #666; /* Màu chữ */
+            margin-bottom: 5px;
+        }
 
-   /* Thêm hiệu ứng chuyển đổi mượt mà cho các nút và input */
-   button, input {
-   transition: all 0.3s ease;
-   }
+    .ticket-detail {
+        background: #f9f9f9; /* Màu nền cho từng vé */
+        border: 1px solid #eaeaea; /* Viền */
+        border-radius: 4px; /* Bo góc */
+        padding: 10px;
+        margin-bottom: 10px; /* Khoảng cách giữa các vé */
+    }
 
-   button:hover, input:focus {
-   transform: scale(1.05);
-   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-   }
+        .ticket-detail h4 {
+            color: #4CAF50; /* Màu chữ */
+            margin-bottom: 5px;
+        }
 
-   /* Tạo hiệu ứng gradient nền động */
+        .ticket-detail p {
+            font-size: 14px; /* Kích thước chữ */
+        }
+
+    /* Phần nhập thông tin thanh toán */
+    .payment-info {
+        background: linear-gradient(to right, #6DD5FA, #FF758C); /* Gradient nền động */
+    }
+
+        /* Tùy chỉnh label và input trong phần thanh toán */
+        .payment-info label {
+            display: block;
+            margin-bottom: 5px;
+            color: #fff; /* Màu chữ cho label */
+        }
+
+        .payment-info input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2); /* Bóng đổ trong */
+        }
+
+            /* Nút thanh toán */
+            .payment-info input[type="submit"] {
+                background-color: #77DADA; /* Màu nền cho nút */
+                color: white; /* Màu chữ cho nút */
+                cursor: pointer; /* Con trỏ chuột khi di chuyển vào nút */
+            }
+
+                .payment-info input[type="submit"]:hover {
+                    background-color: #6DD5FA; /* Màu nền khi hover */
+                }
 
 </style>
