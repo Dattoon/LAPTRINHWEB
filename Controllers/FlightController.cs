@@ -9,6 +9,7 @@ using LAPTRINHWEB.Controllers;
 using LAPTRINHWEB.Models;
 
 using PagedList;
+using System.Threading.Tasks;
 
 namespace FourAirLineFinal.Controllers
 {
@@ -274,6 +275,33 @@ namespace FourAirLineFinal.Controllers
             return View(viewModel);
         }
 
+        private async Task SendBookingConfirmationEmailAsync(string email, string bookingDetails)
+        {
+            var fromAddress = new MailAddress("fourairline@gmail.com", "FourAirline Bay Cùng Bạn");
+            var toAddress = new MailAddress(email);
+            const string subject = "Booking Confirmation";
+            string body = "Thank you for booking your flight with us. Your seats have been successfully booked. Here are your booking details:\n\n" + bookingDetails;
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromAddress.Address, "ysjm dynx uawd arit")
+            };
+            using (var message = new MailMessage(fromAddress, toAddress)
+            {
+                Subject = subject,
+                Body = body
+            })
+            {
+                await smtp.SendMailAsync(message);
+            }
+        }
+
+
         [HttpPost]
         public ActionResult ConfirmPayment(int bookingId)
         {
@@ -292,6 +320,13 @@ namespace FourAirLineFinal.Controllers
                 body += $"Flight ID: {detail.OutboundFlightID}, Seat Number: {detail.Seat.SeatNumber}, Seat Class: {detail.Seat.SeatClass}, Price: {detail.Seat.Price}\n";
             }
 
+            // Send the booking details via email
+            var user = Session["Taikhoan"] as Customer;
+            if (user != null)
+            {
+                SendBookingConfirmationEmailAsync("Booking Confirmation", body);
+            }
+
             // Display a success message
             TempData["SuccessMessage"] = "Đặt vé thành công! " + body;
 
@@ -300,38 +335,12 @@ namespace FourAirLineFinal.Controllers
         }
 
 
-        private void SendEmail(string subject, string body)
-        {
-            string recipient = "ttmdvhd@gmail.com"; // Địa chỉ email cố định để kiểm tra
 
-            // Địa chỉ email và tên người gửi
-            var fromAddress = new MailAddress("fouairline@gmail.com", "FourAirLine Bay Cùng Bạn");
-            var toAddress = new MailAddress(recipient);
-            const string fromPassword = "fouairline533";
+     
 
-            // Cấu hình SMTP client
-            var smtp = new SmtpClient
-            {
-                Host = "smtp.gmail.com",
-                Port = 587,
-                EnableSsl = true,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
-            };
 
-            // Tạo và gửi email
-            using (var message = new MailMessage(fromAddress, toAddress)
-            {
-                Subject = subject,
-                Body = body
-            })
-            {
-                smtp.Send(message);
-            }   
-        }
 
-                public ActionResult MyBookings()
+        public ActionResult MyBookings()
                 {
     
                     var user = Session["Taikhoan"] as Customer;

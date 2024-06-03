@@ -169,7 +169,7 @@ namespace LAPTRINHWEB.Controllers
 
         private async Task SendResetPasswordEmailAsync(string email, string resetCode)
         {
-            var fromAddress = new MailAddress("fourairline@gmail.com", "Four Airline");
+            var fromAddress = new MailAddress("fourairline@gmail.com", "FourAirline Bay Cùng Bạn");
             var toAddress = new MailAddress(email);
             const string subject = "Password Reset";
             string body = "Your password reset code is: " + resetCode;
