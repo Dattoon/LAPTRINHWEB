@@ -340,37 +340,35 @@ namespace FourAirLineFinal.Controllers
 
 
 
-     
+
 
 
 
         public ActionResult MyBookings()
-                {
-    
-                    var user = Session["Taikhoan"] as Customer;
-                    if (user == null)
-                 {
+        {
+            var user = Session["Taikhoan"] as Customer;
+            if (user == null)
+            {
                 return RedirectToAction("Dangnhap", "Accounts");
-                }
-            
+            }
+
             var bookings = data.Bookings.Where(b => b.CustomerID == user.CustomerID).ToList();
             var bookingViewModels = new List<BookingViewModel>();
-            var bookingId = Session["BookingID"] as int?;
 
             foreach (var booking in bookings)
             {
                 var bookingDetails = data.BookingDetails.Where(bd => bd.BookingID == booking.BookingID).ToList();
-                var guest = new Guest
-                {
-                    UserName = user.UserName,
-                    Email = user.Email,
-                    PhoneNumber = user.PhoneNumber
-                };
+                var seats = bookingDetails.Select(bd => data.Seats.Single(s => s.SeatID == bd.SeatID)).ToList();
+                var flights = seats.Select(s => data.Flights.Single(f => f.FlightID == s.FlightID)).ToList();
+                var airlines = flights.Select(f => data.Airlines.Single(a => a.AirlineID == f.AirlineID)).ToList();
+
                 var viewModel = new BookingViewModel
                 {
                     Booking = booking,
                     BookingDetails = bookingDetails,
-                    Guest = guest
+                    Seats = seats,
+                    Flights = flights,
+                    Airlines = airlines
                 };
                 bookingViewModels.Add(viewModel);
             }
@@ -379,7 +377,6 @@ namespace FourAirLineFinal.Controllers
         }
 
 
-    
 
 
         // Các hành động khác...
