@@ -239,6 +239,7 @@
     <Content Include="Content\CSSJSIMG\images\VeMayBay\HCM.jpg" />
     <Content Include="Content\CSSJSIMG\images\VeMayBay\PhuQuoc.jpg" />
     <Content Include="Content\CSSJSIMG\LoginAdminstyle.css" />
+    <Content Include="Content\CSSJSIMG\SearchFlight.js" />
     <Content Include="Content\CSSJSIMG\styles.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
@@ -322,6 +323,7 @@
     <Content Include="Views\Shared\_AccountInfo.cshtml" />
     <Content Include="Views\Accounts\ForgotPassword.cshtml" />
     <Content Include="Views\Accounts\ResetPassword.cshtml" />
+    <Content Include="Views\Flight\MyBookings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

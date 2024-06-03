@@ -1,50 +1,47 @@
 ﻿
 @{
-    ViewBag.Title = "Thông Tin Đặt Vé Của Tôi";
+    ViewBag.Title = "MyBookings";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@model List<LAPTRINHWEB.Models.BookingViewModel>
+@using LAPTRINHWEB.Models
 
 
-<h2>Thông Tin Đặt Vé Của Tôi</h2>
+@model List<BookingViewModel>
 
-@if (Model != null && Model.Count > 0)
+@foreach (var viewModel in Model)
 {
-    foreach (var bookingViewModel in Model)
+    <h2>Đặt chỗ ID: @viewModel.Booking.BookingID</h2>
+
+    <h3>Chi tiết đặt chỗ:</h3>
+    foreach (var detail in viewModel.BookingDetails)
     {
-        <div class="booking">
-            <h3>Mã Đặt Vé: @bookingViewModel.Booking.BookingID</h3>
-            <p>Ngày Đặt: @bookingViewModel.Booking.BookingDate</p>
-            <p>Thanh Toán: @(bookingViewModel.Booking.IsPaid ? "Đã thanh toán" : "Chưa thanh toán")</p>
-            <p>Khứ Hồi: @(bookingViewModel.Booking.IsRoundTrip ? "Có" : "Không")</p>
-
-            <h4>Chi Tiết Vé:</h4>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Mã Chuyến Bay</th>
-                        <th>Số Ghế</th>
-                        <th>Hạng Ghế</th>
-                        <th>Giá</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var detail in bookingViewModel.BookingDetails)
-                    {
-                        <tr>
-                            <td>@detail.OutboundFlightID</td>
-                            <td>@detail.Seat.SeatNumber</td>
-                            <td>@detail.Seat.SeatClass</td>
-                            <td>@detail.Seat.Price</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+        <p>Chi tiết đặt chỗ ID: @detail.BookingDetailID</p>
+        <!-- Thêm thông tin khác về chi tiết đặt chỗ nếu muốn -->
     }
-}
-else
-{
-    <p>Bạn chưa có đặt vé nào.</p>
+
+    <h3>Thông tin ghế:</h3>
+    foreach (var seat in viewModel.Seats)
+    {
+        <p>Số ghế: @seat.SeatNumber</p>
+        <p>Loại ghế: @seat.SeatClass</p>
+        <p>Giá: @seat.Price</p>
+    }
+
+    <h3>Thông tin chuyến bay:</h3>
+    foreach (var flight in viewModel.Flights)
+    {
+        <p>Chuyến bay ID: @flight.FlightID</p>
+        <p>Thời gian khởi hành: @flight.DepartureTime</p>
+        <p>Thời gian đến: @flight.ArrivalTime</p>
+    }
+
+    <h3>Thông tin hãng hàng không:</h3>
+    foreach (var airline in viewModel.Airlines)
+    {
+        <p>Tên hãng: @airline.AirlineName</p>
+    }
+
+    <hr />
+    <!-- Tạo một đường kẻ ngang để phân tách các đặt chỗ -->
 }

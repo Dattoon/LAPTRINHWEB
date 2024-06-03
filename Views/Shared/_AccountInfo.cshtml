@@ -3,11 +3,11 @@
 @if (Model != null)
 {
     <li class="profile">
-        <div onclick="show_hidden_div('member_control');" class="member_profile">
+        <div class="member_profile">
             Chào, @Model.UserName
             <div class="clear"></div>
         </div>
-        <div target="member_control" id="member_control" class="hidden_div" style="display: none;">
+        <div id="member_control" class="hidden_div">
             <ul>
                 <li>@Html.ActionLink("Thay đổi thông tin", "UpdateProfile", "Accounts")</li>
                 <li>@Html.ActionLink("Đổi mật khẩu", "ChangePassword", "Accounts")</li>
@@ -21,15 +21,80 @@ else
 {
     <li>@Html.ActionLink("Đăng nhập", "Dangnhap", "Accounts")</li>
 }
+
+<style>
+    /* CSS cho menu profile */
+    .profile {
+        position: relative;
+        list-style: none;
+    }
+
+    .member_profile {
+        cursor: pointer;
+        /* Thêm các style khác tại đây để tùy chỉnh ngoại hình */
+    }
+
+    /* CSS cho submenu khi hover */
+    .profile:hover .hidden_div {
+        display: block;
+        opacity: 1;
+        transition: opacity 0.3s ease;
+    }
+
+    .hidden_div {
+        display: none;
+        position: absolute;
+        right: 0;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        transition: opacity 0.3s ease;
+    }
+
+        .hidden_div ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .hidden_div li {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            width:100%;
+        }
+
+            .hidden_div li:hover {
+                background-color: #f1f1f1;
+            }
+
+    .clear {
+        clear: both;
+    }
+
+</style>
+
 <script>
 
+    // JavaScript để hiển thị/ẩn submenu
     function show_hidden_div(divId) {
         var div = document.getElementById(divId);
         if (div.style.display === "none") {
             div.style.display = "block";
+            // Thêm hiệu ứng chuyển đổi
+            div.style.opacity = 0;
+            setTimeout(function () {
+                div.style.opacity = 1;
+            }, 10);
         } else {
-            div.style.display = "none";
+            // Thêm hiệu ứng chuyển đổi
+            div.style.opacity = 0;
+            setTimeout(function () {
+                div.style.display = "none";
+            }, 300);
         }
     }
+
 
 </script>
