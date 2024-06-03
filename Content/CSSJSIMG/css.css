@@ -1601,6 +1601,7 @@ figure {
 
 .Button_button-color__7QnYK {
     background-color: var(--primary-base);
+    border-radius: 30px;
     border: 1px solid var(--primary-base);
     color: var(--primary-dark);
     fill: var(--primary-dark)
