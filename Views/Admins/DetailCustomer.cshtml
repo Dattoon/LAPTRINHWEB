@@ -5,9 +5,91 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
+<style>
+    dd {
+        padding: 2px;
+        color: black;
+        border: solid 1px;
+        border-radius: 5px;
+    }
 
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        color: #4CAF50; /* Thay đổi màu chữ của phần nội dung thành màu xanh lá */
+    }
+
+    h2 {
+        color: #4CAF50;
+        text-align: center;
+        padding: 10px;
+        font-size: 2.5em; /* Tăng kích thước chữ của tiêu đề */
+        margin-bottom: 20px;
+    }
+
+    .form-horizontal {
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    }
+
+        .form-horizontal h4 {
+            color: #4CAF50;
+            text-align: center;
+        }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-horizontal .control-label {
+        text-align: left;
+    }
+
+    .form-horizontal .form-control {
+        border-radius: 5px;
+        border: 2px solid #ddd;
+        color: black; /* Thay đổi màu chữ của các trường nhập liệu thành màu đen */
+    }
+
+        .form-horizontal .form-control:focus {
+            border-color: #4CAF50;
+            box-shadow: 0 0 5px #4CAF50;
+        }
+
+    .btn-default {
+        background-color: #4CAF50;
+        color: white;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+    }
+
+        .btn-default:hover {
+            background-color: #45a049;
+        }
+
+    .text-danger {
+        color: #f44336;
+    }
+
+    .back-link {
+        display: inline-block;
+        padding: 5px 10px;
+        background-color: #4CAF50;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+        margin-top: 20px;
+    }
+
+        .back-link:hover {
+            background-color: #45a049;
+        }
+</style>
 <div>
-    <h4>Customer</h4>
+    <h2>Customer</h2>
     <hr />
     <dl class="dl-horizontal">
         <dt>
