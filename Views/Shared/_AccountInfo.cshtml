@@ -1,0 +1,35 @@
+﻿@model LAPTRINHWEB.Models.Customer
+
+@if (Model != null)
+{
+    <li class="profile">
+        <div onclick="show_hidden_div('member_control');" class="member_profile">
+            Chào, @Model.UserName
+            <div class="clear"></div>
+        </div>
+        <div target="member_control" id="member_control" class="hidden_div" style="display: none;">
+            <ul>
+                <li>@Html.ActionLink("Thay đổi thông tin", "UpdateProfile", "Accounts")</li>
+                <li>@Html.ActionLink("Đổi mật khẩu", "ChangePassword", "Accounts")</li>
+                <li>@Html.ActionLink("Đăng xuất", "Dangxuat", "Accounts")</li>
+            </ul>
+            <div class="clear"></div>
+        </div>
+    </li>
+}
+else
+{
+    <li>@Html.ActionLink("Đăng nhập", "Dangnhap", "Accounts")</li>
+}
+<script>
+
+    function show_hidden_div(divId) {
+        var div = document.getElementById(divId);
+        if (div.style.display === "none") {
+            div.style.display = "block";
+        } else {
+            div.style.display = "none";
+        }
+    }
+
+</script>

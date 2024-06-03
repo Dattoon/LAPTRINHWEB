@@ -1,4 +1,6 @@
-﻿<!doctype html>
+﻿@using LAPTRINHWEB.Models;
+
+<!doctype html>
 <html>
 
 <head>
@@ -110,7 +112,7 @@
                         </div>
                         <div class=" Header_menu__jRq_R h-full flex align-center ">
                             <label for="" class="md">
-                                <a @Html.ActionLink("Đăng Nhập", "Dangnhap", "Accounts")</a>
+                                @Html.Partial("_AccountInfo", (Customer)Session["Taikhoan"])
                             </label>
                         </div>
 
@@ -230,3 +232,6 @@
 
 
 </html>
+
+
+

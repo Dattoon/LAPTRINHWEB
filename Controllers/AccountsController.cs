@@ -2,10 +2,15 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Web;
-    using System.Web.Mvc;
+using System.Web;
+using System.Web.Mvc;
+using System.Net.Mail;
+using System.Net;
+using System.Threading.Tasks;
 
-    namespace LAPTRINHWEB.Controllers
+
+
+namespace LAPTRINHWEB.Controllers
     {
         public class AccountsController : BaseController
         {
@@ -119,5 +124,176 @@
                 Session["Taikhoan"] = null;
                 return RedirectToAction("Index", "Home");
             }
+
+
+
+
+        // GET: User/UpdateProfile
+        [HttpGet]
+        public ActionResult UpdateProfile()
+        {
+            var user = (Customer)Session["Taikhoan"];
+            if (user == null)
+            {
+                return RedirectToAction("Dangnhap");
+            }
+            return View(user);
         }
-    }   
+
+        // POST: User/UpdateProfile
+        // POST: User/UpdateProfile
+        [HttpPost]
+        public ActionResult UpdateProfile(Customer updatedUser)
+        {
+            try
+            {
+                // Get the user from the database
+                var dbUser = data.Customers.SingleOrDefault(u => u.CustomerID == updatedUser.CustomerID);
+                if (dbUser != null)
+                {
+                    dbUser.UserName = updatedUser.UserName;
+                    dbUser.Email = updatedUser.Email;
+                    dbUser.PhoneNumber = updatedUser.PhoneNumber;
+                    data.SubmitChanges();
+                }
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception e)
+            {
+                ViewBag.Error = "Có lỗi xảy ra khi cố gắng cập nhật thông tin người dùng: " + e.Message;
+                return View(updatedUser);
+            }
+        }
+
+       
+
+        private async Task SendResetPasswordEmailAsync(string email, string resetCode)
+        {
+            var fromAddress = new MailAddress("fourairline@gmail.com", "Four Airline");
+            var toAddress = new MailAddress(email);
+            const string subject = "Password Reset";
+            string body = "Your password reset code is: " + resetCode;
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromAddress.Address, "ysjm dynx uawd arit")
+            };
+            using (var message = new MailMessage(fromAddress, toAddress)
+            {
+                Subject = subject,
+                Body = body
+            })
+            {
+                await smtp.SendMailAsync(message);
+            }
+        }
+
+
+
+        // GET: User/ChangePassword
+        [HttpGet]
+        public ActionResult ChangePassword()
+        {
+            var user = (Customer)Session["Taikhoan"];
+            if (user == null)
+            {
+                return RedirectToAction("Dangnhap");
+            }
+            return View(user);
+        }
+
+        // POST: User/ChangePassword
+        [HttpPost]
+        public ActionResult ChangePassword(string oldPassword, string newPassword, string confirmPassword)
+        {
+            var user = (Customer)Session["Taikhoan"];
+            if (user == null)
+            {
+                return RedirectToAction("Dangnhap");
+            }
+            if (user.PasswordHash != oldPassword)
+            {
+                ViewBag.Error = "Mật khẩu cũ không đúng";
+                return View(user);
+            }
+            if (newPassword != confirmPassword)
+            {
+                ViewBag.Error = "Mật khẩu mới và mật khẩu xác nhận không khớp";
+                return View(user);
+            }
+            // Get the user from the database
+            var dbUser = data.Customers.SingleOrDefault(u => u.CustomerID == user.CustomerID);
+            if (dbUser != null)
+            {
+                dbUser.PasswordHash = newPassword; // Consider encrypting this
+                try
+                {
+                    data.SubmitChanges();
+                }
+                catch (Exception e)
+                {
+                    ViewBag.Error = "Có lỗi xảy ra khi cố gắng cập nhật mật khẩu: " + e.Message;
+                    return View(user);
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        // GET: User/ForgotPassword
+        [HttpGet]
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        // POST: User/ForgotPassword
+        [HttpPost]
+        public async Task<ActionResult> ForgotPassword(string email)
+        {
+            var user = data.Customers.SingleOrDefault(u => u.Email == email);
+            if (user != null)
+            {
+                // Generate a reset password code
+                var resetCode = Guid.NewGuid().ToString();
+                user.ResetPasswordCode = resetCode;
+                // Consider setting an expiry time for the code
+                data.SubmitChanges();
+
+                // Send the reset password code to the user's email
+                // This will depend on your email sending setup
+                await SendResetPasswordEmailAsync(user.Email, resetCode);
+            }
+            return RedirectToAction("ResetPassword");
+        }
+
+
+        // GET: User/ResetPassword
+        [HttpGet]
+        public ActionResult ResetPassword()
+        {
+            return View();
+        }
+
+        // POST: User/ResetPassword
+        [HttpPost]
+        public ActionResult ResetPassword(string resetCode, string newPassword)
+        {
+            var user = data.Customers.SingleOrDefault(u => u.ResetPasswordCode == resetCode);
+            if (user != null)
+            {
+                user.PasswordHash = newPassword; // Consider encrypting this
+                user.ResetPasswordCode = null; // Clear the reset password code
+                data.SubmitChanges();
+            }
+            return RedirectToAction("Dangnhap");
+        }
+
+
+
+    }
+}   
