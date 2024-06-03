@@ -57,7 +57,7 @@
         <classShapeMoniker Id="3ee3effb-7aae-47e5-a38d-9a3a4e8f51ed" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 5.22679768880208); (6.25 : 5.22679768880208)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(5.5 : 5.22679768880208); (6.01041666666667 : 5.22679768880208 : JumpStart); (6.17708333333333 : 5.22679768880208 : JumpEnd); (6.25 : 5.22679768880208)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DataClasses1DataContext/Flight/Flight_Ticket" />
       <nodes>
         <classShapeMoniker Id="f0e121db-4265-41ff-a59b-596c4c50f322" />
@@ -71,7 +71,7 @@
         <classShapeMoniker Id="c91908d2-7590-463b-93fe-9aa386d5dc70" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 3.16429768880208); (4.5 : 3.16429768880208); (4.5 : 4.875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 3.51369466145833); (5.46875 : 3.51369466145833); (5.46875 : 4.875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/DataClasses1DataContext/Airline/Airline_Flight" />
       <nodes>
         <classShapeMoniker Id="1ca2c28a-6f73-4241-b36f-ae111466e193" />
@@ -113,10 +113,10 @@
         <classShapeMoniker Id="0dcaeec6-3541-4ffa-b15f-3a33dc7e0db4" />
       </nodes>
     </associationConnector>
-    <classShape Id="36180bd2-f878-49b9-a7a8-cea39cf8d77d" absoluteBounds="3, 0.75, 2, 1.3862939453125">
+    <classShape Id="36180bd2-f878-49b9-a7a8-cea39cf8d77d" absoluteBounds="3.375, 1.25, 2, 1.3862939453125">
       <DataClassMoniker Name="/DataClasses1DataContext/Admin" />
       <nestedChildShapes>
-        <elementListCompartment Id="aa97dccf-236d-40d3-b571-1ec4c490499d" absoluteBounds="3.015, 1.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="aa97dccf-236d-40d3-b571-1ec4c490499d" absoluteBounds="3.39, 1.71, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="5190d3b5-6e7c-4603-a49e-229a9e3e5e20" absoluteBounds="9, 3.75, 2, 2.1554996744791666">
@@ -132,7 +132,7 @@
         <classShapeMoniker Id="3ee3effb-7aae-47e5-a38d-9a3a4e8f51ed" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(11 : 5.57774983723958); (11.4166666666667 : 5.57774983723958 : JumpStart); (11.5833333333333 : 5.57774983723958 : JumpEnd); (11.75 : 5.57774983723958)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(11 : 5.57774983723958); (11.75 : 5.57774983723958)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DataClasses1DataContext/Booking/Booking_BookingDetail" />
       <nodes>
         <classShapeMoniker Id="5190d3b5-6e7c-4603-a49e-229a9e3e5e20" />
@@ -159,16 +159,16 @@
         <classShapeMoniker Id="5190d3b5-6e7c-4603-a49e-229a9e3e5e20" />
       </nodes>
     </associationConnector>
-    <classShape Id="513ef98d-524e-4b31-942b-4f3f54890d5c" absoluteBounds="15, 5, 2, 2.1554996744791666">
+    <classShape Id="29f5288e-3e22-42d2-8fb0-06790a995d1c" absoluteBounds="15, 4.5, 2, 2.1554996744791666">
       <DataClassMoniker Name="/DataClasses1DataContext/Customer" />
       <nestedChildShapes>
-        <elementListCompartment Id="0ae76556-4e17-49b9-a6aa-fdb97772f6db" absoluteBounds="15.015, 5.46, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="8444bb15-62ed-4ab5-b231-f93913401abf" absoluteBounds="15.015, 4.96, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(15 : 5.15625); (12.8333333333333 : 5.15625 : JumpStart); (12.6666666666667 : 5.15625 : JumpEnd); (11.5833333333333 : 5.15625 : JumpStart); (11.4166666666667 : 5.15625 : JumpEnd); (11 : 5.15625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(15 : 4.6875); (11 : 4.6875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DataClasses1DataContext/Customer/Customer_Booking" />
       <nodes>
-        <classShapeMoniker Id="513ef98d-524e-4b31-942b-4f3f54890d5c" />
+        <classShapeMoniker Id="29f5288e-3e22-42d2-8fb0-06790a995d1c" />
         <classShapeMoniker Id="5190d3b5-6e7c-4603-a49e-229a9e3e5e20" />
       </nodes>
     </associationConnector>

@@ -4,8 +4,70 @@
     ViewBag.Title = "ManagerFlight";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        overflow-x: auto;
+        font-size: 0.9em;
+    }
+
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 3px; 
+        }
+
+        .table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .table tr:hover {
+            background-color: #ddd;
+        }
+
+        .table th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .table td a {
+            display: inline-block;
+            padding: 1px 2px;
+            margin: 0 1px;
+            transition: all 0.3s ease;
+        }
+
+            .table td a:hover {
+                transform: scale(1.1);
+                background-color: #ddd;
+            }
+
+    .create-link {
+        display: inline-block;
+        padding: 5px 10px;
+        background-color: #4CAF50;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+    }
+
+        .create-link:hover {
+            background-color: #ddd;
+            color: #4CAF50;
+        }
+</style>
+
 <p>
-    @Html.ActionLink("Create New", "AddNewFlight")
+    <a href="@Url.Action("AddNewFlight")" class="create-link">Create New</a>
 </p>
 <table class="table">
     <tr>
@@ -36,38 +98,38 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.AirlineID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DepartureAirportID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ArrivalAirportID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DepartureTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ArrivalTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Duration)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AvailableSeats)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FlightStatus)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "EditFlight", new { id=item.FlightID }) |
-            @Html.ActionLink("Details", "DetailFlight", new { id=item.FlightID }) |
-            @Html.ActionLink("Delete", "DeleteFlight", new { id=item.FlightID })
-        </td>
-    </tr>
-}
-
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AirlineID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartureAirportID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArrivalAirportID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartureTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArrivalTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AvailableSeats)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FlightStatus)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditFlight", new { id = item.FlightID })
+                @Html.ActionLink("Details", "DetailFlight", new { id = item.FlightID })
+                @Html.ActionLink("Delete", "DeleteFlight", new { id = item.FlightID })
+            </td>
+        </tr>
+    }
 </table>
