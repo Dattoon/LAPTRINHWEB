@@ -5,23 +5,50 @@
 
 @using LAPTRINHWEB.Models
 @model List<BookingViewModel>
-
-@foreach (var viewModel in Model)
-{
-    <h2>Đặt chỗ ID: @viewModel.Booking.BookingID</h2>
-
-    <h3>Chi tiết đặt chỗ:</h3>
-    @Html.Raw(string.Join("<br/>", viewModel.BookingDetails.Select(detail => $"Chi tiết đặt chỗ ID: {detail.BookingDetailID}")))
-
-    <h3>Thông tin ghế:</h3>
-    @Html.Raw(string.Join("<br/>", viewModel.Seats.Select(seat => $"Số ghế: {seat.SeatNumber}<br/>Loại ghế: {seat.SeatClass}<br/>Giá: {seat.Price}")))
-
-    <h3>Thông tin chuyến bay:</h3>
-    @Html.Raw(string.Join("<br/>", viewModel.Flights.Select(flight => $"Chuyến bay ID: {flight.FlightID}<br/>Thời gian khởi hành: {flight.DepartureTime}<br/>Thời gian đến: {flight.ArrivalTime}")))
-
-    <h3>Thông tin hãng hàng không:</h3>
-    @Html.Raw(string.Join("<br/>", viewModel.Airlines.Select(airline => $"Tên hãng: {airline.AirlineName}")))
-
-    <hr />
- <!-- Tạo một đường kẻ ngang để phân tách các đặt chỗ -->
+<div>
+    @foreach (var viewModel in Model)
+    {
+        <div class="booking-info">
+            <h2>Đặt chỗ ID: @viewModel.Booking.BookingID</h2>
+            <div class="details">
+                <h3>Chi tiết đặt chỗ:</h3>
+                @Html.Raw(string.Join("<br/>", viewModel.BookingDetails.Select(detail => $"Chi tiết đặt chỗ ID: {detail.BookingDetailID}")))
+            </div>
+            <div class="flight-info">
+                <h3>Thông tin chuyến bay:</h3>
+                @Html.Raw(string.Join("<br/>", viewModel.Flights.Select(flight => $"Chuyến bay ID: {flight.FlightID}<br/>Thời gian khởi hành: {flight.DepartureTime}<br/>Thời gian đến: {flight.ArrivalTime}")))
+            </div>
+            <div class="airline-info">
+                <h3>Thông tin hãng hàng không:</h3>
+                @Html.Raw(string.Join("<br/>", viewModel.Airlines.Select(airline => $"Tên hãng: {airline.AirlineName}")))
+            </div>
+            <div class="seat-info">
+                <h3>Thông tin ghế:</h3>
+                @Html.Raw(string.Join("<br/>", viewModel.Seats.Select(seat => $"Số ghế: {seat.SeatNumber} - Loại ghế: {seat.SeatClass} - Giá: {seat.Price}")))
+            </div>
+        </div>
+        <hr />
+    }
+</div>
+!-- Tạo một đường kẻ ngang để phân tách các đặt chỗ -->
 }
+<style>
+    .booking-info {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .details, .flight-info, .airline-info, .seat-info {
+        margin-bottom: 10px;
+    }
+
+    h2, h3 {
+        color: #333;
+    }
+
+    hr {
+        margin-top: 20px;
+    }
+
+</style>
