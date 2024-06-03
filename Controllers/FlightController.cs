@@ -56,8 +56,12 @@ namespace FourAirLineFinal.Controllers
             return View(flights);
         }
 
-        public ActionResult SearchFlights(string departureCity, string arrivalCity, DateTime? departureDate, DateTime? returnDate, int? page)
+        public ActionResult SearchFlights(string airlineName, string departureCity, string arrivalCity, DateTime? departureDate, DateTime? returnDate, int? page)
         {
+            ViewBag.Airlines = data.Airlines.Select(a => a.AirlineName).ToList();
+
+            
+
             var cities = data.Airports.Select(a => a.City).Distinct().ToList();
             ViewBag.Cities = new SelectList(cities);
 
@@ -67,17 +71,17 @@ namespace FourAirLineFinal.Controllers
                                       join a in data.Airlines on f.AirlineID equals a.AirlineID
                                       join d in data.Airports on f.DepartureAirportID equals d.AirportID
                                       join r in data.Airports on f.ArrivalAirportID equals r.AirportID
-                                      where d.City == departureCity && r.City == arrivalCity && f.DepartureTime.Date == departureDate.Value
+                                      where a.AirlineName == airlineName && d.City == departureCity && r.City == arrivalCity && f.DepartureTime.Date == departureDate.Value
                                       select new FlightDetailsViewModel
                                       {
                                           Flight = f,
                                           AirlineName = a.AirlineName,
-                                          AirlineLogo = a.Logo, // Thêm logo hãng hàng không
+                                          AirlineLogo = a.Logo,
                                           DepartureAirportName = d.AirportName,
                                           ArrivalAirportName = r.AirportName,
                                           AvailableSeats = data.Seats.Count(s => s.FlightID == f.FlightID && s.IsAvailable),
-                                          SeatPrice = data.Seats.Where(s => s.FlightID == f.FlightID && s.IsAvailable).Select(s => s.Price).FirstOrDefault(), // Thêm giá ghế
-                                          SeatClass = data.Seats.Where(s => s.FlightID == f.FlightID && s.IsAvailable).Select(s => s.SeatClass).FirstOrDefault() // Thêm hạng ghế
+                                          SeatPrice = data.Seats.Where(s => s.FlightID == f.FlightID && s.IsAvailable).Select(s => s.Price).FirstOrDefault(),
+                                          SeatClass = data.Seats.Where(s => s.FlightID == f.FlightID && s.IsAvailable).Select(s => s.SeatClass).FirstOrDefault()
                                       };
 
                 int pageSize = 10;
@@ -348,7 +352,7 @@ namespace FourAirLineFinal.Controllers
                  {
                 return RedirectToAction("Dangnhap", "Accounts");
                 }
-
+            
             var bookings = data.Bookings.Where(b => b.CustomerID == user.CustomerID).ToList();
             var bookingViewModels = new List<BookingViewModel>();
             var bookingId = Session["BookingID"] as int?;

@@ -3,6 +3,73 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+<style>
+    #departureCity, #arrivalCity {
+        border: none; /* Loại bỏ viền */
+        outline: none; /* Loại bỏ đường viền khi focus */
+        padding: 10px; /* Thêm padding để tăng kích thước click */
+        margin: -20px 0; /* Thêm margin để tách biệt các phần tử */
+        color: #333; /* Màu chữ */
+        font-size: 16px; /* Kích thước chữ */
+        border-radius: 5px; /* Bo góc */
+        -webkit-appearance: none; /* Loại bỏ style mặc định của browser cho select */
+        -moz-appearance: none; /* Loại bỏ style mặc định của Firefox */
+        cursor: pointer; /* Thay đổi con trỏ khi di chuyển qua dropdown */
+    }
+
+    /* Style cho icon mũi tên chỉ xuống */
+    .departureCity-arrow {
+        pointer-events: none; /* Ngăn sự kiện chuột để không ảnh hưởng đến việc chọn */
+        position: absolute; /* Đặt icon cố định so với parent */
+        right: 10px; /* Khoảng cách từ phải */
+        top: 50%; /* Đặt ở giữa theo chiều dọc */
+        transform: translateY(-50%); /* Cân chỉnh icon ở giữa theo chiều dọc */
+    }
+
+    /* Thêm style cho label nếu cần */
+    .label-departureCity {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 14px;
+    }
+    /* Phong cách cho thẻ select */
+    select {
+        width: 88%; /* Chiều rộng tối đa */
+        padding: 8px 16px; /* Đệm bên trong */
+        margin: 10px 0; /* Khoảng cách xung quanh */
+        display: inline-block; /* Hiển thị dạng khối */
+        border: 1px solid #ccc; /* Viền */
+        border-radius: 4px; /* Bo góc */
+        box-sizing: border-box; /* Tính kích thước hộp */
+        appearance: none; /* Gỡ bỏ phong cách mặc định */
+    }
+
+        /* Phong cách cho biểu tượng mũi tên */
+        select + svg {
+            position: absolute; /* Vị trí tuyệt đối */
+            right: 10px; /* Cách lề phải */
+            top: calc(50% - 12px); /* Cách lề trên */
+            pointer-events: none; /* Không tương tác chuột */
+        }
+
+        /* Thêm phong cách khi người dùng rê chuột qua */
+        select:hover {
+            border-color: #888; /* Đổi màu viền */
+        }
+
+        /* Thêm phong cách khi người dùng chọn */
+        select:focus {
+            border-color: #555; /* Đổi màu viền */
+            outline: none; /* Gỡ bỏ đường viền ngoài */
+        }
+</style>
+
+
+
+
+
+
 <form action="@Url.Action("SearchFlights")" method="get">
     <div class="Card_card__rC1zg FlightSearchNavigation_wrapper__TCl60">
         <div class="flex flex-col gap-24">
@@ -87,69 +154,6 @@
         </div>
     </div>
 
-    <style>
-        #departureCity, #arrivalCity {
-            border: none; /* Loại bỏ viền */
-            outline: none; /* Loại bỏ đường viền khi focus */
-            padding: 10px; /* Thêm padding để tăng kích thước click */
-            margin: -20px 0; /* Thêm margin để tách biệt các phần tử */
-            color: #333; /* Màu chữ */
-            font-size: 16px; /* Kích thước chữ */
-            border-radius: 5px; /* Bo góc */
-            -webkit-appearance: none; /* Loại bỏ style mặc định của browser cho select */
-            -moz-appearance: none; /* Loại bỏ style mặc định của Firefox */
-            cursor: pointer; /* Thay đổi con trỏ khi di chuyển qua dropdown */
-        }
-
-        /* Style cho icon mũi tên chỉ xuống */
-        .departureCity-arrow {
-            pointer-events: none; /* Ngăn sự kiện chuột để không ảnh hưởng đến việc chọn */
-            position: absolute; /* Đặt icon cố định so với parent */
-            right: 10px; /* Khoảng cách từ phải */
-            top: 50%; /* Đặt ở giữa theo chiều dọc */
-            transform: translateY(-50%); /* Cân chỉnh icon ở giữa theo chiều dọc */
-        }
-
-        /* Thêm style cho label nếu cần */
-        .label-departureCity {
-            display: block;
-            margin-bottom: 5px;
-            font-size: 14px;
-        }
-        /* Phong cách cho thẻ select */
-        select {
-            width: 88%; /* Chiều rộng tối đa */
-            padding: 8px 16px; /* Đệm bên trong */
-            margin: 10px 0; /* Khoảng cách xung quanh */
-            display: inline-block; /* Hiển thị dạng khối */
-            border: 1px solid #ccc; /* Viền */
-            border-radius: 4px; /* Bo góc */
-            box-sizing: border-box; /* Tính kích thước hộp */
-            appearance: none; /* Gỡ bỏ phong cách mặc định */
-        }
-
-            /* Phong cách cho biểu tượng mũi tên */
-            select + svg {
-                position: absolute; /* Vị trí tuyệt đối */
-                right: 10px; /* Cách lề phải */
-                top: calc(50% - 12px); /* Cách lề trên */
-                pointer-events: none; /* Không tương tác chuột */
-            }
-
-            /* Thêm phong cách khi người dùng rê chuột qua */
-            select:hover {
-                border-color: #888; /* Đổi màu viền */
-            }
-
-            /* Thêm phong cách khi người dùng chọn */
-            select:focus {
-                border-color: #555; /* Đổi màu viền */
-                outline: none; /* Gỡ bỏ đường viền ngoài */
-            }
-    </style>
-
-
-
     <div>
         <h2 class="flight-header">Chuyến bay đi</h2>
 
@@ -164,68 +168,60 @@
                         </button>
                     </div>
 
-                   
+
 
 
                     <div>
+
+
                         <div class="FlightSidebar_filter-item__jtakl">
-                            <label class="md">Hiển thị theo</label><label for=":r3:" class=" Checkbox_container__ccFUl">
-                                <input id=":r3:" type="checkbox"><span class="Checkbox_checkmark__81gnF Checkbox_sm__nLRCs">
-                                    <svg width="24" height="24" viewBox="0 0 24 24"
-                                         fill="none">
-                                        <path d="M4 12.6111L8.92308 17.5L20 6.5" stroke="black" stroke-width="2"
-                                              stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                </span>
-                                <div class="Checkbox_textGroup__Z0QZ_">
-                                    <div class="sm Checkbox_title__rGvCj label">Vietravel Airlines</div>
-                                    <p class="sm"></p>
-                                </div>
-                            </label><label for=":r4:" class=" Checkbox_container__ccFUl">
-                                <input id=":r4:"
-                                       type="checkbox"><span class="Checkbox_checkmark__81gnF Checkbox_sm__nLRCs">
-                                    <svg width="24" height="24" viewBox="0 0 24 24"
-                                         fill="none">
-                                        <path d="M4 12.6111L8.92308 17.5L20 6.5" stroke="black" stroke-width="2"
-                                              stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                </span>
-                                <div class="Checkbox_textGroup__Z0QZ_">
-                                    <div class="sm Checkbox_title__rGvCj label">Vietjet Air</div>
-                                    <p class="sm"></p>
-                                </div>
-                            </label><label for=":r5:" class=" Checkbox_container__ccFUl">
-                                <input id=":r5:"
-                                       type="checkbox"><span class="Checkbox_checkmark__81gnF Checkbox_sm__nLRCs">
-                                    <svg width="24" height="24" viewBox="0 0 24 24"
-                                         fill="none">
-                                        <path d="M4 12.6111L8.92308 17.5L20 6.5" stroke="black" stroke-width="2"
-                                              stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                </span>
-                                <div class="Checkbox_textGroup__Z0QZ_">
-                                    <div class="sm Checkbox_title__rGvCj label">Bamboo Airways</div>
-                                    <p class="sm"></p>
-                                </div>
-                            </label><label for=":r6:" class=" Checkbox_container__ccFUl">
-                                <input id=":r6:"
-                                       type="checkbox"><span class="Checkbox_checkmark__81gnF Checkbox_sm__nLRCs">
-                                    <svg width="24" height="24" viewBox="0 0 24 24"
-                                         fill="none">
-                                        <path d="M4 12.6111L8.92308 17.5L20 6.5" stroke="black" stroke-width="2"
-                                              stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                </span>
-                                <div class="Checkbox_textGroup__Z0QZ_">
-                                    <div class="sm Checkbox_title__rGvCj label">Vietnam Airlines</div>
-                                    <p class="sm"></p>
-                                </div>
-                            </label>
+                            <label class="md">Hiển thị theo</label>
+                            @foreach (var airline in ViewBag.Airlines)
+                            {
+                                <label for="@airline" class=" Checkbox_container__ccFUl">
+                                    <input id="@airline" type="checkbox" name="airlineName" value="@airline">
+                                    <span class="Checkbox_checkmark__81gnF Checkbox_sm__nLRCs">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M4 12.6111L8.92308 17.5L20 6.5" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </svg>
+                                    </span>
+                                    <div class="Checkbox_textGroup__Z0QZ_">
+                                        <div class="sm Checkbox_title__rGvCj label">@airline</div>
+                                        <p class="sm"></p>
+                                    </div>
+                                </label>
+                            }
                         </div>
+
+
                     </div>
                 </div>
             </div>
 </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @if (ViewBag.OutboundFlights != null)
 {
 
@@ -442,15 +438,3 @@
         }
 </style>
 
-
-
-@*đạo js dưới đây là khi ấn vào check box thì nó sẽ reload lại và tìm theo checkbox hãng máy bay nha duy*@
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('input[type="checkbox"]').on('change', function () {
-            $(this).closest('form').submit();
-        });
-    });
-</script>
