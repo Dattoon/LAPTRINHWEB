@@ -13,3 +13,6 @@ namespace LAPTRINHWEB.Controllers
         protected DataClasses1DataContext data = new DataClasses1DataContext("DATTOON\\DATER");
     }
 }
+
+
+
