@@ -317,6 +317,11 @@
     <Content Include="Views\Admins\DetailCustomer.cshtml" />
     <Content Include="Views\Admins\DeleteCustomer.cshtml" />
     <Content Include="Views\Admins\ManagerCustomer.cshtml" />
+    <Content Include="Views\Accounts\UpdateProfile.cshtml" />
+    <Content Include="Views\Accounts\ChangePassword.cshtml" />
+    <Content Include="Views\Shared\_AccountInfo.cshtml" />
+    <Content Include="Views\Accounts\ForgotPassword.cshtml" />
+    <Content Include="Views\Accounts\ResetPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

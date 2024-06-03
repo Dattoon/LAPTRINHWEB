@@ -114,8 +114,17 @@
       <Association Name="Booking_Transaction" Member="Transactions" ThisKey="BookingID" OtherKey="BookingID" Type="Transaction" />
       <Association Name="Booking_BookingDetail" Member="BookingDetails" ThisKey="BookingID" OtherKey="BookingID" Type="BookingDetail" />
       <Association Name="Ticket_Booking" Member="Ticket" ThisKey="TicketID" OtherKey="TicketID" Type="Ticket" IsForeignKey="true" />
-      <Association Name="Customer_Booking" Member="Customer" ThisKey="CustomerID" OtherKey="CustomerID" Type="Customer" IsForeignKey="true" />
       <Association Name="Guest_Booking" Member="Guest" ThisKey="GuestID" OtherKey="GuestID" Type="Guest" IsForeignKey="true" />
+      <Association Name="Customer_Booking" Member="Customer" ThisKey="CustomerID" OtherKey="CustomerID" Type="Customer" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Guests" Member="Guests">
+    <Type Name="Guest">
+      <Column Name="GuestID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="PhoneNumber" Type="System.String" DbType="NVarChar(1)" CanBeNull="true" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="Guest_Booking" Member="Bookings" ThisKey="GuestID" OtherKey="GuestID" Type="Booking" />
     </Type>
   </Table>
   <Table Name="dbo.Customers" Member="Customers">
@@ -126,16 +135,8 @@
       <Column Name="PasswordHash" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="PhoneNumber" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
       <Column Name="IsRegistered" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ResetPasswordCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Association Name="Customer_Booking" Member="Bookings" ThisKey="CustomerID" OtherKey="CustomerID" Type="Booking" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Guests" Member="Guests">
-    <Type Name="Guest">
-      <Column Name="GuestID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Email" Type="System.String" DbType="NVarChar(1) NOT NULL" CanBeNull="false" />
-      <Column Name="PhoneNumber" Type="System.String" DbType="NVarChar(1)" CanBeNull="true" />
-      <Column Name="UserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Association Name="Guest_Booking" Member="Bookings" ThisKey="GuestID" OtherKey="GuestID" Type="Booking" />
     </Type>
   </Table>
 </Database>
