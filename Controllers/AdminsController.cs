@@ -541,6 +541,16 @@ namespace LAPTRINHWEB.Controllers
         }
         #endregion
 
+        #region LogoutAdmin
+        [HttpGet]
+        public ActionResult LogoutAdmin()
+        {
+            Session["Taikhoanadmin"] = null;
+            return RedirectToAction("Login", "Admins");
+        }
+
+        #endregion
+
 
 
     }
