@@ -15,5 +15,8 @@ namespace LAPTRINHWEB.Models
         public decimal SeatPrice { get; set; } 
         public string SeatClass { get; set; } 
         public int AvailableSeats { get; set; }
+
+        public string DepartureAirportCity { get; set; }
+        public string ArrivalAirportCity { get; set; }
     }
 }

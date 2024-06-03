@@ -72,6 +72,7 @@ namespace FourAirLineFinal.Controllers
                                       join d in data.Airports on f.DepartureAirportID equals d.AirportID
                                       join r in data.Airports on f.ArrivalAirportID equals r.AirportID
                                       where a.AirlineName == airlineName && d.City == departureCity && r.City == arrivalCity && f.DepartureTime.Date == departureDate.Value
+                                      let availableSeats = data.Seats.Where(s => s.FlightID == f.FlightID && s.IsAvailable).ToList()
                                       select new FlightDetailsViewModel
                                       {
                                           Flight = f,
@@ -79,9 +80,11 @@ namespace FourAirLineFinal.Controllers
                                           AirlineLogo = a.Logo,
                                           DepartureAirportName = d.AirportName,
                                           ArrivalAirportName = r.AirportName,
-                                          AvailableSeats = data.Seats.Count(s => s.FlightID == f.FlightID && s.IsAvailable),
-                                          SeatPrice = data.Seats.Where(s => s.FlightID == f.FlightID && s.IsAvailable).Select(s => s.Price).FirstOrDefault(),
-                                          SeatClass = data.Seats.Where(s => s.FlightID == f.FlightID && s.IsAvailable).Select(s => s.SeatClass).FirstOrDefault()
+                                          DepartureAirportCity = d.City,
+                                          ArrivalAirportCity = r.City,
+                                          AvailableSeats = availableSeats.Count,
+                                          SeatPrice = availableSeats.Any() ? availableSeats.Select(s => s.Price).FirstOrDefault() : default(decimal),
+                                          SeatClass = availableSeats.Any() ? availableSeats.Select(s => s.SeatClass).FirstOrDefault() : "Unknown"
                                       };
 
                 int pageSize = 10;
@@ -89,7 +92,7 @@ namespace FourAirLineFinal.Controllers
                 ViewBag.OutboundFlights = outboundFlights.ToPagedList(pageNumber, pageSize);
             }
 
-            // Tương tự cho ViewBag.ReturnFlights
+            
 
             return View();
         }
