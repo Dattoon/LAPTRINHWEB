@@ -290,7 +290,7 @@ namespace LAPTRINHWEB.Controllers
 
         public ActionResult EditFlight(int id)
         {
-            Flight flight = data.Flights.SingleOrDefault(n => n.AirlineID == id);
+            Flight flight = data.Flights.SingleOrDefault(n => n.FlightID == id);
             if (flight == null)
             {
                 Response.StatusCode = 404;
@@ -310,7 +310,7 @@ namespace LAPTRINHWEB.Controllers
             ViewBag.ArrivalAirportID = new SelectList(data.Airports, "AirportID", "AirportName");
             if (ModelState.IsValid)
             {
-                Flight airlineToUpdate = data.Flights.SingleOrDefault(n => n.AirlineID == flight.AirlineID);
+                Flight airlineToUpdate = data.Flights.SingleOrDefault(n => n.FlightID == flight.FlightID);
                 if (airlineToUpdate != null)
                 {
                     TryUpdateModel(airlineToUpdate);
