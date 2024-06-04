@@ -56,6 +56,7 @@ namespace FourAirLineFinal.Controllers
             return View(flights);
         }
 
+       
         public ActionResult SearchFlights(string airlineName, string departureCity, string arrivalCity, DateTime? departureDate, DateTime? returnDate, int? page)
         {
             if (ViewBag.Airlines == null)
@@ -325,7 +326,7 @@ namespace FourAirLineFinal.Controllers
 
             // Display a success message
             TempData["SuccessMessage"] = "Đặt vé thành công!";
-
+    
             // Redirect the user to the home page
             return RedirectToAction("Index", "Home");
         }
