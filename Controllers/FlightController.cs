@@ -318,9 +318,8 @@ namespace FourAirLineFinal.Controllers
             }
         }
 
-
         [HttpPost]
-        public ActionResult ConfirmPayment(int bookingId)
+        public async Task<ActionResult> ConfirmPayment(int bookingId)
         {
             // Get the booking
             var booking = data.Bookings.Single(b => b.BookingID == bookingId);
@@ -329,6 +328,17 @@ namespace FourAirLineFinal.Controllers
             booking.IsPaid = true;
             data.SubmitChanges();
 
+            // Get the booking details for the email
+            var bookingDetails = data.BookingDetails.Where(bd => bd.BookingID == bookingId).ToList();
+            var bookingDetailsString = string.Join(", ", bookingDetails.Select(bd => $"Seat: {bd.Seat.SeatNumber}, Flight: {bd.Flight.Airline.AirlineName} , Ngay Bay: {bd.Flight.ArrivalTime} ")); 
+
+            // Get the customer's email
+            var customer = data.Customers.Single(c => c.CustomerID == booking.CustomerID);
+            var email = customer.Email;
+
+            // Send the booking confirmation email
+            await SendBookingConfirmationEmailAsync(email, bookingDetailsString);
+
             // Display a success message
             TempData["SuccessMessage"] = "Đặt vé thành công!";
             TempData.Keep("SuccessMessage");
@@ -336,6 +346,7 @@ namespace FourAirLineFinal.Controllers
             // Redirect the user to the home page
             return RedirectToAction("Index", "Home");
         }
+
 
 
 
