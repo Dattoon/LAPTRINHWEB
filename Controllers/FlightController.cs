@@ -333,12 +333,6 @@ namespace FourAirLineFinal.Controllers
 
 
 
-
-
-
-
-
-
         public ActionResult MyBookings()
         {
             var user = Session["Taikhoan"] as Customer;
