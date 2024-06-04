@@ -137,28 +137,29 @@
 
     </header>
 
+    <div>
+        }
+        @if (TempData["LogoutMessage"] != null)
+        {
+            <div class="alert alert-success">
+                @TempData["LogoutMessage"]
+            </div>
+        }
+        @if (TempData["LogoutErrorMessage"] != null)
+        {
+            <div class="alert alert-danger">
+                @TempData["LogoutErrorMessage"]
+            </div>
+        }
 
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success">
+                @TempData["SuccessMessage"]
+            </div>
+        }
     </div>
-    }
-    @if (TempData["LogoutMessage"] != null)
-    {
-        <div class="alert alert-success">
-            @TempData["LogoutMessage"]
-        </div>
-    }
-    @if (TempData["LogoutErrorMessage"] != null)
-    {
-        <div class="alert alert-danger">
-            @TempData["LogoutErrorMessage"]
-        </div>
-    }
-
-    @if (TempData["SuccessMessage"] != null)
-    {
-        <div class="alert alert-success">
-            @TempData["SuccessMessage"]
-        </div>
-    }
+  
     @RenderBody()
     <footer>
         <div class="flex justify-center Footer_footer1__GxwEZ">
