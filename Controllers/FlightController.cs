@@ -325,10 +325,12 @@ namespace FourAirLineFinal.Controllers
 
             // Display a success message
             TempData["SuccessMessage"] = "Đặt vé thành công!";
+            TempData.Keep("SuccessMessage");
 
             // Redirect the user to the home page
             return RedirectToAction("Index", "Home");
         }
+
 
 
 

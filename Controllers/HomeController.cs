@@ -10,6 +10,7 @@ namespace LAPTRINHWEB.Controllers
     {
         public ActionResult Index()
         {
+            TempData.Keep("SuccessMessage");
             return View();
         }
 
