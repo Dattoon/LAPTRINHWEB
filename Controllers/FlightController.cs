@@ -45,9 +45,16 @@ namespace FourAirLineFinal.Controllers
         // Hiển thị danh sách ghế cho một chuyến bay
         public ActionResult SelectSeats(int id)
         {
+            var user = Session["Taikhoan"] as Customer;
+            if (user == null)
+            {
+                return RedirectToAction("Dangnhap", "Accounts");
+            }
+
             var seats = data.Seats.Where(s => s.FlightID == id && s.IsAvailable).ToList();
             return View(seats);
         }
+
 
         // Hiển thị danh sách chuyến bay để chọn chuyến bay về
         public ActionResult SelectReturnFlight(int id)
