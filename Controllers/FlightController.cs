@@ -58,12 +58,16 @@ namespace FourAirLineFinal.Controllers
 
         public ActionResult SearchFlights(string airlineName, string departureCity, string arrivalCity, DateTime? departureDate, DateTime? returnDate, int? page)
         {
-            ViewBag.Airlines = data.Airlines.Select(a => a.AirlineName).ToList();
+            if (ViewBag.Airlines == null)
+            {
+                ViewBag.Airlines = data.Airlines.Select(a => a.AirlineName).ToList();
+            }
 
-            
-
-            var cities = data.Airports.Select(a => a.City).Distinct().ToList();
-            ViewBag.Cities = new SelectList(cities);
+            if (ViewBag.Cities == null)
+            {
+                var cities = data.Airports.Select(a => a.City).Distinct().ToList();
+                ViewBag.Cities = new SelectList(cities);
+            }
 
             if (departureDate.HasValue)
             {
@@ -319,27 +323,13 @@ namespace FourAirLineFinal.Controllers
             booking.IsPaid = true;
             data.SubmitChanges();
 
-            // Prepare the booking details for the email
-            var bookingDetails = data.BookingDetails.Where(bd => bd.BookingID == bookingId).ToList();
-            string body = "Thank you for booking your flight with us. Your seats have been successfully booked. Here are your booking details:\n\n";
-            foreach (var detail in bookingDetails)
-            {
-                body += $"Flight ID: {detail.OutboundFlightID}, Seat Number: {detail.Seat.SeatNumber}, Seat Class: {detail.Seat.SeatClass}, Price: {detail.Seat.Price}\n";
-            }
-
-            // Send the booking details via email
-            var user = Session["Taikhoan"] as Customer;
-            if (user != null)
-            {
-                SendBookingConfirmationEmailAsync("Booking Confirmation", body);
-            }
-
             // Display a success message
-            TempData["SuccessMessage"] = "Đặt vé thành công! " + body;
+            TempData["SuccessMessage"] = "Đặt vé thành công!";
 
             // Redirect the user to the home page
             return RedirectToAction("Index", "Home");
         }
+
 
 
 

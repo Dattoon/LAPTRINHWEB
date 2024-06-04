@@ -3,6 +3,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@model PagedList.PagedList<LAPTRINHWEB.Models.FlightDetailsViewModel>
+@using PagedList.Mvc;
 
 <style>
     #departureCity, #arrivalCity {
@@ -197,7 +199,6 @@
                     </div>
                 </div>
             </div>
-</form>
 
 
 
@@ -222,176 +223,180 @@
 
 
 
-@if (ViewBag.OutboundFlights != null)
-{
+            @if (ViewBag.OutboundFlights != null)
+            {
 
-    foreach (var flightDetails in ViewBag.OutboundFlights)
-    {
+                foreach (var flightDetails in ViewBag.OutboundFlights)
+                {
 
-        <div class="FlightSearch_flight-content__E4THF flex-grow flex flex-col gap-16">
-            <div class="Card_card__rC1zg ">
-                <div class="">
-                    <div class="FlightsCard_header__z_QqO flex gap-16 align-center">
-                        <svg width="48" height="48" viewBox="0 0 20 20" fill="none">
-                            <path d="M19.1667 7.76666C19.2189 7.55255 19.1891 7.32665 19.0833 7.13333C18.8133 6.6647 18.4533 6.25401 18.0241 5.92483C17.5949 5.59565 17.105 5.35445 16.5824 5.21509C16.0597 5.07572 15.5147 5.04093 14.9786 5.1127C14.4425 5.18447 13.9259 5.3614 13.4583 5.63333L11.6667 6.66666L7.49999 4.70833C7.38154 4.64696 7.25007 4.61493 7.11666 4.61493C6.98325 4.61493 6.85179 4.64696 6.73333 4.70833L4.23333 6.15C4.10978 6.22126 4.00659 6.32305 3.93363 6.44561C3.86068 6.56818 3.8204 6.70741 3.81666 6.85C3.81263 6.99364 3.8458 7.13588 3.91297 7.26292C3.98014 7.38995 4.07901 7.49746 4.2 7.575L6.95 9.30833L5.49999 10.1417L1.51666 10.625C1.35653 10.6448 1.2056 10.7107 1.08218 10.8146C0.958764 10.9185 0.868172 11.0561 0.821404 11.2105C0.774636 11.3649 0.773703 11.5296 0.818719 11.6845C0.863735 11.8395 0.952763 11.978 1.07499 12.0833L4.02499 14.6333C4.41337 15.004 4.91075 15.2398 5.44353 15.3058C5.97632 15.3719 6.51621 15.2646 6.98333 15L18.75 8.275C18.8503 8.22294 18.9389 8.15103 19.0106 8.06365C19.0822 7.97626 19.1353 7.87522 19.1667 7.76666ZM6.22499 13.6C6.06492 13.6881 5.88033 13.7211 5.69964 13.694C5.51896 13.6669 5.35218 13.5812 5.225 13.45L3.64166 12.0917L5.91666 11.8167C6.02846 11.8023 6.13619 11.7655 6.23333 11.7083L9.03333 10.1C9.15807 10.028 9.26202 9.9249 9.33505 9.80076C9.40807 9.67662 9.44768 9.53567 9.45 9.39166C9.4517 9.24864 9.41657 9.10758 9.34798 8.98206C9.27938 8.85654 9.17963 8.7508 9.05833 8.675L6.30833 6.93333L7.225 6.40833L11.3917 8.34166C11.5101 8.40303 11.6416 8.43506 11.775 8.43506C11.9084 8.43506 12.0399 8.40303 12.1583 8.34166L14.2917 7.10833C14.7288 6.86333 15.2295 6.75538 15.7288 6.79847C16.2281 6.84156 16.7029 7.03371 17.0917 7.35L6.22499 13.6Z"
-                                  fill="var(--primary-base)"></path>
-                        </svg>
-                        <div class="FlightsCard_header__details__JJRqD flex flex-col gap-8">
-                            <div class="flex gap-8 align-center">
-                                <label class="sm"> @flightDetails.DepartureAirportName</label><svg width="20" height="20" viewBox="0 0 12 12" fill="none">
-                                    <path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="var(--black)"
-                                          stroke-linecap="round" stroke-linejoin="round"></path>
-                                </svg><label class="sm">@flightDetails.ArrivalAirportName</label>
-                            </div>
-                            <p class="sm">Chủ nhật, 02/06/2024</p>
-                        </div><svg width="24" height="24" viewBox="0 0 24 24"
-                                   fill="none">
-                            <path d="M6 12L18 12" stroke="var(--primary-base)" stroke-width="2" stroke-linecap="round"
-                                  stroke-linejoin="round"></path>
-                        </svg>
-                    </div>
-                </div>
-                <div class=" Collapse_collapse__g6PnD" style="height: 851.594px;">
-                    <div>
-                        <div>
-                            <div class="flex flex-col gap-16 FlightList_flight-card-list__MdNDe">
-                                <div class="Card_card__rC1zg ">
-                                    <div class="Collapse_open-header__wyuXQ">
-                                        <div class="FlightItemCard_header__fyioF flex gap-16 align-center  ">
-                                            <div class="FlightItemCard_item-group__mWKsn">
-                                                <div class="flex gap-16 align-center">
-                                                    <div class="FlightItemCard_img-wrapper__Z8tXu">
-                                                        <div style="width: 100%; height: 100%; position: relative; overflow: hidden;">
-                                                            <img src="~/Content/CSSJSIMG/images/Hanghangkhong/@flightDetails.AirlineLogo" alt="@flightDetails.AirlineName Logo"
-                                                                 width="100%" height="100%" loading="lazy"
-                                                                 style="object-fit: cover;">
-                                                        </div>
-                                                    </div>
-                                                    <div class="flex flex-col gap-8 flex-grow text-left">
-                                                        <p class="sm">@flightDetails.AirlineName</p>
-                                                    </div>
-                                                </div>
-                                                <div class="FlightItemCard_price-mobile__Cxgwg">
-                                                    <label class="sm">@flightDetails.SeatPrice&nbsp;VND</label>
-                                                    <p class="sm">VND</p>
-                                                </div>
-                                            </div>
-                                            <div class="FlightItemCard_item-group__mWKsn">
-                                                <div class="FlightItemCard_destination___qpoR">
-                                                    <label class="sm">@flightDetails.Flight.DepartureTime</label>
-                                                    <p class="sm">@flightDetails.DepartureAirportName</p>
-                                                </div>
-                                                <div class="FlightItemCard_destination___qpoR">
-                                                    <label class="sm">@flightDetails.Flight.ArrivalTime</label>
-                                                    <p class="sm">@flightDetails.ArrivalAirportName</p>
-                                                </div>
-                                            </div>
-                                            <div class="FlightItemCard_price__yFFyH">
-                                                <label class="sm">@flightDetails.SeatPrice&nbsp;VND</label>
-                                                <p class="sm">VND</p>
-                                            </div><button type="button"
-                                                          class="Button_button__QHarr FlightItemCard_select-btn__L2VsD Button_button-sm__ljQtM Button_button-outline__YRytX  ">
-                                                <div class="label sm"><a href="@Url.Action("SelectSeats", new { id = flightDetails.Flight.FlightID })" class="btn btn-primary">Chọn ghế</a></div>
-                                            </button>
-                                            <div class="muiten">
-                                                <svg width="24" height="24"
-                                                     viewBox="0 0 24 24" fill="none">
-                                                    <path d="M6 9L12 15L18 9" stroke="var(--gray-600)" stroke-width="2"
-                                                          stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg>
-                                            </div>
+                    <div class="FlightSearch_flight-content__E4THF flex-grow flex flex-col gap-16">
+                        <div class="Card_card__rC1zg ">
+                            <div class="">
+                                <div class="FlightsCard_header__z_QqO flex gap-16 align-center">
+                                    <svg width="48" height="48" viewBox="0 0 20 20" fill="none">
+                                        <path d="M19.1667 7.76666C19.2189 7.55255 19.1891 7.32665 19.0833 7.13333C18.8133 6.6647 18.4533 6.25401 18.0241 5.92483C17.5949 5.59565 17.105 5.35445 16.5824 5.21509C16.0597 5.07572 15.5147 5.04093 14.9786 5.1127C14.4425 5.18447 13.9259 5.3614 13.4583 5.63333L11.6667 6.66666L7.49999 4.70833C7.38154 4.64696 7.25007 4.61493 7.11666 4.61493C6.98325 4.61493 6.85179 4.64696 6.73333 4.70833L4.23333 6.15C4.10978 6.22126 4.00659 6.32305 3.93363 6.44561C3.86068 6.56818 3.8204 6.70741 3.81666 6.85C3.81263 6.99364 3.8458 7.13588 3.91297 7.26292C3.98014 7.38995 4.07901 7.49746 4.2 7.575L6.95 9.30833L5.49999 10.1417L1.51666 10.625C1.35653 10.6448 1.2056 10.7107 1.08218 10.8146C0.958764 10.9185 0.868172 11.0561 0.821404 11.2105C0.774636 11.3649 0.773703 11.5296 0.818719 11.6845C0.863735 11.8395 0.952763 11.978 1.07499 12.0833L4.02499 14.6333C4.41337 15.004 4.91075 15.2398 5.44353 15.3058C5.97632 15.3719 6.51621 15.2646 6.98333 15L18.75 8.275C18.8503 8.22294 18.9389 8.15103 19.0106 8.06365C19.0822 7.97626 19.1353 7.87522 19.1667 7.76666ZM6.22499 13.6C6.06492 13.6881 5.88033 13.7211 5.69964 13.694C5.51896 13.6669 5.35218 13.5812 5.225 13.45L3.64166 12.0917L5.91666 11.8167C6.02846 11.8023 6.13619 11.7655 6.23333 11.7083L9.03333 10.1C9.15807 10.028 9.26202 9.9249 9.33505 9.80076C9.40807 9.67662 9.44768 9.53567 9.45 9.39166C9.4517 9.24864 9.41657 9.10758 9.34798 8.98206C9.27938 8.85654 9.17963 8.7508 9.05833 8.675L6.30833 6.93333L7.225 6.40833L11.3917 8.34166C11.5101 8.40303 11.6416 8.43506 11.775 8.43506C11.9084 8.43506 12.0399 8.40303 12.1583 8.34166L14.2917 7.10833C14.7288 6.86333 15.2295 6.75538 15.7288 6.79847C16.2281 6.84156 16.7029 7.03371 17.0917 7.35L6.22499 13.6Z"
+                                              fill="var(--primary-base)"></path>
+                                    </svg>
+                                    <div class="FlightsCard_header__details__JJRqD flex flex-col gap-8">
+                                        <div class="flex gap-8 align-center">
+                                            <label class="sm"> @flightDetails.DepartureAirportName</label><svg width="20" height="20" viewBox="0 0 12 12" fill="none">
+                                                <path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="var(--black)"
+                                                      stroke-linecap="round" stroke-linejoin="round"></path>
+                                            </svg><label class="sm">@flightDetails.ArrivalAirportName</label>
                                         </div>
-                                    </div>
-
-                                    <div class="Collapse_collapsed-content__UzsXV Collapse_collapse__g6PnD"
-                                         style="height: 0px;">
-                                        <div>
-                                            <div class="FlightItemCard_content__eJaAQ">
-                                                <div class="flex gap-19 flex-grow">
-                                                    <div class="FlightItemCard_vertical-steps__Wzkcv">
-                                                        <div class="FlightItemCard_vertical-big-dot__68E_0"></div>
-                                                        <div class="FlightItemCard_vertical-small-dot__pPBY5"></div>
-                                                        <div class="FlightItemCard_vertical-small-dot__pPBY5"></div>
-                                                        <div class="FlightItemCard_vertical-small-dot__pPBY5"></div>
-                                                        <div class="FlightItemCard_vertical-small-dot__pPBY5"></div>
-                                                        <div class="FlightItemCard_vertical-small-dot__pPBY5"></div>
-                                                        <div class="FlightItemCard_vertical-big-dot__68E_0"></div>
-                                                    </div>
-                                                    <div class="flex flex-col gap-12 justify-between">
-                                                        <div class="flex gap-8 align-center">
-                                                            <label class="sm">@flightDetails.Flight.DepartureTime</label>
-                                                            <div class="FlightItemCard_dot__Fb_rm"></div><label class="sm">@flightDetails.DepartureAirportName</label>
-                                                        </div>
-                                                        <p class="sm">Thời gian chuyến đi: @flightDetails.Flight.Duration Phút</p>
-                                                        <div class="flex gap-8 align-center">
-                                                            <label class="sm">@flightDetails.Flight.ArrivalTime</label>
-                                                            <div class="FlightItemCard_dot__Fb_rm"></div><label class="sm">@flightDetails.ArrivalAirportName</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="flex flex-col gap-8">
-                                                    <div style="width: 30px; height: 30px; position: relative; overflow: hidden;">
-                                                        <img src="~/Content/CSSJSIMG/images/Hanghangkhong/@flightDetails.AirlineLogo" alt="@flightDetails.AirlineName Logo"
-                                                             width="100%" height="100%" loading="lazy"
-                                                             style="object-fit: cover;">
-                                                    </div>
-                                                    <p class="sm">Hãng: @flightDetails.AirlineName</p>
-                                                    <p class="sm">Hạng ghế: @flightDetails.SeatClass </p>
-                                                    <p class="sm">Số ghế trống: @flightDetails.AvailableSeats</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                        <p class="sm">Chủ nhật, 02/06/2024</p>
+                                    </div><svg width="24" height="24" viewBox="0 0 24 24"
+                                               fill="none">
+                                        <path d="M6 12L18 12" stroke="var(--primary-base)" stroke-width="2" stroke-linecap="round"
+                                              stroke-linejoin="round"></path>
+                                    </svg>
                                 </div>
                             </div>
-                            <div class="flex justify-between align-center Pagination_pagination__dV9rN">
-                                <div class="flex align-center gap-8 Pagination_left-pagination__IuI30">
-                                    <p class="sm">Đang xem:</p>
+                            <div class=" Collapse_collapse__g6PnD" style="height: 851.594px;">
+                                <div>
                                     <div>
-                                        <label class="md Pagination_page-size__Rakop">
-                                            <input max="20" min="1"
-                                                   type="number" value="5">
-                                        </label>
+                                        <div class="flex flex-col gap-16 FlightList_flight-card-list__MdNDe">
+                                            <div class="Card_card__rC1zg ">
+                                                <div class="Collapse_open-header__wyuXQ">
+                                                    <div class="FlightItemCard_header__fyioF flex gap-16 align-center  ">
+                                                        <div class="FlightItemCard_item-group__mWKsn">
+                                                            <div class="flex gap-16 align-center">
+                                                                <div class="FlightItemCard_img-wrapper__Z8tXu">
+                                                                    <div style="width: 100%; height: 100%; position: relative; overflow: hidden;">
+                                                                        <img src="~/Content/CSSJSIMG/images/Hanghangkhong/@flightDetails.AirlineLogo" alt="@flightDetails.AirlineName Logo"
+                                                                             width="100%" height="100%" loading="lazy"
+                                                                             style="object-fit: cover;">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="flex flex-col gap-8 flex-grow text-left">
+                                                                    <p class="sm">@flightDetails.AirlineName</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="FlightItemCard_price-mobile__Cxgwg">
+                                                                <label class="sm">@flightDetails.SeatPrice&nbsp;VND</label>
+                                                                <p class="sm">VND</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="FlightItemCard_item-group__mWKsn">
+                                                            <div class="FlightItemCard_destination___qpoR">
+                                                                <label class="sm">@flightDetails.Flight.DepartureTime</label>
+                                                                <p class="sm">@flightDetails.DepartureAirportName</p>
+                                                            </div>
+                                                            <div class="FlightItemCard_destination___qpoR">
+                                                                <label class="sm">@flightDetails.Flight.ArrivalTime</label>
+                                                                <p class="sm">@flightDetails.ArrivalAirportName</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="FlightItemCard_price__yFFyH">
+                                                            <label class="sm">@flightDetails.SeatPrice&nbsp;VND</label>
+                                                            <p class="sm">VND</p>
+                                                        </div><button type="button"
+                                                                      class="Button_button__QHarr FlightItemCard_select-btn__L2VsD Button_button-sm__ljQtM Button_button-outline__YRytX  ">
+                                                            <div class="label sm"><a href="@Url.Action("SelectSeats", new { id = flightDetails.Flight.FlightID })" class="btn btn-primary">Chọn ghế</a></div>
+                                                        </button>
+                                                        <div class="muiten">
+                                                            <svg width="24" height="24"
+                                                                 viewBox="0 0 24 24" fill="none">
+                                                                <path d="M6 9L12 15L18 9" stroke="var(--gray-600)" stroke-width="2"
+                                                                      stroke-linecap="round" stroke-linejoin="round"></path>
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="Collapse_collapsed-content__UzsXV Collapse_collapse__g6PnD"
+                                                     style="height: 0px;">
+                                                    <div>
+                                                        <div class="FlightItemCard_content__eJaAQ">
+                                                            <div class="flex gap-19 flex-grow">
+                                                                <div class="FlightItemCard_vertical-steps__Wzkcv">
+                                                                    <div class="FlightItemCard_vertical-big-dot__68E_0"></div>
+                                                                    <div class="FlightItemCard_vertical-small-dot__pPBY5"></div>
+                                                                    <div class="FlightItemCard_vertical-small-dot__pPBY5"></div>
+                                                                    <div class="FlightItemCard_vertical-small-dot__pPBY5"></div>
+                                                                    <div class="FlightItemCard_vertical-small-dot__pPBY5"></div>
+                                                                    <div class="FlightItemCard_vertical-small-dot__pPBY5"></div>
+                                                                    <div class="FlightItemCard_vertical-big-dot__68E_0"></div>
+                                                                </div>
+                                                                <div class="flex flex-col gap-12 justify-between">
+                                                                    <div class="flex gap-8 align-center">
+                                                                        <label class="sm">@flightDetails.Flight.DepartureTime</label>
+                                                                        <div class="FlightItemCard_dot__Fb_rm"></div><label class="sm">@flightDetails.DepartureAirportName</label>
+                                                                    </div>
+                                                                    <p class="sm">Thời gian chuyến đi: @flightDetails.Flight.Duration Phút</p>
+                                                                    <div class="flex gap-8 align-center">
+                                                                        <label class="sm">@flightDetails.Flight.ArrivalTime</label>
+                                                                        <div class="FlightItemCard_dot__Fb_rm"></div><label class="sm">@flightDetails.ArrivalAirportName</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="flex flex-col gap-8">
+                                                                <div style="width: 30px; height: 30px; position: relative; overflow: hidden;">
+                                                                    <img src="~/Content/CSSJSIMG/images/Hanghangkhong/@flightDetails.AirlineLogo" alt="@flightDetails.AirlineName Logo"
+                                                                         width="100%" height="100%" loading="lazy"
+                                                                         style="object-fit: cover;">
+                                                                </div>
+                                                                <p class="sm">Hãng: @flightDetails.AirlineName</p>
+                                                                <p class="sm">Hạng ghế: @flightDetails.SeatClass </p>
+                                                                <p class="sm">Số ghế trống: @flightDetails.AvailableSeats</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex justify-between align-center Pagination_pagination__dV9rN">
+                                            <div class="flex align-center gap-8 Pagination_left-pagination__IuI30">
+                                                <p class="sm">Đang xem:</p>
+                                                <div>
+                                                    <label class="md Pagination_page-size__Rakop">
+                                                        <input max="20" min="1"
+                                                               type="number" value="5">
+                                                    </label>
+                                                </div>
+                                                <p class="sm">của 136</p>
+                                            </div>
+                                            <ul class="Pagination_pagination-container__J4wRd ">
+                                                <li class="Pagination_pagination-left-item__Ni_lJ Pagination_pagination-item__ZzJmt Pagination_disabled__UwpSX">
+                                                    <svg width="20" height="20"
+                                                         viewBox="0 0 20 20" fill="none">
+                                                        <path d="M4.16602 10H15.8327M4.16602 10L9.16602 5M4.16602 10L9.16602 15"
+                                                              stroke="var(--gray-700)" stroke-width="1.67" stroke-linecap="round"
+                                                              stroke-linejoin="round"></path>
+                                                    </svg><label class="sm">Trước</label>
+                                                </li>
+                                                <li class="Pagination_pagination-item__ZzJmt Pagination_selected__G5yaV">1</li>
+                                                <li class="Pagination_pagination-item__ZzJmt ">2</li>
+                                                <li class="Pagination_pagination-item__ZzJmt ">3</li>
+                                                <li class="Pagination_pagination-item__ZzJmt Pagination_dots__kDBP6">…</li>
+                                                <li class="Pagination_pagination-item__ZzJmt ">26</li>
+                                                <li class="Pagination_pagination-item__ZzJmt ">27</li>
+                                                <li class="Pagination_pagination-item__ZzJmt ">28</li>
+                                                <li class="Pagination_pagination-right-item__xEHMH Pagination_pagination-item__ZzJmt ">
+                                                    <label class="sm">Tiếp</label><svg width="20" height="20" viewBox="0 0 12 12"
+                                                                                       fill="none">
+                                                        <path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="var(--gray-700)"
+                                                              stroke-linecap="round" stroke-linejoin="round"></path>
+                                                    </svg>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+
+
                                     </div>
-                                    <p class="sm">của 136</p>
                                 </div>
-                                <ul class="Pagination_pagination-container__J4wRd ">
-                                    <li class="Pagination_pagination-left-item__Ni_lJ Pagination_pagination-item__ZzJmt Pagination_disabled__UwpSX">
-                                        <svg width="20" height="20"
-                                             viewBox="0 0 20 20" fill="none">
-                                            <path d="M4.16602 10H15.8327M4.16602 10L9.16602 5M4.16602 10L9.16602 15"
-                                                  stroke="var(--gray-700)" stroke-width="1.67" stroke-linecap="round"
-                                                  stroke-linejoin="round"></path>
-                                        </svg><label class="sm">Trước</label>
-                                    </li>
-                                    <li class="Pagination_pagination-item__ZzJmt Pagination_selected__G5yaV">1</li>
-                                    <li class="Pagination_pagination-item__ZzJmt ">2</li>
-                                    <li class="Pagination_pagination-item__ZzJmt ">3</li>
-                                    <li class="Pagination_pagination-item__ZzJmt Pagination_dots__kDBP6">…</li>
-                                    <li class="Pagination_pagination-item__ZzJmt ">26</li>
-                                    <li class="Pagination_pagination-item__ZzJmt ">27</li>
-                                    <li class="Pagination_pagination-item__ZzJmt ">28</li>
-                                    <li class="Pagination_pagination-right-item__xEHMH Pagination_pagination-item__ZzJmt ">
-                                        <label class="sm">Tiếp</label><svg width="20" height="20" viewBox="0 0 12 12"
-                                                                           fill="none">
-                                            <path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="var(--gray-700)"
-                                                  stroke-linecap="round" stroke-linejoin="round"></path>
-                                        </svg>
-                                    </li>
-                                </ul>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                }
+            }
+
         </div>
-    }
-}
 
     </div>
 
-</div>
-
+</form>
 
 <style>
     /* CSS cho chuyến bay đi và về */
