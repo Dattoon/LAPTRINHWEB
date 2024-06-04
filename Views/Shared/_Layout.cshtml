@@ -114,7 +114,19 @@
                         </div>
                         <div class="style-line Header_menu__jRq_R h-full flex align-center ">
                             <label for="" class="md">
-                                @Html.Partial("_AccountInfo", (Customer)Session["Taikhoan"])
+
+                                @if (Model != null)
+                                {
+                                    @Html.Partial("_AccountInfo", (Customer)Session["Taikhoan"])
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Đăng nhập", "Dangnhap", "Accounts")
+                                }
+
+
+
+
                             </label>
                         </div>
 
