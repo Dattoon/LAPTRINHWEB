@@ -104,14 +104,12 @@
                         </div>
                         <div class=" Header_menu__jRq_R h-full flex align-center ">
                             <label for="" class="md">
-                                <a @Html.ActionLink("Tìm kiếm chuyến bay", "SearchFlights", "Flight")
- </a>
+                                <a @Html.ActionLink("Tìm kiếm chuyến bay", "SearchFlights", "Flight")</a>
                             </label>
                         </div>
                         <div class=" Header_menu__jRq_R h-full flex align-center ">
                             <label for="" class="md">
-                                <a @Html.ActionLink("Thông Tin Đặt Vé", "MyBookings", "Flight")
-</a>
+                                <a @Html.ActionLink("Thông Tin Đặt Vé", "MyBookings", "Flight")</a>
                             </label>
                         </div>
                         <div class="style-line Header_menu__jRq_R h-full flex align-center ">
@@ -146,32 +144,11 @@
                 </div>
             </div>
 
-
+         </div>
     </header>
 
-    <div>
-        }
-        @if (TempData["LogoutMessage"] != null)
-        {
-            <div class="alert alert-success">
-                @TempData["LogoutMessage"]
-            </div>
-        }
-        @if (TempData["LogoutErrorMessage"] != null)
-        {
-            <div class="alert alert-danger">
-                @TempData["LogoutErrorMessage"]
-            </div>
-        }
 
-        @if (TempData["SuccessMessage"] != null)
-        {
-            <div class="alert alert-success">
-                @TempData["SuccessMessage"]
-            </div>
-        }
-    </div>
-  
+
     @RenderBody()
     <footer>
         <div class="flex justify-center Footer_footer1__GxwEZ">

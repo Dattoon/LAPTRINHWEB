@@ -186,5 +186,11 @@
             </a>
         </div>
     </div>
-
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <script type="text/javascript">
+        // Hiển thị thông báo bằng JavaScript
+        alert(@Html.Raw(Json.Encode(TempData["SuccessMessage"])));
+        </script>
+    }
 </main>
